@@ -58,7 +58,7 @@
 .end method
 
 .method public static regCallback(Lcom/transsion/hubsdk/api/trancare/TranTrancareCallback;)V
-    .locals 9
+    .locals 8
     .param p0, "callback"    # Lcom/transsion/hubsdk/api/trancare/TranTrancareCallback;
 
     .line 27
@@ -100,23 +100,23 @@
 
     const/4 v5, 0x1
 
-    new-array v6, v5, [Ljava/lang/Class;
+    new-array v5, v5, [Ljava/lang/Class;
 
-    const-class v7, Lcom/transsion/log/TranLogCallback;
+    const-class v6, Lcom/transsion/log/TranLogCallback;
 
-    const/4 v8, 0x0
+    const/4 v7, 0x0
 
-    aput-object v7, v6, v8
+    aput-object v6, v5, v7
 
-    invoke-virtual {v3, v4, v6}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v3, v4, v5}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v4
 
     .line 51
     .local v4, "method":Ljava/lang/reflect/Method;
-    new-array v5, v5, [Ljava/lang/Object;
+    filled-new-array {v2}, [Ljava/lang/Object;
 
-    aput-object v2, v5, v8
+    move-result-object v5
 
     invoke-virtual {v4, v1, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -202,15 +202,15 @@
 
     .line 62
     .local v2, "method":Ljava/lang/reflect/Method;
-    const/4 v4, 0x0
-
     new-array v3, v3, [Ljava/lang/Object;
 
     invoke-virtual {v1}, Lcom/transsion/hubsdk/aosp/trancare/TranAospTrancareCallbackWrapper$CallbackInfo;->getTranLogCallback()Lcom/transsion/log/TranLogCallback;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v6
+    aput-object v4, v3, v6
+
+    const/4 v4, 0x0
 
     invoke-virtual {v2, v4, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0

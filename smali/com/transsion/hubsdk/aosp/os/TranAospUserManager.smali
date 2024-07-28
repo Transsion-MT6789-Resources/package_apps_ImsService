@@ -86,106 +86,106 @@
     .line 34
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mMethodGet:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x1
+    const/4 v1, 0x1
 
     if-nez v0, :cond_0
 
     .line 35
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->sClassName:Ljava/lang/Class;
 
-    new-array v3, v2, [Ljava/lang/Class;
+    const-class v2, Landroid/content/Context;
 
-    const-class v4, Landroid/content/Context;
+    filled-new-array {v2}, [Ljava/lang/Class;
 
-    aput-object v4, v3, v1
+    move-result-object v2
 
-    const-string v4, "get"
+    const-string v3, "get"
 
-    invoke-static {v0, v4, v3}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v3, v2}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mMethodGet:Ljava/lang/reflect/Method;
 
     .line 37
-    invoke-virtual {v0, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    invoke-virtual {v0, v1}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 40
     :cond_0
-    :try_start_0
-    iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
+    const/4 v0, 0x0
 
-    if-nez v0, :cond_1
+    :try_start_0
+    iget-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
+
+    if-nez v2, :cond_1
 
     .line 41
-    iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mMethodGet:Ljava/lang/reflect/Method;
+    iget-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mMethodGet:Ljava/lang/reflect/Method;
 
     sget-object v3, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Object;
+    new-array v4, v1, [Ljava/lang/Object;
 
     iget-object v5, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mContext:Landroid/content/Context;
 
-    aput-object v5, v4, v1
+    aput-object v5, v4, v0
 
-    invoke-virtual {v0, v3, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v2, v3, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v2
 
-    iput-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
+    iput-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
 
     .line 43
     :cond_1
-    iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
+    iget-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
 
-    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+    invoke-virtual {v2}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
-    move-result-object v0
+    move-result-object v2
 
     const-string v3, "getCredentialOwnerProfile"
 
-    new-array v4, v2, [Ljava/lang/Class;
+    new-array v4, v1, [Ljava/lang/Class;
 
     sget-object v5, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
 
-    aput-object v5, v4, v1
+    aput-object v5, v4, v0
 
-    invoke-static {v0, v3, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v2, v3, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
-    move-result-object v0
+    move-result-object v2
 
     .line 44
-    .local v0, "method":Ljava/lang/reflect/Method;
+    .local v2, "method":Ljava/lang/reflect/Method;
     const/4 v3, 0x0
 
     .line 45
     .local v3, "profile":I
     iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->mInstanceObject:Ljava/lang/Object;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    new-array v1, v1, [Ljava/lang/Object;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v5
 
-    aput-object v5, v2, v1
+    aput-object v5, v1, v0
 
-    invoke-virtual {v0, v4, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v2, v4, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v2
+    move-result-object v1
 
     .line 46
-    .local v2, "obj":Ljava/lang/Object;
-    if-eqz v2, :cond_2
+    .local v1, "obj":Ljava/lang/Object;
+    if-eqz v1, :cond_2
 
-    instance-of v4, v2, Ljava/lang/Integer;
+    instance-of v4, v1, Ljava/lang/Integer;
 
     if-eqz v4, :cond_2
 
     .line 47
-    move-object v4, v2
+    move-object v4, v1
 
     check-cast v4, Ljava/lang/Integer;
 
@@ -225,14 +225,14 @@
     return v3
 
     .line 51
-    .end local v0    # "method":Ljava/lang/reflect/Method;
-    .end local v2    # "obj":Ljava/lang/Object;
+    .end local v1    # "obj":Ljava/lang/Object;
+    .end local v2    # "method":Ljava/lang/reflect/Method;
     .end local v3    # "profile":I
     :catchall_0
-    move-exception v0
+    move-exception v1
 
     .line 52
-    .local v0, "t":Ljava/lang/Throwable;
+    .local v1, "t":Ljava/lang/Throwable;
     sget-object v2, Lcom/transsion/hubsdk/aosp/os/TranAospUserManager;->TAG:Ljava/lang/String;
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -245,7 +245,7 @@
 
     move-result-object v3
 
-    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
     move-result-object v3
 
@@ -256,8 +256,8 @@
     invoke-static {v2, v3}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 54
-    .end local v0    # "t":Ljava/lang/Throwable;
-    return v1
+    .end local v1    # "t":Ljava/lang/Throwable;
+    return v0
 .end method
 
 .method public getProfileIdsWithDisabled(I)[I

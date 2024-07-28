@@ -443,9 +443,9 @@
 
     invoke-direct {v2}, Ljava/lang/Throwable;-><init>()V
 
+    .line 47
     const/4 v3, 0x3
 
-    .line 47
     invoke-static {v2, v3}, Lcom/transsion/hubsdk/common/version/TranVersion;->getStackTrace(Ljava/lang/Throwable;I)Ljava/lang/String;
 
     move-result-object v2

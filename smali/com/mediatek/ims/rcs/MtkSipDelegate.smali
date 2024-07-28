@@ -9,8 +9,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;,
-        Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;
+        Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;,
+        Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;
     }
 .end annotation
 
@@ -44,8 +44,6 @@
     .end annotation
 .end field
 
-.field private sipCallback:Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
-
 .field private stateCallback:Landroid/telephony/ims/DelegateStateCallback;
 
 .field private subId:I
@@ -65,7 +63,7 @@
     .line 70
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 692
+    .line 686
     new-instance v0, Ljava/util/HashSet;
 
     invoke-direct {v0}, Ljava/util/HashSet;-><init>()V
@@ -166,28 +164,23 @@
     if-eqz v1, :cond_1
 
     .line 89
-    new-instance v1, Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;
+    iget v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->phoneId:I
 
-    invoke-direct {v1, p0}, Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;-><init>(Lcom/mediatek/ims/rcs/MtkSipDelegate;)V
+    new-instance v3, Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;
 
-    iput-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->sipCallback:Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
+    invoke-direct {v3, p0}, Lcom/mediatek/ims/rcs/MtkSipDelegate$SipCallback;-><init>(Lcom/mediatek/ims/rcs/MtkSipDelegate;)V
 
-    .line 90
-    iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
-
-    iget v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->phoneId:I
-
-    invoke-virtual {v2, v3, v1}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerSipCallback(ILcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
+    invoke-virtual {v1, v2, v3}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerSipCallback(ILcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
 
     goto :goto_1
 
-    .line 92
+    .line 91
     :cond_1
     const-string v1, "MtkSipDelegate >> UaServiceManager not ready"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logE(Ljava/lang/String;)V
 
-    .line 94
+    .line 93
     :goto_1
     return-void
 .end method
@@ -251,14 +244,14 @@
     .locals 11
     .param p1, "rawData"    # [B
 
-    .line 465
+    .line 462
     const/4 v0, 0x0
 
-    .line 466
+    .line 463
     .local v0, "sipMessage":Landroid/telephony/ims/SipMessage;
     const/4 v1, 0x0
 
-    .line 467
+    .line 464
     .local v1, "startLine":Ljava/lang/String;
     const/4 v2, 0x0
 
@@ -268,19 +261,19 @@
     .local v3, "hdrEndPos":I
     const/4 v4, 0x0
 
-    .line 469
+    .line 466
     .local v4, "bodyBeginPos":I
     new-instance v5, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;
 
     invoke-direct {v5, p1}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;-><init>([B)V
 
-    .line 470
+    .line 467
     .local v5, "reader":Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;
     invoke-virtual {v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;->read()[C
 
     move-result-object v6
 
-    .line 471
+    .line 468
     .local v6, "line":[C
     if-eqz v6, :cond_1
 
@@ -288,19 +281,19 @@
 
     if-lez v7, :cond_1
 
-    .line 472
+    .line 469
     invoke-virtual {v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;->getNextPosition()I
 
     move-result v2
 
-    .line 473
+    .line 470
     new-instance v7, Ljava/lang/String;
 
     invoke-direct {v7, v6}, Ljava/lang/String;-><init>([C)V
 
     move-object v1, v7
 
-    .line 474
+    .line 471
     new-instance v7, Ljava/lang/StringBuilder;
 
     invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
@@ -319,7 +312,7 @@
 
     move-result-object v1
 
-    .line 475
+    .line 472
     :cond_0
     invoke-virtual {v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;->read()[C
 
@@ -329,22 +322,25 @@
 
     if-eqz v7, :cond_1
 
-    .line 476
+    .line 473
     array-length v7, v6
 
     if-nez v7, :cond_0
 
-    .line 477
+    .line 474
     invoke-virtual {v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;->getCurrPosition()I
 
     move-result v3
 
-    .line 478
+    .line 475
     invoke-virtual {v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate$LineReader;->getNextPosition()I
 
     move-result v4
 
-    .line 484
+    .line 476
+    nop
+
+    .line 481
     :cond_1
     if-eqz v1, :cond_3
 
@@ -354,33 +350,33 @@
 
     if-le v3, v2, :cond_3
 
-    .line 485
+    .line 482
     new-instance v7, Ljava/lang/String;
 
     sub-int v8, v3, v2
 
     invoke-direct {v7, p1, v2, v8}, Ljava/lang/String;-><init>([BII)V
 
-    .line 486
+    .line 483
     .local v7, "headerSection":Ljava/lang/String;
     array-length v8, p1
 
     sub-int/2addr v8, v4
 
-    .line 487
+    .line 484
     .local v8, "bodyLength":I
     new-array v9, v8, [B
 
-    .line 488
+    .line 485
     .local v9, "body":[B
     if-lez v8, :cond_2
 
-    .line 489
+    .line 486
     const/4 v10, 0x0
 
     invoke-static {p1, v4, v9, v10, v8}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
 
-    .line 490
+    .line 487
     :cond_2
     new-instance v10, Landroid/telephony/ims/SipMessage;
 
@@ -388,7 +384,7 @@
 
     move-object v0, v10
 
-    .line 493
+    .line 490
     .end local v7    # "headerSection":Ljava/lang/String;
     .end local v8    # "bodyLength":I
     .end local v9    # "body":[B
@@ -400,17 +396,17 @@
     .locals 5
     .param p1, "uri"    # Ljava/lang/String;
 
-    .line 634
+    .line 631
     const/4 v0, 0x0
 
-    .line 635
+    .line 632
     .local v0, "user":Ljava/lang/String;
     const/4 v1, 0x0
 
     .local v1, "start":I
     const/4 v2, 0x0
 
-    .line 637
+    .line 634
     .local v2, "end":I
     if-eqz p1, :cond_4
 
@@ -422,7 +418,7 @@
 
     goto :goto_1
 
-    .line 640
+    .line 637
     :cond_0
     const-string v3, "sip:"
 
@@ -440,13 +436,13 @@
 
     if-eqz v4, :cond_2
 
-    .line 641
+    .line 638
     :cond_1
     invoke-virtual {v3}, Ljava/lang/String;->length()I
 
     move-result v1
 
-    .line 643
+    .line 640
     :cond_2
     const/16 v3, 0x40
 
@@ -454,15 +450,15 @@
 
     move-result v2
 
-    .line 644
+    .line 641
     if-gez v2, :cond_3
 
-    .line 645
+    .line 642
     invoke-virtual {p1}, Ljava/lang/String;->length()I
 
     move-result v2
 
-    .line 648
+    .line 645
     :cond_3
     :try_start_0
     invoke-virtual {p1, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
@@ -473,18 +469,18 @@
 
     move-object v0, v3
 
-    .line 650
+    .line 647
     goto :goto_0
 
-    .line 649
+    .line 646
     :catch_0
     move-exception v3
 
-    .line 652
+    .line 649
     :goto_0
     return-object v0
 
-    .line 638
+    .line 635
     :cond_4
     :goto_1
     return-object v0
@@ -494,10 +490,10 @@
     .locals 4
     .param p1, "ipAddress"    # Ljava/lang/String;
 
-    .line 656
+    .line 653
     move-object v0, p1
 
-    .line 658
+    .line 655
     .local v0, "result":Ljava/lang/String;
     const/16 v1, 0x5b
 
@@ -505,7 +501,7 @@
 
     move-result v1
 
-    .line 659
+    .line 656
     .local v1, "startIdx":I
     const/16 v2, 0x5d
 
@@ -513,7 +509,7 @@
 
     move-result v2
 
-    .line 660
+    .line 657
     .local v2, "endIdx":I
     if-ltz v1, :cond_0
 
@@ -521,14 +517,14 @@
 
     if-le v2, v1, :cond_0
 
-    .line 661
+    .line 658
     add-int/lit8 v3, v1, 0x1
 
     invoke-virtual {p1, v3, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 664
+    .line 661
     :cond_0
     return-object v0
 .end method
@@ -538,7 +534,7 @@
     .param p0, "feature"    # Ljava/lang/String;
     .param p1, "ft"    # Ljava/lang/String;
 
-    .line 392
+    .line 389
     invoke-virtual {p1, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
@@ -553,7 +549,7 @@
     .param p0, "feature"    # Ljava/lang/String;
     .param p1, "ft"    # Ljava/lang/String;
 
-    .line 394
+    .line 391
     invoke-virtual {p1, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
@@ -567,7 +563,7 @@
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 668
+    .line 665
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -602,7 +598,7 @@
 
     invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 669
+    .line 666
     return-void
 .end method
 
@@ -610,7 +606,7 @@
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 676
+    .line 673
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -645,7 +641,7 @@
 
     invoke-static {v1, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 677
+    .line 674
     return-void
 .end method
 
@@ -653,7 +649,7 @@
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 672
+    .line 669
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -688,7 +684,7 @@
 
     invoke-static {v1, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 673
+    .line 670
     return-void
 .end method
 
@@ -696,7 +692,7 @@
     .locals 25
     .param p1, "configuration"    # Lcom/mediatek/ims/rcsua/Configuration;
 
-    .line 146
+    .line 140
     move-object/from16 v0, p0
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -727,7 +723,7 @@
 
     invoke-direct {v0, v1}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
-    .line 147
+    .line 141
     iget-object v1, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->mContext:Landroid/content/Context;
 
     const-string v3, "phone"
@@ -738,17 +734,17 @@
 
     check-cast v1, Landroid/telephony/TelephonyManager;
 
-    .line 148
+    .line 142
     .local v1, "tm":Landroid/telephony/TelephonyManager;
     const/4 v3, 0x0
 
-    .line 149
+    .line 143
     .local v3, "publicGruuUri":Landroid/net/Uri;
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPublicGruu()Ljava/lang/String;
 
     move-result-object v4
 
-    .line 150
+    .line 144
     .local v4, "gruu":Ljava/lang/String;
     if-eqz v4, :cond_1
 
@@ -758,7 +754,7 @@
 
     if-nez v5, :cond_1
 
-    .line 151
+    .line 145
     const-string v5, "sip:"
 
     invoke-virtual {v4, v5}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
@@ -767,56 +763,56 @@
 
     if-eqz v5, :cond_0
 
-    .line 152
+    .line 146
     const/4 v5, 0x4
 
     invoke-virtual {v4, v5}, Ljava/lang/String;->substring(I)Ljava/lang/String;
 
     move-result-object v4
 
-    .line 153
+    .line 147
     :cond_0
-    const/4 v5, 0x0
+    const-string v5, "sip"
 
-    const-string v6, "sip"
+    const/4 v6, 0x0
 
-    invoke-static {v6, v4, v5}, Landroid/net/Uri;->fromParts(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;
+    invoke-static {v5, v4, v6}, Landroid/net/Uri;->fromParts(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;
 
     move-result-object v3
 
-    .line 155
+    .line 149
     :cond_1
     const/16 v13, 0x13c4
 
-    .line 156
+    .line 150
     .local v13, "localTxPort":I
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getViaPort()I
 
     move-result v14
 
-    .line 157
+    .line 151
     .local v14, "localRxPort":I
     const/4 v15, 0x0
 
-    .line 158
+    .line 152
     .local v15, "remoteTxPort":I
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPortS()I
 
     move-result v16
 
-    .line 159
+    .line 153
     .local v16, "remoteRxPort":I
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getSecurityVerify()Ljava/lang/String;
 
     move-result-object v17
 
-    .line 162
+    .line 156
     .local v17, "security":Ljava/lang/String;
     iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
 
     if-nez v5, :cond_2
 
-    .line 163
+    .line 157
     const-wide/16 v5, 0x0
 
     move-wide/from16 v18, v5
@@ -824,7 +820,7 @@
     .local v5, "version":J
     goto :goto_0
 
-    .line 165
+    .line 159
     .end local v5    # "version":J
     :cond_2
     invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getVersion()J
@@ -837,7 +833,7 @@
 
     move-wide/from16 v18, v5
 
-    .line 168
+    .line 162
     .local v18, "version":J
     :goto_0
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getLocalAddress()Ljava/lang/String;
@@ -848,7 +844,7 @@
 
     move-result-object v20
 
-    .line 169
+    .line 163
     .local v20, "localAddr":Ljava/lang/String;
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getProxyAddress()Ljava/lang/String;
 
@@ -858,7 +854,7 @@
 
     move-result-object v21
 
-    .line 171
+    .line 165
     .local v21, "serverAddr":Ljava/lang/String;
     new-instance v5, Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
@@ -866,12 +862,12 @@
 
     new-instance v11, Ljava/net/InetSocketAddress;
 
-    .line 173
+    .line 167
     invoke-static/range {v20 .. v20}, Landroid/net/InetAddresses;->parseNumericAddress(Ljava/lang/String;)Ljava/net/InetAddress;
 
     move-result-object v6
 
-    .line 174
+    .line 168
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getLocalPort()I
 
     move-result v7
@@ -880,12 +876,12 @@
 
     new-instance v12, Ljava/net/InetSocketAddress;
 
-    .line 175
+    .line 169
     invoke-static/range {v21 .. v21}, Landroid/net/InetAddresses;->parseNumericAddress(Ljava/lang/String;)Ljava/net/InetAddress;
 
     move-result-object v6
 
-    .line 176
+    .line 170
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getProxyPort()I
 
     move-result v7
@@ -900,7 +896,7 @@
 
     move-object v12, v5
 
-    .line 178
+    .line 172
     .local v12, "builder":Landroid/telephony/ims/SipDelegateConfiguration$Builder;
     invoke-virtual/range {p0 .. p1}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->preferredImpu(Lcom/mediatek/ims/rcsua/Configuration;)Ljava/lang/String;
 
@@ -922,13 +918,13 @@
 
     check-cast v11, Ljava/lang/String;
 
-    .line 179
+    .line 173
     .local v11, "impu":Ljava/lang/String;
     invoke-virtual {v12, v11}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setPublicUserIdentifier(Ljava/lang/String;)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
     move-result-object v5
 
-    .line 180
+    .line 174
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getIMPI()Ljava/lang/String;
 
     move-result-object v6
@@ -937,7 +933,7 @@
 
     move-result-object v5
 
-    .line 181
+    .line 175
     invoke-direct {v0, v11}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->extractUserParameter(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v6
@@ -946,7 +942,7 @@
 
     move-result-object v5
 
-    .line 182
+    .line 176
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getHomeDomain()Ljava/lang/String;
 
     move-result-object v6
@@ -955,7 +951,7 @@
 
     move-result-object v5
 
-    .line 183
+    .line 177
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getWholePAssociatedUri()Ljava/lang/String;
 
     move-result-object v6
@@ -964,7 +960,7 @@
 
     move-result-object v5
 
-    .line 184
+    .line 178
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPAccessNetworkInfo()Ljava/lang/String;
 
     move-result-object v6
@@ -973,16 +969,7 @@
 
     move-result-object v5
 
-    .line 185
-    invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPLastAccessNetworkInfo()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setSipPlaniHeader(Ljava/lang/String;)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
-
-    move-result-object v5
-
-    .line 186
+    .line 179
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getWholeServiceRoute()Ljava/lang/String;
 
     move-result-object v6
@@ -1019,20 +1006,23 @@
     .local v23, "impu":Ljava/lang/String;
     move v11, v15
 
-    move-object/from16 v24, v12
+    move/from16 v24, v13
+
+    move-object v13, v12
 
     .end local v12    # "builder":Landroid/telephony/ims/SipDelegateConfiguration$Builder;
-    .local v24, "builder":Landroid/telephony/ims/SipDelegateConfiguration$Builder;
+    .local v13, "builder":Landroid/telephony/ims/SipDelegateConfiguration$Builder;
+    .local v24, "localTxPort":I
     move-object/from16 v12, v17
 
     invoke-direct/range {v5 .. v12}, Landroid/telephony/ims/SipDelegateConfiguration$IpSecConfiguration;-><init>(IIIIIILjava/lang/String;)V
 
-    .line 187
+    .line 180
     invoke-virtual {v4, v2}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setIpSecConfiguration(Landroid/telephony/ims/SipDelegateConfiguration$IpSecConfiguration;)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
     move-result-object v2
 
-    .line 189
+    .line 182
     invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getUserAgent()Ljava/lang/String;
 
     move-result-object v4
@@ -1041,21 +1031,21 @@
 
     move-result-object v2
 
-    .line 190
+    .line 183
     invoke-virtual {v2, v3}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setPublicGruuUri(Landroid/net/Uri;)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
     move-result-object v2
 
+    .line 185
     const/16 v4, 0x4b0
 
-    .line 192
     invoke-virtual {v2, v4}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setMaxUdpPayloadSizeBytes(I)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
     move-result-object v2
 
     iget v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->phoneId:I
 
-    .line 193
+    .line 186
     invoke-virtual {v1, v4}, Landroid/telephony/TelephonyManager;->getImei(I)Ljava/lang/String;
 
     move-result-object v4
@@ -1064,146 +1054,165 @@
 
     move-result-object v2
 
+    .line 187
     const/4 v4, 0x0
 
-    .line 194
     invoke-virtual {v2, v4}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setSipCompactFormEnabled(Z)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
-    .line 196
-    invoke-virtual/range {v24 .. v24}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->build()Landroid/telephony/ims/SipDelegateConfiguration;
+    .line 188
+    invoke-virtual/range {p1 .. p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPLastAccessNetworkInfo()Ljava/lang/String;
 
     move-result-object v2
 
-    iput-object v2, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+    .line 189
+    .local v2, "plani":Ljava/lang/String;
+    if-eqz v2, :cond_3
 
-    .line 198
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "notifyConfigurationChanged >> report configuraiton{version["
-
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 199
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getVersion()J
-
-    move-result-wide v4
-
-    invoke-virtual {v2, v4, v5}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v4, "],transport["
-
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 200
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getTransportType()I
+    invoke-virtual {v2}, Ljava/lang/String;->isEmpty()Z
 
     move-result v4
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    if-nez v4, :cond_3
 
-    move-result-object v2
+    .line 190
+    invoke-virtual {v13, v2}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->setSipPlaniHeader(Ljava/lang/String;)Landroid/telephony/ims/SipDelegateConfiguration$Builder;
 
-    const-string v4, "],localAddr["
-
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 201
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getLocalAddress()Ljava/net/InetSocketAddress;
+    .line 193
+    :cond_3
+    invoke-virtual {v13}, Landroid/telephony/ims/SipDelegateConfiguration$Builder;->build()Landroid/telephony/ims/SipDelegateConfiguration;
 
     move-result-object v4
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iput-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
 
-    move-result-object v2
+    .line 195
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    const-string v4, "],serverAddr["
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v5, "notifyConfigurationChanged >> report configuraiton{version["
 
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 202
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getSipServerAddress()Ljava/net/InetSocketAddress;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v4
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
 
-    move-result-object v2
+    .line 196
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getVersion()J
 
-    const-string v4, "],ipsecConfig["
+    move-result-wide v5
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 203
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getIpSecConfiguration()Landroid/telephony/ims/SipDelegateConfiguration$IpSecConfiguration;
+    invoke-virtual {v4, v5, v6}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
 
     move-result-object v4
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    const-string v5, "],transport["
 
-    move-result-object v2
-
-    const-string v4, "],contactUserParam["
-
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
-
-    .line 204
-    invoke-virtual {v4}, Landroid/telephony/ims/SipDelegateConfiguration;->getSipContactUserParameter()Ljava/lang/String;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v4
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
 
-    move-result-object v2
+    .line 197
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getTransportType()I
 
-    const-string v4, "]}"
+    move-result v5
 
-    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v5, "],localAddr["
 
-    move-result-object v2
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
 
     .line 198
-    invoke-direct {v0, v2}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getLocalAddress()Ljava/net/InetSocketAddress;
 
-    .line 206
-    iget-object v2, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->stateCallback:Landroid/telephony/ims/DelegateStateCallback;
+    move-result-object v5
 
-    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    invoke-interface {v2, v4}, Landroid/telephony/ims/DelegateStateCallback;->onConfigurationChanged(Landroid/telephony/ims/SipDelegateConfiguration;)V
+    move-result-object v4
 
-    .line 207
+    const-string v5, "],serverAddr["
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+
+    .line 199
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getSipServerAddress()Ljava/net/InetSocketAddress;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    const-string v5, "],ipsecConfig["
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+
+    .line 200
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getIpSecConfiguration()Landroid/telephony/ims/SipDelegateConfiguration$IpSecConfiguration;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    const-string v5, "],contactUserParam["
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+
+    .line 201
+    invoke-virtual {v5}, Landroid/telephony/ims/SipDelegateConfiguration;->getSipContactUserParameter()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    const-string v5, "]}"
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 195
+    invoke-direct {v0, v4}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
+
+    .line 203
+    iget-object v4, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->stateCallback:Landroid/telephony/ims/DelegateStateCallback;
+
+    iget-object v5, v0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateConfig:Landroid/telephony/ims/SipDelegateConfiguration;
+
+    invoke-interface {v4, v5}, Landroid/telephony/ims/DelegateStateCallback;->onConfigurationChanged(Landroid/telephony/ims/SipDelegateConfiguration;)V
+
+    .line 204
     return-void
 .end method
 
@@ -1211,7 +1220,7 @@
     .locals 2
     .param p1, "state"    # Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 405
+    .line 402
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1238,12 +1247,12 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logD(Ljava/lang/String;)V
 
-    .line 406
+    .line 403
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->stateCallback:Landroid/telephony/ims/DelegateStateCallback;
 
     invoke-interface {v0, p1}, Landroid/telephony/ims/DelegateStateCallback;->onFeatureTagRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 407
+    .line 404
     return-void
 .end method
 
@@ -1253,12 +1262,12 @@
     .locals 2
     .param p1, "callId"    # Ljava/lang/String;
 
-    .line 122
+    .line 121
     const-string v0, "callId should not be null"
 
     invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 
-    .line 123
+    .line 122
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1285,7 +1294,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logD(Ljava/lang/String;)V
 
-    .line 124
+    .line 125
     return-void
 .end method
 
@@ -1300,14 +1309,14 @@
         }
     .end annotation
 
-    .line 414
+    .line 411
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState;->getDeregisteringFeatureTags()Ljava/util/Set;
 
     move-result-object v0
 
-    .line 415
+    .line 412
     invoke-interface {v0}, Ljava/util/Set;->stream()Ljava/util/stream/Stream;
 
     move-result-object v0
@@ -1330,7 +1339,7 @@
 
     check-cast v0, Ljava/util/Set;
 
-    .line 414
+    .line 411
     return-object v0
 .end method
 
@@ -1345,7 +1354,7 @@
         }
     .end annotation
 
-    .line 410
+    .line 407
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateRequest:Landroid/telephony/ims/DelegateRequest;
 
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRequest;->getFeatureTags()Ljava/util/Set;
@@ -1358,7 +1367,7 @@
 .method getStateCallback()Landroid/telephony/ims/DelegateStateCallback;
     .locals 1
 
-    .line 419
+    .line 416
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->stateCallback:Landroid/telephony/ims/DelegateStateCallback;
 
     return-object v0
@@ -1368,20 +1377,20 @@
     .locals 7
     .param p1, "feature"    # Ljava/lang/String;
 
-    .line 350
+    .line 347
     const/4 v0, 0x0
 
-    .line 351
+    .line 348
     .local v0, "needUpdate":Z
     const/4 v1, 0x0
 
-    .line 352
+    .line 349
     .local v1, "changed":Z
     new-instance v2, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v2}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 353
+    .line 350
     .local v2, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1406,7 +1415,7 @@
 
     check-cast v4, Landroid/telephony/ims/FeatureTagState;
 
-    .line 354
+    .line 351
     .local v4, "dereg":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1418,7 +1427,7 @@
 
     if-eqz v5, :cond_0
 
-    .line 355
+    .line 352
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getState()I
 
     move-result v5
@@ -1427,10 +1436,10 @@
 
     if-ne v5, v6, :cond_0
 
-    .line 356
+    .line 353
     const/4 v0, 0x1
 
-    .line 357
+    .line 354
     :cond_0
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1442,11 +1451,11 @@
 
     invoke-virtual {v2, v5, v6}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 358
+    .line 355
     .end local v4    # "dereg":Landroid/telephony/ims/FeatureTagState;
     goto :goto_0
 
-    .line 359
+    .line 356
     :cond_1
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1471,7 +1480,7 @@
 
     check-cast v4, Landroid/telephony/ims/FeatureTagState;
 
-    .line 360
+    .line 357
     .restart local v4    # "dereg":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1483,7 +1492,7 @@
 
     if-eqz v5, :cond_2
 
-    .line 361
+    .line 358
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getState()I
 
     move-result v5
@@ -1492,19 +1501,19 @@
 
     if-ne v5, v6, :cond_2
 
-    .line 362
+    .line 359
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
     move-result-object v5
 
     invoke-virtual {v2, v5}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTag(Ljava/lang/String;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 363
+    .line 360
     const/4 v1, 0x1
 
     goto :goto_2
 
-    .line 365
+    .line 362
     :cond_2
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1516,12 +1525,12 @@
 
     invoke-virtual {v2, v5, v6}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 367
+    .line 364
     .end local v4    # "dereg":Landroid/telephony/ims/FeatureTagState;
     :goto_2
     goto :goto_1
 
-    .line 368
+    .line 365
     :cond_3
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1531,7 +1540,7 @@
 
     invoke-virtual {v2, v3}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTags(Ljava/util/Set;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 369
+    .line 366
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v3}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteringFeatureTags()Ljava/util/Set;
@@ -1540,22 +1549,22 @@
 
     invoke-virtual {v2, v3}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTags(Ljava/util/Set;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 370
+    .line 367
     if-eqz v1, :cond_4
 
-    .line 371
+    .line 368
     invoke-virtual {v2}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
     move-result-object v3
 
-    .line 372
+    .line 369
     .local v3, "state":Landroid/telephony/ims/DelegateRegistrationState;
     invoke-direct {p0, v3}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 373
+    .line 370
     iput-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 375
+    .line 372
     .end local v3    # "state":Landroid/telephony/ims/DelegateRegistrationState;
     :cond_4
     new-instance v3, Ljava/lang/StringBuilder;
@@ -1604,7 +1613,7 @@
 
     invoke-direct {p0, v3}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
-    .line 377
+    .line 374
     return v0
 .end method
 
@@ -1612,7 +1621,7 @@
     .locals 5
     .param p1, "feature"    # Ljava/lang/String;
 
-    .line 381
+    .line 378
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1639,7 +1648,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
-    .line 382
+    .line 379
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteringFeatureTags()Ljava/util/Set;
@@ -1654,7 +1663,7 @@
 
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 383
+    .line 380
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteredFeatureTags()Ljava/util/Set;
 
     move-result-object v0
@@ -1667,20 +1676,20 @@
 
     goto :goto_0
 
-    .line 401
+    .line 398
     :cond_0
     const/4 v0, 0x0
 
     return v0
 
-    .line 384
+    .line 381
     :cond_1
     :goto_0
     new-instance v0, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 385
+    .line 382
     .local v0, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1705,7 +1714,7 @@
 
     check-cast v2, Landroid/telephony/ims/FeatureTagState;
 
-    .line 386
+    .line 383
     .local v2, "dereg":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v2}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1717,11 +1726,11 @@
 
     invoke-virtual {v0, v3, v4}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 387
+    .line 384
     .end local v2    # "dereg":Landroid/telephony/ims/FeatureTagState;
     goto :goto_1
 
-    .line 388
+    .line 385
     :cond_2
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1746,7 +1755,7 @@
 
     check-cast v2, Landroid/telephony/ims/FeatureTagState;
 
-    .line 389
+    .line 386
     .restart local v2    # "dereg":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v2}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1758,15 +1767,15 @@
 
     invoke-virtual {v0, v3, v4}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 390
+    .line 387
     .end local v2    # "dereg":Landroid/telephony/ims/FeatureTagState;
     goto :goto_2
 
-    .line 391
+    .line 388
     :cond_3
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 392
+    .line 389
     invoke-virtual {v1}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteringFeatureTags()Ljava/util/Set;
 
     move-result-object v1
@@ -1793,13 +1802,13 @@
 
     check-cast v1, Ljava/util/Set;
 
-    .line 391
+    .line 388
     invoke-virtual {v0, v1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteringFeatureTags(Ljava/util/Set;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 393
+    .line 390
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 394
+    .line 391
     invoke-virtual {v1}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteredFeatureTags()Ljava/util/Set;
 
     move-result-object v1
@@ -1826,25 +1835,25 @@
 
     check-cast v1, Ljava/util/Set;
 
-    .line 393
+    .line 390
     invoke-virtual {v0, v1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTags(Ljava/util/Set;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 395
+    .line 392
     const/4 v1, 0x4
 
     invoke-virtual {v0, p1, v1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 396
+    .line 393
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
     move-result-object v1
 
     iput-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 397
+    .line 394
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 398
+    .line 395
     const/4 v1, 0x1
 
     return v1
@@ -1855,12 +1864,12 @@
     .param p1, "viaTransactionId"    # Ljava/lang/String;
     .param p2, "reason"    # I
 
-    .line 134
+    .line 135
     const-string v0, "viaTransactionId should not be null"
 
     invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 
-    .line 135
+    .line 136
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1897,7 +1906,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logD(Ljava/lang/String;)V
 
-    .line 136
+    .line 137
     return-void
 .end method
 
@@ -1905,12 +1914,12 @@
     .locals 2
     .param p1, "viaTransactionId"    # Ljava/lang/String;
 
-    .line 128
+    .line 129
     const-string v0, "viaTransactionId should not be null"
 
     invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 
-    .line 129
+    .line 130
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1937,19 +1946,19 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logD(Ljava/lang/String;)V
 
-    .line 130
+    .line 131
     return-void
 .end method
 
 .method public notifyRegistrationDeregistered()V
     .locals 7
 
-    .line 318
+    .line 315
     new-instance v0, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 320
+    .line 317
     .local v0, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1957,7 +1966,7 @@
 
     move-result-object v1
 
-    .line 321
+    .line 318
     .local v1, "remainStates":Ljava/util/Set;, "Ljava/util/Set<Landroid/telephony/ims/FeatureTagState;>;"
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -1982,7 +1991,7 @@
 
     check-cast v3, Landroid/telephony/ims/FeatureTagState;
 
-    .line 322
+    .line 319
     .local v3, "feature":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v3}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -1994,11 +2003,11 @@
 
     invoke-virtual {v0, v4, v5}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 323
+    .line 320
     .end local v3    # "feature":Landroid/telephony/ims/FeatureTagState;
     goto :goto_0
 
-    .line 324
+    .line 321
     :cond_0
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2023,11 +2032,11 @@
 
     check-cast v3, Landroid/telephony/ims/FeatureTagState;
 
-    .line 325
+    .line 322
     .restart local v3    # "feature":Landroid/telephony/ims/FeatureTagState;
     const/4 v4, 0x2
 
-    .line 326
+    .line 323
     .local v4, "reason":I
     invoke-virtual {v3}, Landroid/telephony/ims/FeatureTagState;->getState()I
 
@@ -2037,10 +2046,10 @@
 
     if-ne v5, v6, :cond_1
 
-    .line 327
+    .line 324
     const/4 v4, 0x1
 
-    .line 328
+    .line 325
     :cond_1
     invoke-virtual {v3}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2048,12 +2057,12 @@
 
     invoke-virtual {v0, v5, v4}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 329
+    .line 326
     .end local v3    # "feature":Landroid/telephony/ims/FeatureTagState;
     .end local v4    # "reason":I
     goto :goto_1
 
-    .line 330
+    .line 327
     :cond_2
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2080,15 +2089,15 @@
 
     check-cast v3, Ljava/lang/String;
 
-    .line 331
+    .line 328
     .local v3, "feature":Ljava/lang/String;
     invoke-virtual {v0, v3, v4}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 332
+    .line 329
     .end local v3    # "feature":Ljava/lang/String;
     goto :goto_2
 
-    .line 333
+    .line 330
     :cond_3
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2113,25 +2122,25 @@
 
     check-cast v3, Ljava/lang/String;
 
-    .line 334
+    .line 331
     .restart local v3    # "feature":Ljava/lang/String;
     invoke-virtual {v0, v3, v4}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 335
+    .line 332
     .end local v3    # "feature":Ljava/lang/String;
     goto :goto_3
 
-    .line 337
+    .line 334
     :cond_4
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
     move-result-object v2
 
-    .line 339
+    .line 336
     .local v2, "state":Landroid/telephony/ims/DelegateRegistrationState;
     invoke-direct {p0, v2}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 341
+    .line 338
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v2, v3}, Landroid/telephony/ims/DelegateRegistrationState;->equals(Ljava/lang/Object;)Z
@@ -2140,23 +2149,23 @@
 
     if-eqz v3, :cond_5
 
-    .line 342
+    .line 339
     const-string v3, "feature tag reg state not changed"
 
     invoke-direct {p0, v3}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
     goto :goto_4
 
-    .line 344
+    .line 341
     :cond_5
     const-string v3, "feature tag reg state changed"
 
     invoke-direct {p0, v3}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
-    .line 345
+    .line 342
     iput-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 347
+    .line 344
     :goto_4
     return-void
 .end method
@@ -2165,12 +2174,12 @@
     .locals 7
     .param p1, "reason"    # I
 
-    .line 294
+    .line 291
     new-instance v0, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 296
+    .line 293
     .local v0, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2178,7 +2187,7 @@
 
     move-result-object v1
 
-    .line 297
+    .line 294
     .local v1, "features":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
     invoke-interface {v1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2197,15 +2206,15 @@
 
     check-cast v3, Ljava/lang/String;
 
-    .line 298
+    .line 295
     .local v3, "feature":Ljava/lang/String;
     invoke-virtual {v0, v3, p1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 299
+    .line 296
     .end local v3    # "feature":Ljava/lang/String;
     goto :goto_0
 
-    .line 300
+    .line 297
     :cond_0
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2213,7 +2222,7 @@
 
     move-result-object v1
 
-    .line 301
+    .line 298
     invoke-interface {v1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
     move-result-object v2
@@ -2231,15 +2240,15 @@
 
     check-cast v3, Ljava/lang/String;
 
-    .line 302
+    .line 299
     .restart local v3    # "feature":Ljava/lang/String;
     invoke-virtual {v0, v3, p1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 303
+    .line 300
     .end local v3    # "feature":Ljava/lang/String;
     goto :goto_1
 
-    .line 304
+    .line 301
     :cond_1
     iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2247,7 +2256,7 @@
 
     move-result-object v2
 
-    .line 305
+    .line 302
     .local v2, "ftStates":Ljava/util/Set;, "Ljava/util/Set<Landroid/telephony/ims/FeatureTagState;>;"
     invoke-interface {v2}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2266,7 +2275,7 @@
 
     check-cast v4, Landroid/telephony/ims/FeatureTagState;
 
-    .line 306
+    .line 303
     .local v4, "ftState":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2274,11 +2283,11 @@
 
     invoke-virtual {v0, v5, p1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 307
+    .line 304
     .end local v4    # "ftState":Landroid/telephony/ims/FeatureTagState;
     goto :goto_2
 
-    .line 308
+    .line 305
     :cond_2
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2286,7 +2295,7 @@
 
     move-result-object v2
 
-    .line 309
+    .line 306
     invoke-interface {v2}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
     move-result-object v3
@@ -2304,7 +2313,7 @@
 
     check-cast v4, Landroid/telephony/ims/FeatureTagState;
 
-    .line 310
+    .line 307
     .restart local v4    # "ftState":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v4}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2316,11 +2325,11 @@
 
     invoke-virtual {v0, v5, v6}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 311
+    .line 308
     .end local v4    # "ftState":Landroid/telephony/ims/FeatureTagState;
     goto :goto_3
 
-    .line 313
+    .line 310
     :cond_3
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2328,10 +2337,10 @@
 
     iput-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 314
+    .line 311
     invoke-direct {p0, v3}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 315
+    .line 312
     return-void
 .end method
 
@@ -2339,19 +2348,19 @@
     .locals 10
     .param p1, "regInfo"    # Lcom/mediatek/ims/rcsua/RegistrationInfo;
 
-    .line 220
+    .line 217
     invoke-virtual {p1}, Lcom/mediatek/ims/rcsua/RegistrationInfo;->readImsConfiguration()Lcom/mediatek/ims/rcsua/Configuration;
 
     move-result-object v0
 
-    .line 221
+    .line 218
     .local v0, "configuration":Lcom/mediatek/ims/rcsua/Configuration;
     if-nez v0, :cond_0
 
-    .line 222
+    .line 219
     return-void
 
-    .line 224
+    .line 221
     :cond_0
     new-instance v1, Lcom/mediatek/ims/rcsua/Capability;
 
@@ -2363,13 +2372,13 @@
 
     invoke-direct {v1, v2, v3}, Lcom/mediatek/ims/rcsua/Capability;-><init>(J)V
 
-    .line 226
+    .line 223
     .local v1, "registered":Lcom/mediatek/ims/rcsua/Capability;
     new-instance v2, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v2}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 228
+    .line 225
     .local v2, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v3, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2377,7 +2386,7 @@
 
     move-result-object v3
 
-    .line 229
+    .line 226
     .local v3, "features":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
     iget-object v4, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2402,7 +2411,7 @@
 
     check-cast v5, Ljava/lang/String;
 
-    .line 230
+    .line 227
     .local v5, "feature":Ljava/lang/String;
     invoke-virtual {v1, v5}, Lcom/mediatek/ims/rcsua/Capability;->contains(Ljava/lang/String;)Z
 
@@ -2410,18 +2419,18 @@
 
     if-eqz v6, :cond_1
 
-    .line 231
+    .line 228
     invoke-virtual {v2, v5}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTag(Ljava/lang/String;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 232
+    .line 229
     invoke-interface {v3, v5}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
 
-    .line 234
+    .line 231
     .end local v5    # "feature":Ljava/lang/String;
     :cond_1
     goto :goto_0
 
-    .line 235
+    .line 232
     :cond_2
     invoke-interface {v3}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2442,15 +2451,15 @@
 
     check-cast v5, Ljava/lang/String;
 
-    .line 236
+    .line 233
     .restart local v5    # "feature":Ljava/lang/String;
     invoke-virtual {v2, v5, v6}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 237
+    .line 234
     .end local v5    # "feature":Ljava/lang/String;
     goto :goto_1
 
-    .line 239
+    .line 236
     :cond_3
     iget-object v4, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2458,7 +2467,7 @@
 
     move-result-object v3
 
-    .line 240
+    .line 237
     iget-object v4, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v4}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteredFeatureTags()Ljava/util/Set;
@@ -2482,7 +2491,7 @@
 
     check-cast v5, Ljava/lang/String;
 
-    .line 241
+    .line 238
     .restart local v5    # "feature":Ljava/lang/String;
     invoke-virtual {v1, v5}, Lcom/mediatek/ims/rcsua/Capability;->contains(Ljava/lang/String;)Z
 
@@ -2490,18 +2499,18 @@
 
     if-eqz v7, :cond_4
 
-    .line 242
+    .line 239
     invoke-virtual {v2, v5}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTag(Ljava/lang/String;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 243
+    .line 240
     invoke-interface {v3, v5}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
 
-    .line 245
+    .line 242
     .end local v5    # "feature":Ljava/lang/String;
     :cond_4
     goto :goto_2
 
-    .line 246
+    .line 243
     :cond_5
     invoke-interface {v3}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2520,15 +2529,15 @@
 
     check-cast v5, Ljava/lang/String;
 
-    .line 247
+    .line 244
     .restart local v5    # "feature":Ljava/lang/String;
     invoke-virtual {v2, v5, v6}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 248
+    .line 245
     .end local v5    # "feature":Ljava/lang/String;
     goto :goto_3
 
-    .line 250
+    .line 247
     :cond_6
     iget-object v4, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2536,7 +2545,7 @@
 
     move-result-object v4
 
-    .line 251
+    .line 248
     .local v4, "ftStates":Ljava/util/Set;, "Ljava/util/Set<Landroid/telephony/ims/FeatureTagState;>;"
     iget-object v5, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2561,7 +2570,7 @@
 
     check-cast v6, Landroid/telephony/ims/FeatureTagState;
 
-    .line 253
+    .line 250
     .local v6, "feature":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2573,7 +2582,7 @@
 
     if-eqz v7, :cond_7
 
-    .line 254
+    .line 251
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
     move-result-object v7
@@ -2584,15 +2593,15 @@
 
     invoke-virtual {v2, v7, v8}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteringFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 255
+    .line 252
     invoke-interface {v4, v6}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
 
-    .line 257
+    .line 254
     .end local v6    # "feature":Landroid/telephony/ims/FeatureTagState;
     :cond_7
     goto :goto_4
 
-    .line 258
+    .line 255
     :cond_8
     invoke-interface {v4}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2611,11 +2620,11 @@
 
     check-cast v6, Landroid/telephony/ims/FeatureTagState;
 
-    .line 259
+    .line 256
     .local v6, "dereg":Landroid/telephony/ims/FeatureTagState;
     const/4 v7, 0x2
 
-    .line 260
+    .line 257
     .local v7, "reason":I
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getState()I
 
@@ -2625,10 +2634,10 @@
 
     if-ne v8, v9, :cond_9
 
-    .line 261
+    .line 258
     const/4 v7, 0x1
 
-    .line 262
+    .line 259
     :cond_9
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2636,12 +2645,12 @@
 
     invoke-virtual {v2, v8, v7}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 263
+    .line 260
     .end local v6    # "dereg":Landroid/telephony/ims/FeatureTagState;
     .end local v7    # "reason":I
     goto :goto_5
 
-    .line 265
+    .line 262
     :cond_a
     iget-object v5, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2649,7 +2658,7 @@
 
     move-result-object v4
 
-    .line 266
+    .line 263
     iget-object v5, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
     invoke-virtual {v5}, Landroid/telephony/ims/DelegateRegistrationState;->getDeregisteredFeatureTags()Ljava/util/Set;
@@ -2673,7 +2682,7 @@
 
     check-cast v6, Landroid/telephony/ims/FeatureTagState;
 
-    .line 267
+    .line 264
     .local v6, "ftState":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2685,22 +2694,22 @@
 
     if-eqz v7, :cond_b
 
-    .line 268
+    .line 265
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
     move-result-object v7
 
     invoke-virtual {v2, v7}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteredFeatureTag(Ljava/lang/String;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 269
+    .line 266
     invoke-interface {v4, v6}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
 
-    .line 271
+    .line 268
     .end local v6    # "ftState":Landroid/telephony/ims/FeatureTagState;
     :cond_b
     goto :goto_6
 
-    .line 272
+    .line 269
     :cond_c
     invoke-interface {v4}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
@@ -2719,7 +2728,7 @@
 
     check-cast v6, Landroid/telephony/ims/FeatureTagState;
 
-    .line 273
+    .line 270
     .restart local v6    # "ftState":Landroid/telephony/ims/FeatureTagState;
     invoke-virtual {v6}, Landroid/telephony/ims/FeatureTagState;->getFeatureTag()Ljava/lang/String;
 
@@ -2731,17 +2740,17 @@
 
     invoke-virtual {v2, v7, v8}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addDeregisteredFeatureTag(Ljava/lang/String;I)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 274
+    .line 271
     .end local v6    # "ftState":Landroid/telephony/ims/FeatureTagState;
     goto :goto_7
 
-    .line 279
+    .line 276
     :cond_d
     invoke-virtual {v2}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
     move-result-object v5
 
-    .line 281
+    .line 278
     .local v5, "state":Landroid/telephony/ims/DelegateRegistrationState;
     invoke-virtual {v5}, Landroid/telephony/ims/DelegateRegistrationState;->getRegisteredFeatureTags()Ljava/util/Set;
 
@@ -2753,10 +2762,10 @@
 
     if-nez v6, :cond_e
 
-    .line 282
+    .line 279
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyConfigurationChanged(Lcom/mediatek/ims/rcsua/Configuration;)V
 
-    .line 284
+    .line 281
     :cond_e
     iget-object v6, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
@@ -2766,21 +2775,21 @@
 
     if-eqz v6, :cond_f
 
-    .line 285
+    .line 282
     const-string v6, "feature tag reg state not changed"
 
     invoke-direct {p0, v6}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logI(Ljava/lang/String;)V
 
     goto :goto_8
 
-    .line 287
+    .line 284
     :cond_f
     invoke-direct {p0, v5}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 288
+    .line 285
     iput-object v5, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 290
+    .line 287
     :goto_8
     return-void
 .end method
@@ -2788,12 +2797,12 @@
 .method notifyRegistrationRegistering()V
     .locals 2
 
-    .line 210
+    .line 207
     new-instance v0, Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
     invoke-direct {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;-><init>()V
 
-    .line 212
+    .line 209
     .local v0, "builder":Landroid/telephony/ims/DelegateRegistrationState$Builder;
     iget-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->delegateRequest:Landroid/telephony/ims/DelegateRequest;
 
@@ -2803,41 +2812,17 @@
 
     invoke-virtual {v0, v1}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->addRegisteringFeatureTags(Ljava/util/Set;)Landroid/telephony/ims/DelegateRegistrationState$Builder;
 
-    .line 214
+    .line 211
     invoke-virtual {v0}, Landroid/telephony/ims/DelegateRegistrationState$Builder;->build()Landroid/telephony/ims/DelegateRegistrationState;
 
     move-result-object v1
 
     iput-object v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->regState:Landroid/telephony/ims/DelegateRegistrationState;
 
-    .line 216
+    .line 213
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->notifyFeatureTagsRegistrationChanged(Landroid/telephony/ims/DelegateRegistrationState;)V
 
-    .line 217
-    return-void
-.end method
-
-.method public onDestroy()V
-    .locals 3
-
-    .line 139
-    invoke-static {}, Lcom/mediatek/ims/rcs/UaServiceManager;->getInstance()Lcom/mediatek/ims/rcs/UaServiceManager;
-
-    move-result-object v0
-
-    .line 140
-    .local v0, "uaSrvMgr":Lcom/mediatek/ims/rcs/UaServiceManager;
-    if-eqz v0, :cond_0
-
-    .line 141
-    iget v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->phoneId:I
-
-    iget-object v2, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->sipCallback:Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
-
-    invoke-virtual {v0, v1, v2}, Lcom/mediatek/ims/rcs/UaServiceManager;->unregisterSipCallback(ILcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
-
-    .line 143
-    :cond_0
+    .line 214
     return-void
 .end method
 
@@ -2845,16 +2830,16 @@
     .locals 6
     .param p1, "configuration"    # Lcom/mediatek/ims/rcsua/Configuration;
 
-    .line 616
+    .line 613
     invoke-virtual {p1}, Lcom/mediatek/ims/rcsua/Configuration;->getPAssociatedUri()[Ljava/lang/String;
 
     move-result-object v0
 
-    .line 617
+    .line 614
     .local v0, "pAssociatedUris":[Ljava/lang/String;
     const/4 v1, 0x0
 
-    .line 619
+    .line 616
     .local v1, "impu":Ljava/lang/String;
     if-eqz v0, :cond_2
 
@@ -2862,7 +2847,7 @@
 
     if-lez v2, :cond_2
 
-    .line 620
+    .line 617
     array-length v2, v0
 
     const/4 v3, 0x0
@@ -2872,7 +2857,7 @@
 
     aget-object v4, v0, v3
 
-    .line 622
+    .line 619
     .local v4, "uri":Ljava/lang/String;
     const-string v5, "sip:"
 
@@ -2884,12 +2869,12 @@
 
     if-nez v1, :cond_0
 
-    .line 623
+    .line 620
     move-object v1, v4
 
     goto :goto_1
 
-    .line 624
+    .line 621
     :cond_0
     const-string v5, "tel:"
 
@@ -2901,10 +2886,10 @@
 
     if-nez v1, :cond_1
 
-    .line 625
+    .line 622
     move-object v1, v4
 
-    .line 620
+    .line 617
     .end local v4    # "uri":Ljava/lang/String;
     :cond_1
     :goto_1
@@ -2912,7 +2897,7 @@
 
     goto :goto_0
 
-    .line 630
+    .line 627
     :cond_2
     return-object v1
 .end method
@@ -2922,12 +2907,12 @@
     .param p1, "message"    # Landroid/telephony/ims/SipMessage;
     .param p2, "configVersion"    # J
 
-    .line 98
+    .line 97
     const-string v0, "message should not be null"
 
     invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 
-    .line 100
+    .line 99
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2964,24 +2949,24 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logD(Ljava/lang/String;)V
 
-    .line 102
+    .line 101
     invoke-static {}, Lcom/mediatek/ims/rcs/UaServiceManager;->getInstance()Lcom/mediatek/ims/rcs/UaServiceManager;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    .line 103
+    .line 102
     if-nez v0, :cond_0
 
-    .line 104
+    .line 103
     const-string v0, "sendMessage >> UaServiceManager not ready"
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/MtkSipDelegate;->logE(Ljava/lang/String;)V
 
     goto :goto_0
 
-    .line 106
+    .line 105
     :cond_0
     iget v1, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->phoneId:I
 
@@ -2991,7 +2976,7 @@
 
     if-nez v0, :cond_1
 
-    .line 107
+    .line 106
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->getCallbackHandler()Landroid/os/Handler;
@@ -3006,7 +2991,7 @@
 
     goto :goto_0
 
-    .line 115
+    .line 114
     :cond_1
     iget-object v0, p0, Lcom/mediatek/ims/rcs/MtkSipDelegate;->sendingTransactions:Ljava/util/Set;
 
@@ -3016,7 +3001,7 @@
 
     invoke-interface {v0, v1}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
 
-    .line 118
+    .line 117
     :goto_0
     return-void
 .end method

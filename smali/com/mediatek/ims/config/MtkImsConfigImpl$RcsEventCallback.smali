@@ -1,5 +1,5 @@
 .class public Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;
-.super Lcom/mediatek/ims/rcsua/AcsEventCallback;
+.super Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;
 .source "MtkImsConfigImpl.java"
 
 
@@ -26,45 +26,18 @@
     .line 168
     iput-object p1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-direct {p0}, Lcom/mediatek/ims/rcsua/AcsEventCallback;-><init>()V
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;-><init>()V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onAcsConnected()V
-    .locals 2
-
-    .line 216
-    iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    const-string v1, "onAcsConnected"
-
-    invoke-static {v0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$000(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
-
-    .line 217
-    return-void
-.end method
-
-.method public onAcsDisconnected()V
-    .locals 2
-
-    .line 220
-    iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    const-string v1, "onAcsDisconnected"
-
-    invoke-static {v0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$000(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
-
-    .line 221
-    return-void
-.end method
-
-.method public onConfigurationErrorReceived(ILjava/lang/String;)V
+.method public onConfigurationErrorReceived(IILjava/lang/String;)V
     .locals 4
-    .param p1, "errorCode"    # I
-    .param p2, "errorString"    # Ljava/lang/String;
+    .param p1, "phoneId"    # I
+    .param p2, "errorCode"    # I
+    .param p3, "errorString"    # Ljava/lang/String;
 
     .line 206
     iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
@@ -73,7 +46,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "onConfigurationErrorReceived errorCode:"
+    const-string v2, "["
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -83,13 +56,23 @@
 
     move-result-object v1
 
+    const-string v2, "]onConfigurationErrorReceived errorCode:"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
     const-string v2, ", errorString:"
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
@@ -97,13 +80,13 @@
 
     move-result-object v1
 
-    invoke-static {v0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
 
     .line 209
     :try_start_0
     iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->notifyAutoConfigurationErrorReceived(ILjava/lang/String;)V
+    invoke-virtual {v0, p2, p3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->notifyAutoConfigurationErrorReceived(ILjava/lang/String;)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
@@ -136,7 +119,7 @@
 
     move-result-object v2
 
-    invoke-static {v1, v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v1, v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
 
     .line 213
     .end local v0    # "e":Ljava/lang/Exception;
@@ -144,10 +127,11 @@
     return-void
 .end method
 
-.method public onConfigurationStatusChanged(ZI)V
+.method public onConfigurationStatusChanged(IZI)V
     .locals 6
-    .param p1, "valid"    # Z
-    .param p2, "version"    # I
+    .param p1, "phoneId"    # I
+    .param p2, "valid"    # Z
+    .param p3, "version"    # I
 
     .line 171
     iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
@@ -156,13 +140,23 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "onConfigurationStatusChanged: valid:"
+    const-string v2, "["
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    const-string v2, "]onConfigurationStatusChanged: valid:"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
@@ -172,7 +166,7 @@
 
     move-result-object v1
 
-    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
@@ -185,7 +179,7 @@
     .line 172
     iget-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-static {v0, p1, p2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$100(Lcom/mediatek/ims/config/MtkImsConfigImpl;ZI)V
+    invoke-static {v0, p1, p2, p3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$100(Lcom/mediatek/ims/config/MtkImsConfigImpl;IZI)V
 
     .line 174
     const/4 v0, 0x0
@@ -194,31 +188,25 @@
     .local v0, "needDeactivate":Z
     const/4 v1, -0x1
 
-    if-ne p2, v1, :cond_1
+    if-ne p3, v1, :cond_1
 
     .line 177
     :try_start_0
     iget-object v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-static {v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
+    invoke-static {v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
 
     move-result-object v2
 
-    iget-object v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
+    const-string v3, "ACS_VALIDITY"
 
-    invoke-static {v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)I
-
-    move-result v3
-
-    const-string v4, "ACS_VALIDITY"
-
-    invoke-virtual {v2, v3, v4}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigString(ILjava/lang/String;)Ljava/lang/String;
+    invoke-virtual {v2, p1, v3}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigString(ILjava/lang/String;)Ljava/lang/String;
 
     move-result-object v2
 
     .line 178
     .local v2, "validity":Ljava/lang/String;
-    if-ne p2, v1, :cond_0
+    if-ne p3, v1, :cond_0
 
     const-string v1, "-1"
 
@@ -234,17 +222,11 @@
     :try_start_1
     iget-object v1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
+    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
 
     move-result-object v1
 
-    iget-object v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    invoke-static {v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)I
-
-    move-result v3
-
-    invoke-virtual {v1, v3}, Lcom/mediatek/ims/rcs/UaServiceManager;->deactivate(I)V
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->deactivate(I)V
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 
@@ -281,7 +263,7 @@
 
     move-result-object v4
 
-    invoke-static {v3, v4}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v3, v4}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_2
 
@@ -329,7 +311,7 @@
 
     move-result-object v4
 
-    invoke-static {v3, v4}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v3, v4}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
     :try_end_4
     .catch Ljava/lang/Exception; {:try_start_4 .. :try_end_4} :catch_2
 
@@ -366,7 +348,7 @@
 
     move-result-object v3
 
-    invoke-static {v2, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v2, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
 
     .line 196
     .end local v1    # "e":Ljava/lang/Exception;
@@ -378,17 +360,11 @@
     :try_start_5
     iget-object v1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
+    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
 
     move-result-object v1
 
-    iget-object v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    invoke-static {v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)I
-
-    move-result v2
-
-    invoke-virtual {v1, v2}, Lcom/mediatek/ims/rcs/UaServiceManager;->isActivated(I)Z
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->isActivated(I)Z
 
     move-result v1
 
@@ -396,17 +372,11 @@
 
     iget-object v1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
-    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
+    invoke-static {v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
 
     move-result-object v1
 
-    iget-object v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl$RcsEventCallback;->this$0:Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    invoke-static {v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)I
-
-    move-result v2
-
-    invoke-virtual {v1, v2}, Lcom/mediatek/ims/rcs/UaServiceManager;->activate(I)V
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->activate(I)V
     :try_end_5
     .catch Ljava/lang/Exception; {:try_start_5 .. :try_end_5} :catch_3
 
@@ -440,7 +410,7 @@
 
     move-result-object v3
 
-    invoke-static {v2, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+    invoke-static {v2, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
 
     .line 203
     .end local v1    # "e":Ljava/lang/Exception;

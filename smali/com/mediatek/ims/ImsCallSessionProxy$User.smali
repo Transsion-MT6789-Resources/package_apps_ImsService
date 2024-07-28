@@ -30,10 +30,10 @@
 .method public constructor <init>()V
     .locals 1
 
-    .line 528
+    .line 526
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 533
+    .line 531
     const-string v0, "disconnected"
 
     iput-object v0, p0, Lcom/mediatek/ims/ImsCallSessionProxy$User;->mStatus:Ljava/lang/String;

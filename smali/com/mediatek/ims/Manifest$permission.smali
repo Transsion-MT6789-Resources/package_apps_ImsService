@@ -15,6 +15,8 @@
 
 
 # static fields
+.field public static final BIND_ARCALL_SERVICE:Ljava/lang/String; = "com.newcall.permission.BIND_ARCALL_SERVICE"
+
 .field public static final DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION:Ljava/lang/String; = "androidx.legacy.coreutils.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 
 .field public static final IMS_ERR_NOTIFICATION:Ljava/lang/String; = "com.mediatek.permission.IMS_ERR_NOTIFICATION"

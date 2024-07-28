@@ -85,7 +85,7 @@
 
 # virtual methods
 .method public get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-    .locals 6
+    .locals 4
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "defaultValue"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
@@ -97,30 +97,22 @@
     .line 31
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGet:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x2
-
-    const/4 v3, 0x1
-
     if-nez v0, :cond_0
 
     .line 32
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Class;
+    const-class v1, Ljava/lang/String;
 
-    const-class v5, Ljava/lang/String;
+    const-class v2, Ljava/lang/String;
 
-    aput-object v5, v4, v1
+    filled-new-array {v1, v2}, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    move-result-object v1
 
-    aput-object v5, v4, v3
+    const-string v2, "get"
 
-    const-string v5, "get"
-
-    invoke-static {v0, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
@@ -133,22 +125,22 @@
     .line 37
     .local v0, "ret":Ljava/lang/String;
     :try_start_0
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGet:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGet:Ljava/lang/reflect/Method;
 
-    invoke-virtual {v4, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    const/4 v2, 0x1
+
+    invoke-virtual {v1, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 38
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGet:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGet:Ljava/lang/reflect/Method;
 
-    sget-object v5, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
+    sget-object v2, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
 
-    aput-object p1, v2, v1
+    move-result-object v3
 
-    aput-object p2, v2, v3
-
-    invoke-virtual {v4, v5, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
@@ -199,30 +191,22 @@
     .line 91
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetBoolean:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x2
-
-    const/4 v3, 0x1
-
     if-nez v0, :cond_0
 
     .line 92
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Class;
+    const-class v1, Ljava/lang/String;
 
-    const-class v5, Ljava/lang/String;
+    sget-object v2, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;
 
-    aput-object v5, v4, v1
+    filled-new-array {v1, v2}, [Ljava/lang/Class;
 
-    sget-object v5, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;
+    move-result-object v1
 
-    aput-object v5, v4, v3
+    const-string v2, "getBoolean"
 
-    const-string v5, "getBoolean"
-
-    invoke-static {v0, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
@@ -235,26 +219,32 @@
     .line 97
     .local v0, "ret":Z
     :try_start_0
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetBoolean:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetBoolean:Ljava/lang/reflect/Method;
 
-    invoke-virtual {v4, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    const/4 v2, 0x1
+
+    invoke-virtual {v1, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 98
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetBoolean:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetBoolean:Ljava/lang/reflect/Method;
 
-    sget-object v5, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
+    sget-object v3, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    const/4 v4, 0x2
 
-    aput-object p1, v2, v1
+    new-array v4, v4, [Ljava/lang/Object;
+
+    const/4 v5, 0x0
+
+    aput-object p1, v4, v5
 
     invoke-static {p2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v1
+    move-result-object v5
 
-    aput-object v1, v2, v3
+    aput-object v5, v4, v2
 
-    invoke-virtual {v4, v5, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v3, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
@@ -309,30 +299,22 @@
     .line 51
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetInt:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x2
-
-    const/4 v3, 0x1
-
     if-nez v0, :cond_0
 
     .line 52
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Class;
+    const-class v1, Ljava/lang/String;
 
-    const-class v5, Ljava/lang/String;
+    sget-object v2, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
 
-    aput-object v5, v4, v1
+    filled-new-array {v1, v2}, [Ljava/lang/Class;
 
-    sget-object v5, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
+    move-result-object v1
 
-    aput-object v5, v4, v3
+    const-string v2, "getInt"
 
-    const-string v5, "getInt"
-
-    invoke-static {v0, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
@@ -345,26 +327,32 @@
     .line 57
     .local v0, "ret":I
     :try_start_0
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetInt:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetInt:Ljava/lang/reflect/Method;
 
-    invoke-virtual {v4, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    const/4 v2, 0x1
+
+    invoke-virtual {v1, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 58
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetInt:Ljava/lang/reflect/Method;
+    iget-object v1, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetInt:Ljava/lang/reflect/Method;
 
-    sget-object v5, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
+    sget-object v3, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    const/4 v4, 0x2
 
-    aput-object p1, v2, v1
+    new-array v4, v4, [Ljava/lang/Object;
+
+    const/4 v5, 0x0
+
+    aput-object p1, v4, v5
 
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v5
 
-    aput-object v1, v2, v3
+    aput-object v5, v4, v2
 
-    invoke-virtual {v4, v5, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v3, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
@@ -419,30 +407,22 @@
     .line 71
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetLong:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x2
-
-    const/4 v3, 0x1
-
     if-nez v0, :cond_0
 
     .line 72
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Class;
+    const-class v1, Ljava/lang/String;
 
-    const-class v5, Ljava/lang/String;
+    sget-object v2, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
 
-    aput-object v5, v4, v1
+    filled-new-array {v1, v2}, [Ljava/lang/Class;
 
-    sget-object v5, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
+    move-result-object v1
 
-    aput-object v5, v4, v3
+    const-string v2, "getLong"
 
-    const-string v5, "getLong"
-
-    invoke-static {v0, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
@@ -450,74 +430,80 @@
 
     .line 75
     :cond_0
-    move-wide v4, p2
+    move-wide v0, p2
 
     .line 77
-    .local v4, "ret":J
+    .local v0, "ret":J
     :try_start_0
-    iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetLong:Ljava/lang/reflect/Method;
+    iget-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetLong:Ljava/lang/reflect/Method;
 
-    invoke-virtual {v0, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    const/4 v3, 0x1
+
+    invoke-virtual {v2, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 78
-    iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetLong:Ljava/lang/reflect/Method;
+    iget-object v2, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameGetLong:Ljava/lang/reflect/Method;
 
-    sget-object v6, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
+    sget-object v4, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    const/4 v5, 0x2
 
-    aput-object p1, v2, v1
+    new-array v5, v5, [Ljava/lang/Object;
+
+    const/4 v6, 0x0
+
+    aput-object p1, v5, v6
 
     invoke-static {p2, p3}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v1
+    move-result-object v6
 
-    aput-object v1, v2, v3
+    aput-object v6, v5, v3
 
-    invoke-virtual {v0, v6, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v2, v4, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v2
 
     .line 79
-    .local v0, "obj":Ljava/lang/Object;
-    if-eqz v0, :cond_1
+    .local v2, "obj":Ljava/lang/Object;
+    if-eqz v2, :cond_1
 
-    instance-of v1, v0, Ljava/lang/Long;
+    instance-of v3, v2, Ljava/lang/Long;
 
-    if-eqz v1, :cond_1
+    if-eqz v3, :cond_1
 
     .line 80
-    move-object v1, v0
+    move-object v3, v2
 
-    check-cast v1, Ljava/lang/Long;
+    check-cast v3, Ljava/lang/Long;
 
-    invoke-virtual {v1}, Ljava/lang/Long;->longValue()J
+    invoke-virtual {v3}, Ljava/lang/Long;->longValue()J
 
-    move-result-wide v1
+    move-result-wide v3
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    move-wide v4, v1
+    move-wide v0, v3
 
     .line 84
-    .end local v0    # "obj":Ljava/lang/Object;
+    .end local v2    # "obj":Ljava/lang/Object;
     :cond_1
     nop
 
     .line 85
-    return-wide v4
+    return-wide v0
 
     .line 82
     :catchall_0
-    move-exception v0
+    move-exception v2
 
     .line 83
-    .local v0, "t":Ljava/lang/Throwable;
+    .local v2, "t":Ljava/lang/Throwable;
     return-wide p2
 .end method
 
 .method public set(Ljava/lang/String;Ljava/lang/String;)V
-    .locals 6
+    .locals 4
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "val"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
@@ -529,30 +515,22 @@
     .line 111
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameSet:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
-
-    const/4 v2, 0x2
-
-    const/4 v3, 0x1
-
     if-nez v0, :cond_0
 
     .line 112
     sget-object v0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v2, [Ljava/lang/Class;
+    const-class v1, Ljava/lang/String;
 
-    const-class v5, Ljava/lang/String;
+    const-class v2, Ljava/lang/String;
 
-    aput-object v5, v4, v1
+    filled-new-array {v1, v2}, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    move-result-object v1
 
-    aput-object v5, v4, v3
+    const-string v2, "set"
 
-    const-string v5, "set"
-
-    invoke-static {v0, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
@@ -563,20 +541,20 @@
     :try_start_0
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameSet:Ljava/lang/reflect/Method;
 
-    invoke-virtual {v0, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 117
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->mMethodNameSet:Ljava/lang/reflect/Method;
 
-    sget-object v4, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
+    sget-object v1, Lcom/transsion/hubsdk/aosp/os/TranAospSystemProperties;->sClassName:Ljava/lang/Class;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
 
-    aput-object p1, v2, v1
+    move-result-object v2
 
-    aput-object p2, v2, v3
-
-    invoke-virtual {v0, v4, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 

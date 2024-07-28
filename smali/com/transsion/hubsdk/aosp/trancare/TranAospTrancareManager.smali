@@ -57,15 +57,15 @@
 
     .line 47
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -126,17 +126,17 @@
 
     .line 420
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
 
     invoke-static {p2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v6
+    aput-object v3, v2, v6
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -291,8 +291,6 @@
 
     .line 271
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -301,15 +299,17 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     invoke-static {p4}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v8
+    aput-object v3, v2, v8
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -381,8 +381,6 @@
 
     .line 259
     .local v2, "method":Ljava/lang/reflect/Method;
-    const/4 v4, 0x0
-
     new-array v3, v3, [Ljava/lang/Object;
 
     aput-object p1, v3, v0
@@ -391,9 +389,11 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v7
+    aput-object v4, v3, v7
+
+    const/4 v4, 0x0
 
     invoke-virtual {v2, v4, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -552,8 +552,6 @@
 
     .line 295
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -562,15 +560,17 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     invoke-static {p4, p5}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v8
+    aput-object v3, v2, v8
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -642,8 +642,6 @@
 
     .line 283
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -652,9 +650,11 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -932,7 +932,7 @@
 .end method
 
 .method public getConfigInternal(Ljava/lang/String;)Ljava/lang/String;
-    .locals 7
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
 
     .line 208
@@ -951,23 +951,23 @@
 
     const/4 v3, 0x1
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 211
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -990,7 +990,7 @@
 .end method
 
 .method public getConfigStaticInternal(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
-    .locals 8
+    .locals 6
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "key"    # Ljava/lang/String;
 
@@ -1010,31 +1010,29 @@
 
     const/4 v3, 0x2
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Landroid/content/Context;
+    const-class v4, Landroid/content/Context;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v7, 0x1
+    const/4 v5, 0x1
 
-    aput-object v5, v4, v7
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 223
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
-
-    aput-object p2, v3, v7
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1057,7 +1055,7 @@
 .end method
 
 .method public getDefaultConfigInternal(Ljava/lang/String;)Ljava/lang/String;
-    .locals 7
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
 
     .line 196
@@ -1076,23 +1074,23 @@
 
     const/4 v3, 0x1
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 199
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1115,7 +1113,7 @@
 .end method
 
 .method public getDefaultFileContentInternal(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-    .locals 8
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "fileName"    # Ljava/lang/String;
 
@@ -1135,31 +1133,29 @@
 
     const/4 v3, 0x2
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v7, 0x1
+    const/4 v5, 0x1
 
-    aput-object v5, v4, v7
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 187
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
-
-    aput-object p2, v3, v7
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1182,7 +1178,7 @@
 .end method
 
 .method public getDefaultFilePathInternal(Ljava/lang/String;)Ljava/lang/String;
-    .locals 7
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
 
     .line 161
@@ -1201,23 +1197,23 @@
 
     const/4 v3, 0x1
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 163
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1285,8 +1281,6 @@
 
     .line 141
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -1295,9 +1289,11 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1362,17 +1358,17 @@
 
     .line 129
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
 
     invoke-static {p2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v6
+    aput-object v3, v2, v6
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1399,7 +1395,7 @@
 .end method
 
 .method public getFileContentInternal(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-    .locals 8
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "fileName"    # Ljava/lang/String;
 
@@ -1419,31 +1415,29 @@
 
     const/4 v3, 0x2
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v7, 0x1
+    const/4 v5, 0x1
 
-    aput-object v5, v4, v7
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 175
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
-
-    aput-object p2, v3, v7
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1466,7 +1460,7 @@
 .end method
 
 .method public getFilePathInternal(Ljava/lang/String;)Ljava/lang/String;
-    .locals 7
+    .locals 6
     .param p1, "key"    # Ljava/lang/String;
 
     .line 150
@@ -1485,23 +1479,23 @@
 
     const/4 v3, 0x1
 
-    new-array v4, v3, [Ljava/lang/Class;
+    new-array v3, v3, [Ljava/lang/Class;
 
-    const-class v5, Ljava/lang/String;
+    const-class v4, Ljava/lang/String;
 
-    const/4 v6, 0x0
+    const/4 v5, 0x0
 
-    aput-object v5, v4, v6
+    aput-object v4, v3, v5
 
-    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 
     .line 152
     .local v2, "method":Ljava/lang/reflect/Method;
-    new-array v3, v3, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v3, v6
+    move-result-object v3
 
     invoke-virtual {v2, v0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1555,15 +1549,15 @@
 
     .line 57
     .local v2, "method":Ljava/lang/reflect/Method;
-    const/4 v4, 0x0
-
     new-array v3, v3, [Ljava/lang/Object;
 
     invoke-static {p1, p2}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v0
+    aput-object v4, v3, v0
+
+    const/4 v4, 0x0
 
     invoke-virtual {v2, v4, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -1590,7 +1584,7 @@
 .end method
 
 .method public putAsBooleanArrayInternal(Ljava/lang/String;Ljava/lang/String;[Z)V
-    .locals 8
+    .locals 5
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "name"    # Ljava/lang/String;
     .param p3, "value"    # [Z
@@ -1609,41 +1603,37 @@
 
     const/4 v2, 0x3
 
-    new-array v3, v2, [Ljava/lang/Class;
+    new-array v2, v2, [Ljava/lang/Class;
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v5, 0x0
+    const/4 v4, 0x0
 
-    aput-object v4, v3, v5
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const/4 v4, 0x1
 
-    aput-object v4, v3, v6
+    aput-object v3, v2, v4
 
-    const-class v4, [Z
+    const-class v3, [Z
 
-    const/4 v7, 0x2
+    const/4 v4, 0x2
 
-    aput-object v4, v3, v7
+    aput-object v3, v2, v4
 
-    invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 
     .line 398
     .local v1, "method":Ljava/lang/reflect/Method;
+    filled-new-array {p1, p2, p3}, [Ljava/lang/Object;
+
+    move-result-object v2
+
     const/4 v3, 0x0
-
-    new-array v2, v2, [Ljava/lang/Object;
-
-    aput-object p1, v2, v5
-
-    aput-object p2, v2, v6
-
-    aput-object p3, v2, v7
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -1711,8 +1701,6 @@
 
     .line 365
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -1721,9 +1709,11 @@
 
     invoke-static {p3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -1746,7 +1736,7 @@
 .end method
 
 .method public putAsLongArrayInternal(Ljava/lang/String;Ljava/lang/String;[J)V
-    .locals 8
+    .locals 5
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "name"    # Ljava/lang/String;
     .param p3, "value"    # [J
@@ -1765,41 +1755,37 @@
 
     const/4 v2, 0x3
 
-    new-array v3, v2, [Ljava/lang/Class;
+    new-array v2, v2, [Ljava/lang/Class;
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v5, 0x0
+    const/4 v4, 0x0
 
-    aput-object v4, v3, v5
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const/4 v4, 0x1
 
-    aput-object v4, v3, v6
+    aput-object v3, v2, v4
 
-    const-class v4, [J
+    const-class v3, [J
 
-    const/4 v7, 0x2
+    const/4 v4, 0x2
 
-    aput-object v4, v3, v7
+    aput-object v3, v2, v4
 
-    invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 
     .line 409
     .local v1, "method":Ljava/lang/reflect/Method;
+    filled-new-array {p1, p2, p3}, [Ljava/lang/Object;
+
+    move-result-object v2
+
     const/4 v3, 0x0
-
-    new-array v2, v2, [Ljava/lang/Object;
-
-    aput-object p1, v2, v5
-
-    aput-object p2, v2, v6
-
-    aput-object p3, v2, v7
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -1867,8 +1853,6 @@
 
     .line 376
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     aput-object p1, v2, v5
@@ -1877,9 +1861,11 @@
 
     invoke-static {p3, p4}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -1902,7 +1888,7 @@
 .end method
 
 .method public putAsStringArrayInternal(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V
-    .locals 8
+    .locals 5
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "name"    # Ljava/lang/String;
     .param p3, "value"    # [Ljava/lang/String;
@@ -1921,41 +1907,37 @@
 
     const/4 v2, 0x3
 
-    new-array v3, v2, [Ljava/lang/Class;
+    new-array v2, v2, [Ljava/lang/Class;
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v5, 0x0
+    const/4 v4, 0x0
 
-    aput-object v4, v3, v5
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const/4 v4, 0x1
 
-    aput-object v4, v3, v6
+    aput-object v3, v2, v4
 
-    const-class v4, [Ljava/lang/String;
+    const-class v3, [Ljava/lang/String;
 
-    const/4 v7, 0x2
+    const/4 v4, 0x2
 
-    aput-object v4, v3, v7
+    aput-object v3, v2, v4
 
-    invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 
     .line 387
     .local v1, "method":Ljava/lang/reflect/Method;
+    filled-new-array {p1, p2, p3}, [Ljava/lang/Object;
+
+    move-result-object v2
+
     const/4 v3, 0x0
-
-    new-array v2, v2, [Ljava/lang/Object;
-
-    aput-object p1, v2, v5
-
-    aput-object p2, v2, v6
-
-    aput-object p3, v2, v7
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -1978,7 +1960,7 @@
 .end method
 
 .method public putAsStringInternal(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-    .locals 8
+    .locals 5
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "name"    # Ljava/lang/String;
     .param p3, "value"    # Ljava/lang/String;
@@ -1997,41 +1979,37 @@
 
     const/4 v2, 0x3
 
-    new-array v3, v2, [Ljava/lang/Class;
+    new-array v2, v2, [Ljava/lang/Class;
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v5, 0x0
+    const/4 v4, 0x0
 
-    aput-object v4, v3, v5
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const/4 v4, 0x1
 
-    aput-object v4, v3, v6
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v7, 0x2
+    const/4 v4, 0x2
 
-    aput-object v4, v3, v7
+    aput-object v3, v2, v4
 
-    invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 
     .line 354
     .local v1, "method":Ljava/lang/reflect/Method;
+    filled-new-array {p1, p2, p3}, [Ljava/lang/Object;
+
+    move-result-object v2
+
     const/4 v3, 0x0
-
-    new-array v2, v2, [Ljava/lang/Object;
-
-    aput-object p1, v2, v5
-
-    aput-object p2, v2, v6
-
-    aput-object p3, v2, v7
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2054,7 +2032,7 @@
 .end method
 
 .method public putConfigInternal(Ljava/lang/String;Ljava/lang/String;)V
-    .locals 7
+    .locals 5
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "value"    # Ljava/lang/String;
 
@@ -2072,33 +2050,31 @@
 
     const/4 v2, 0x2
 
-    new-array v3, v2, [Ljava/lang/Class;
+    new-array v2, v2, [Ljava/lang/Class;
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v5, 0x0
+    const/4 v4, 0x0
 
-    aput-object v4, v3, v5
+    aput-object v3, v2, v4
 
-    const-class v4, Ljava/lang/String;
+    const-class v3, Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const/4 v4, 0x1
 
-    aput-object v4, v3, v6
+    aput-object v3, v2, v4
 
-    invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 
     .line 343
     .local v1, "method":Ljava/lang/reflect/Method;
+    filled-new-array {p1, p2}, [Ljava/lang/Object;
+
+    move-result-object v2
+
     const/4 v3, 0x0
-
-    new-array v2, v2, [Ljava/lang/Object;
-
-    aput-object p1, v2, v5
-
-    aput-object p2, v2, v6
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2183,17 +2159,17 @@
 
     .line 108
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p2, v2, v6
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2268,25 +2244,25 @@
 
     .line 68
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p2, v2, v6
 
     invoke-static {p3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     aput-object p4, v2, v8
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2380,27 +2356,27 @@
 
     .line 98
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p2, v2, v6
 
     invoke-static {p3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     aput-object p4, v2, v8
 
     aput-object p5, v2, v9
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2461,17 +2437,17 @@
 
     .line 118
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1, p2}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p3, v2, v6
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2546,25 +2522,25 @@
 
     .line 78
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1, p2}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p3, v2, v6
 
     invoke-static {p4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     aput-object p5, v2, v8
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -2658,27 +2634,27 @@
 
     .line 88
     .local v1, "method":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {p1, p2}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
 
     aput-object p3, v2, v6
 
     invoke-static {p4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v3
 
-    aput-object v4, v2, v7
+    aput-object v3, v2, v7
 
     aput-object p5, v2, v8
 
     aput-object p6, v2, v9
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0

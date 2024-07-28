@@ -1,4 +1,4 @@
-version: 2.9.2
+version: 2.9.3
 apkFileName: ImsService.apk
 isFrameworkApk: false
 usesFramework:
@@ -6,14 +6,14 @@ usesFramework:
   - 1
   tag: null
 sdkInfo:
-  minSdkVersion: 33
-  targetSdkVersion: 33
+  minSdkVersion: 34
+  targetSdkVersion: 34
 packageInfo:
   forcedPackageId: 127
   renameManifestPackage: null
 versionInfo:
-  versionCode: 33
-  versionName: 13
+  versionCode: 34
+  versionName: 14
 resourcesAreCompressed: false
 sharedLibrary: false
 sparseResources: false

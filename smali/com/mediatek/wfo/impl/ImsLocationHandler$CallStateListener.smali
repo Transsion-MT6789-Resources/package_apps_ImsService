@@ -130,12 +130,17 @@
     .line 272
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$CallStateListener;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
-    invoke-static {v0}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$maddRetryLocationRequestForECC(Lcom/mediatek/wfo/impl/ImsLocationHandler;)V
+    invoke-static {v0}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$mupdateLocationForNoSimEcc(Lcom/mediatek/wfo/impl/ImsLocationHandler;)V
 
     .line 273
+    iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$CallStateListener;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
+
+    invoke-static {v0}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$maddRetryLocationRequestForECC(Lcom/mediatek/wfo/impl/ImsLocationHandler;)V
+
+    .line 274
     return-void
 
-    .line 276
+    .line 277
     :cond_1
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$CallStateListener;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
@@ -161,12 +166,12 @@
 
     if-nez v0, :cond_2
 
-    .line 277
+    .line 278
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$CallStateListener;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     invoke-static {v0}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$mcancelNetworkLocationRequest(Lcom/mediatek/wfo/impl/ImsLocationHandler;)V
 
-    .line 279
+    .line 280
     :cond_2
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$CallStateListener;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
@@ -178,7 +183,7 @@
 
     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
 
-    .line 281
+    .line 282
     :cond_3
     return-void
 .end method

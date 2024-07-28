@@ -570,11 +570,11 @@
     :cond_0
     iget-object v1, p0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityTaskManager;->mMethodGetService:Ljava/lang/reflect/Method;
 
-    const/4 v2, 0x0
+    new-array v2, v0, [Ljava/lang/Object;
 
-    new-array v3, v0, [Ljava/lang/Object;
+    const/4 v3, 0x0
 
-    invoke-virtual {v1, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
@@ -700,11 +700,11 @@
     :cond_0
     iget-object v1, p0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityTaskManager;->mMethodGetService:Ljava/lang/reflect/Method;
 
-    const/4 v2, 0x0
+    new-array v2, v0, [Ljava/lang/Object;
 
-    new-array v3, v0, [Ljava/lang/Object;
+    const/4 v3, 0x0
 
-    invoke-virtual {v1, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
@@ -831,11 +831,11 @@
     :cond_0
     iget-object v0, p0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityTaskManager;->mMethodGetService:Ljava/lang/reflect/Method;
 
-    const/4 v2, 0x0
+    new-array v2, v1, [Ljava/lang/Object;
 
-    new-array v3, v1, [Ljava/lang/Object;
+    const/4 v3, 0x0
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v0
 
@@ -866,17 +866,17 @@
 
     .line 196
     .local v3, "removeRootTasksInWindowingModes":Ljava/lang/reflect/Method;
-    new-array v5, v4, [Ljava/lang/Object;
+    new-array v4, v4, [Ljava/lang/Object;
 
-    new-array v4, v4, [I
+    const/4 v5, 0x2
 
-    const/4 v6, 0x2
+    filled-new-array {v5}, [I
 
-    aput v6, v4, v1
+    move-result-object v5
 
-    aput-object v4, v5, v1
+    aput-object v5, v4, v1
 
-    invoke-virtual {v3, v0, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v3, v0, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -951,11 +951,11 @@
     :cond_0
     iget-object v1, p0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityTaskManager;->mMethodGetService:Ljava/lang/reflect/Method;
 
-    const/4 v2, 0x0
+    new-array v2, v0, [Ljava/lang/Object;
 
-    new-array v3, v0, [Ljava/lang/Object;
+    const/4 v3, 0x0
 
-    invoke-virtual {v1, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 

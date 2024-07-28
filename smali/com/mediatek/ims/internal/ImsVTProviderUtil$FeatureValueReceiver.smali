@@ -45,26 +45,26 @@
     .locals 10
     .param p1, "this$0"    # Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
-    .line 233
+    .line 260
     iput-object p1, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->this$0:Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
     invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
 
-    .line 230
+    .line 257
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
-    .line 231
+    .line 258
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
-    .line 235
+    .line 262
     invoke-static {}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->access$000()I
 
     move-result v0
@@ -82,7 +82,7 @@
     :cond_0
     const/4 v0, 0x2
 
-    .line 237
+    .line 264
     .local v0, "slotCount":I
     :goto_0
     const/4 v2, 0x0
@@ -91,10 +91,10 @@
     :goto_1
     if-ge v2, v0, :cond_4
 
-    .line 239
+    .line 266
     const/4 v3, 0x0
 
-    .line 241
+    .line 268
     .local v3, "propValueBit":I
     invoke-static {}, Lcom/mediatek/ims/ImsCommonUtil;->supportMims()Z
 
@@ -102,10 +102,10 @@
 
     if-eqz v4, :cond_1
 
-    .line 242
+    .line 269
     move v3, v2
 
-    .line 245
+    .line 272
     :cond_1
     const-string v4, "persist.vendor.mtk.vilte.enable"
 
@@ -128,7 +128,7 @@
     :cond_2
     move v4, v5
 
-    .line 246
+    .line 273
     .local v4, "enable":Z
     :goto_2
     new-instance v6, Ljava/lang/StringBuilder;
@@ -163,7 +163,7 @@
 
     invoke-static {v8, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 247
+    .line 274
     iget-object v6, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
     invoke-static {v4}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
@@ -172,7 +172,7 @@
 
     invoke-virtual {v6, v9}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 249
+    .line 276
     const-string v6, "persist.vendor.mtk.viwifi.enable"
 
     invoke-static {v6, v5}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
@@ -190,7 +190,7 @@
     :cond_3
     move v4, v5
 
-    .line 250
+    .line 277
     new-instance v5, Ljava/lang/StringBuilder;
 
     invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
@@ -219,7 +219,7 @@
 
     invoke-static {v8, v5}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 251
+    .line 278
     iget-object v5, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
     invoke-static {v4}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
@@ -228,14 +228,14 @@
 
     invoke-virtual {v5, v6}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 237
+    .line 264
     .end local v3    # "propValueBit":I
     .end local v4    # "enable":Z
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_1
 
-    .line 253
+    .line 280
     .end local v2    # "i":I
     :cond_4
     return-void
@@ -247,7 +247,7 @@
     .locals 1
     .param p1, "phondId"    # I
 
-    .line 261
+    .line 288
     iget-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
@@ -267,7 +267,7 @@
     .locals 1
     .param p1, "phondId"    # I
 
-    .line 266
+    .line 293
     iget-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
@@ -288,7 +288,7 @@
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "intent"    # Landroid/content/Intent;
 
-    .line 272
+    .line 299
     if-eqz p2, :cond_8
 
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
@@ -299,7 +299,7 @@
 
     goto/16 :goto_3
 
-    .line 276
+    .line 303
     :cond_0
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
@@ -313,7 +313,7 @@
 
     if-eqz v0, :cond_7
 
-    .line 278
+    .line 305
     const-string v0, "item"
 
     const/4 v1, -0x1
@@ -322,7 +322,7 @@
 
     move-result v0
 
-    .line 279
+    .line 306
     .local v0, "feature":I
     const-string v2, "phone_id"
 
@@ -330,7 +330,7 @@
 
     move-result v2
 
-    .line 280
+    .line 307
     .local v2, "phoneId":I
     const-string v3, "value"
 
@@ -338,21 +338,21 @@
 
     move-result v1
 
-    .line 282
+    .line 309
     .local v1, "status":I
     const-string v3, "ImsVT Util"
 
     if-gez v2, :cond_1
 
-    .line 283
+    .line 310
     const-string v4, "ignore it for invalid SIM id"
 
     invoke-static {v3, v4}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 284
+    .line 311
     return-void
 
-    .line 287
+    .line 314
     :cond_1
     const-string v4, ", status: "
 
@@ -364,7 +364,7 @@
 
     if-ne v0, v7, :cond_4
 
-    .line 288
+    .line 315
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -399,10 +399,10 @@
 
     invoke-static {v3, v4}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 291
+    .line 318
     if-nez v1, :cond_2
 
-    .line 292
+    .line 319
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
     sget-object v4, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
@@ -411,47 +411,47 @@
 
     goto :goto_0
 
-    .line 293
+    .line 320
     :cond_2
     if-ne v1, v7, :cond_3
 
-    .line 294
+    .line 321
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
     sget-object v4, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;
 
     invoke-virtual {v3, v2, v4}, Ljava/util/ArrayList;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
-    .line 296
+    .line 323
     :cond_3
     :goto_0
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mOwner:Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
-    const/high16 v4, -0x1000000
+    iget-object v4, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
 
-    iget-object v5, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViLTEValue:Ljava/util/ArrayList;
+    invoke-virtual {v4, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
-    invoke-virtual {v5, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+    move-result-object v4
 
-    move-result-object v5
+    check-cast v4, Ljava/lang/Boolean;
 
-    check-cast v5, Ljava/lang/Boolean;
+    invoke-virtual {v4}, Ljava/lang/Boolean;->booleanValue()Z
 
-    invoke-virtual {v5}, Ljava/lang/Boolean;->booleanValue()Z
+    move-result v4
 
-    move-result v5
+    const/high16 v5, -0x1000000
 
-    invoke-virtual {v3, v2, v4, v5}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->switchFeature(IIZ)V
+    invoke-virtual {v3, v2, v5, v4}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->switchFeature(IIZ)V
 
     goto :goto_2
 
-    .line 298
+    .line 325
     :cond_4
     const/4 v8, 0x3
 
     if-ne v0, v8, :cond_7
 
-    .line 299
+    .line 326
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -486,10 +486,10 @@
 
     invoke-static {v3, v4}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 302
+    .line 329
     if-nez v1, :cond_5
 
-    .line 303
+    .line 330
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
     sget-object v4, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
@@ -498,39 +498,39 @@
 
     goto :goto_1
 
-    .line 304
+    .line 331
     :cond_5
     if-ne v1, v7, :cond_6
 
-    .line 305
+    .line 332
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
     sget-object v4, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;
 
     invoke-virtual {v3, v2, v4}, Ljava/util/ArrayList;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
-    .line 307
+    .line 334
     :cond_6
     :goto_1
     iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mOwner:Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
-    const/high16 v4, -0xf00000
+    iget-object v4, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
 
-    iget-object v5, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mViWifiValue:Ljava/util/ArrayList;
+    invoke-virtual {v4, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
-    invoke-virtual {v5, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+    move-result-object v4
 
-    move-result-object v5
+    check-cast v4, Ljava/lang/Boolean;
 
-    check-cast v5, Ljava/lang/Boolean;
+    invoke-virtual {v4}, Ljava/lang/Boolean;->booleanValue()Z
 
-    invoke-virtual {v5}, Ljava/lang/Boolean;->booleanValue()Z
+    move-result v4
 
-    move-result v5
+    const/high16 v5, -0xf00000
 
-    invoke-virtual {v3, v2, v4, v5}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->switchFeature(IIZ)V
+    invoke-virtual {v3, v2, v5, v4}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->switchFeature(IIZ)V
 
-    .line 310
+    .line 337
     .end local v0    # "feature":I
     .end local v1    # "status":I
     .end local v2    # "phoneId":I
@@ -538,7 +538,7 @@
     :goto_2
     return-void
 
-    .line 273
+    .line 300
     :cond_8
     :goto_3
     return-void
@@ -548,9 +548,9 @@
     .locals 0
     .param p1, "owner"    # Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
-    .line 256
+    .line 283
     iput-object p1, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$FeatureValueReceiver;->mOwner:Lcom/mediatek/ims/internal/ImsVTProviderUtil;
 
-    .line 257
+    .line 284
     return-void
 .end method

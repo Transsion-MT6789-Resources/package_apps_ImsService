@@ -6,8 +6,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$ImsBearerRequest;,
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;,
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$ImsBearerRequest;
     }
 .end annotation
 
@@ -119,11 +119,11 @@
 
     invoke-direct {v1, v2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
-    const-string v2, "ims"
+    const/4 v2, 0x4
 
-    const/4 v3, 0x4
+    const-string v3, "ims"
 
-    invoke-direct {v0, p0, v2, v1, v3}, Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;-><init>(Lcom/mediatek/ims/internal/ImsDataSynchronizer;Ljava/lang/String;Landroid/os/Handler;I)V
+    invoke-direct {v0, p0, v3, v1, v2}, Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;-><init>(Lcom/mediatek/ims/internal/ImsDataSynchronizer;Ljava/lang/String;Landroid/os/Handler;I)V
 
     iput-object v0, p0, Lcom/mediatek/ims/internal/ImsDataSynchronizer;->mImsDataConnection:Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;
 
@@ -141,11 +141,11 @@
 
     invoke-direct {v1, v2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
-    const-string v2, "emergency"
+    const/16 v2, 0xa
 
-    const/16 v3, 0xa
+    const-string v3, "emergency"
 
-    invoke-direct {v0, p0, v2, v1, v3}, Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;-><init>(Lcom/mediatek/ims/internal/ImsDataSynchronizer;Ljava/lang/String;Landroid/os/Handler;I)V
+    invoke-direct {v0, p0, v3, v1, v2}, Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;-><init>(Lcom/mediatek/ims/internal/ImsDataSynchronizer;Ljava/lang/String;Landroid/os/Handler;I)V
 
     iput-object v0, p0, Lcom/mediatek/ims/internal/ImsDataSynchronizer;->mEmcDataConnection:Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;
 

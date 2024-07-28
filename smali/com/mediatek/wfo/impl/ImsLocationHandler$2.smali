@@ -23,7 +23,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
-    .line 750
+    .line 780
     iput-object p1, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$2;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     invoke-direct {p0}, Landroid/net/ConnectivityManager$NetworkCallback;-><init>()V
@@ -34,31 +34,49 @@
 
 # virtual methods
 .method public onAvailable(Landroid/net/Network;)V
-    .locals 2
+    .locals 3
     .param p1, "network"    # Landroid/net/Network;
 
-    .line 753
-    const-string v0, "ImsLocationHandler"
+    .line 783
+    const-string v0, "NetworkCallback.onAvailable()"
 
-    const-string v1, "NetworkCallback.onAvailable()"
+    const-string v1, "ImsLocationHandler"
 
-    invoke-static {v0, v1}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v0}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 754
+    .line 784
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$2;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
-    const/4 v1, 0x1
+    const/4 v2, 0x1
 
-    invoke-static {v0, v1}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$fputmNetworkAvailable(Lcom/mediatek/wfo/impl/ImsLocationHandler;Z)V
+    invoke-static {v0, v2}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$fputmNetworkAvailable(Lcom/mediatek/wfo/impl/ImsLocationHandler;Z)V
 
-    .line 755
+    .line 787
+    iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$2;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
+
+    invoke-static {v0}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$fgetmLocationSetting(Lcom/mediatek/wfo/impl/ImsLocationHandler;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 788
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$2;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     const/16 v1, 0xbc0
 
     invoke-virtual {v0, v1}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->sendEmptyMessage(I)Z
 
-    .line 756
+    goto :goto_0
+
+    .line 790
+    :cond_0
+    const-string v0, "Location has been closed, waiting for Location to open."
+
+    invoke-static {v1, v0}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 793
+    :goto_0
     return-void
 .end method
 
@@ -66,20 +84,20 @@
     .locals 2
     .param p1, "network"    # Landroid/net/Network;
 
-    .line 760
+    .line 797
     const-string v0, "ImsLocationHandler"
 
     const-string v1, "NetworkCallback.onLost()"
 
     invoke-static {v0, v1}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 761
+    .line 798
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$2;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     const/4 v1, 0x0
 
     invoke-static {v0, v1}, Lcom/mediatek/wfo/impl/ImsLocationHandler;->-$$Nest$fputmNetworkAvailable(Lcom/mediatek/wfo/impl/ImsLocationHandler;Z)V
 
-    .line 762
+    .line 799
     return-void
 .end method

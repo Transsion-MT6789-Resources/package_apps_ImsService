@@ -73,13 +73,13 @@
 
     .line 32
     .local v1, "mMethodGetService":Ljava/lang/reflect/Method;
-    const/4 v3, 0x0
-
     new-array v2, v2, [Ljava/lang/Object;
 
-    iget-object v4, p0, Lcom/transsion/hubsdk/aosp/net/TranAospNetworkPolicyManager;->mContext:Landroid/content/Context;
+    iget-object v3, p0, Lcom/transsion/hubsdk/aosp/net/TranAospNetworkPolicyManager;->mContext:Landroid/content/Context;
 
-    aput-object v4, v2, v5
+    aput-object v3, v2, v5
+
+    const/4 v3, 0x0
 
     invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 

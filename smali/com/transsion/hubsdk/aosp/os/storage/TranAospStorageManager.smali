@@ -135,11 +135,11 @@
     .line 37
     sget-object v2, Lcom/transsion/hubsdk/aosp/os/storage/TranAospStorageManager;->sClassName:Ljava/lang/Class;
 
-    new-array v4, v3, [Ljava/lang/Class;
+    const-string v4, "getVolumes"
 
-    const-string v5, "getVolumes"
+    new-array v5, v3, [Ljava/lang/Class;
 
-    invoke-static {v2, v5, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v2, v4, v5}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v2
 

@@ -1,14 +1,11 @@
 .class Lcom/mediatek/ims/internal/ImsVTProvider$3;
-.super Ljava/lang/Object;
+.super Landroid/os/Handler;
 .source "ImsVTProvider.java"
-
-# interfaces
-.implements Ljava/lang/Runnable;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/mediatek/ims/internal/ImsVTProvider;->setUIModeInternal(IZ)V
+    value = Lcom/mediatek/ims/internal/ImsVTProvider;-><init>()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -22,132 +19,56 @@
 
 
 # direct methods
-.method constructor <init>(Lcom/mediatek/ims/internal/ImsVTProvider;)V
+.method constructor <init>(Lcom/mediatek/ims/internal/ImsVTProvider;Landroid/os/Looper;)V
     .locals 0
     .param p1, "this$0"    # Lcom/mediatek/ims/internal/ImsVTProvider;
+    .param p2, "arg0"    # Landroid/os/Looper;
 
-    .line 1563
+    .line 624
     iput-object p1, p0, Lcom/mediatek/ims/internal/ImsVTProvider$3;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+    invoke-direct {p0, p2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public declared-synchronized run()V
-    .locals 3
+.method public handleMessage(Landroid/os/Message;)V
+    .locals 2
+    .param p1, "msg"    # Landroid/os/Message;
 
-    monitor-enter p0
+    .line 626
+    iget v0, p1, Landroid/os/Message;->what:I
 
-    .line 1565
-    :try_start_0
-    const-string v0, "ImsVT"
+    packed-switch v0, :pswitch_data_0
 
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "[ID="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    iget-object v2, p0, Lcom/mediatek/ims/internal/ImsVTProvider$3;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
-
-    iget v2, v2, Lcom/mediatek/ims/internal/ImsVTProvider;->mId:I
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, "] [onSetUIMode] resetModeRecoverThread start"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    .line 1569
-    const-wide/16 v0, 0x258
-
-    :try_start_1
-    invoke-static {v0, v1}, Ljava/lang/Thread;->sleep(J)V
-
-    .line 1570
-    iget-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProvider$3;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
-
-    const/4 v1, 0x0
-
-    iput-boolean v1, v0, Lcom/mediatek/ims/internal/ImsVTProvider;->mIsDuringResetMode:Z
-    :try_end_1
-    .catch Ljava/lang/InterruptedException; {:try_start_1 .. :try_end_1} :catch_0
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    .line 1572
     goto :goto_0
 
-    .line 1571
-    .end local p0    # "this":Lcom/mediatek/ims/internal/ImsVTProvider$3;
-    :catch_0
-    move-exception v0
-
-    .line 1573
-    :goto_0
-    :try_start_2
+    .line 629
+    :pswitch_0
     const-string v0, "ImsVT"
 
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "[ID="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    iget-object v2, p0, Lcom/mediatek/ims/internal/ImsVTProvider$3;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
-
-    iget v2, v2, Lcom/mediatek/ims/internal/ImsVTProvider;->mId:I
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, "] [onSetUIMode] resetModeRecoverThread finish"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
+    const-string v1, "notify UI, stop MA timeout"
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-    :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 1574
-    monitor-exit p0
+    .line 630
+    iget-object v0, p0, Lcom/mediatek/ims/internal/ImsVTProvider$3;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
+    const/16 v1, 0x138a
+
+    invoke-virtual {v0, v1}, Lcom/mediatek/ims/internal/ImsVTProvider;->handleCallSessionEvent(I)V
+
+    .line 631
+    nop
+
+    .line 637
+    :goto_0
     return-void
 
-    .line 1564
-    :catchall_0
-    move-exception v0
-
-    monitor-exit p0
-
-    throw v0
+    :pswitch_data_0
+    .packed-switch 0x2c8
+        :pswitch_0
+    .end packed-switch
 .end method

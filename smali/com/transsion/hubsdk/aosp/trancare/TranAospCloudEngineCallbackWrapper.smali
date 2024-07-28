@@ -59,7 +59,7 @@
 .end method
 
 .method public static regCallback(Ljava/lang/String;Ljava/lang/String;Lcom/transsion/hubsdk/api/trancare/ITranCloudEngineCallback;)V
-    .locals 11
+    .locals 8
     .param p0, "key"    # Ljava/lang/String;
     .param p1, "version"    # Ljava/lang/String;
     .param p2, "callback"    # Lcom/transsion/hubsdk/api/trancare/ITranCloudEngineCallback;
@@ -103,39 +103,35 @@
 
     const/4 v5, 0x3
 
-    new-array v6, v5, [Ljava/lang/Class;
+    new-array v5, v5, [Ljava/lang/Class;
 
-    const-class v7, Ljava/lang/String;
+    const-class v6, Ljava/lang/String;
 
-    const/4 v8, 0x0
+    const/4 v7, 0x0
 
-    aput-object v7, v6, v8
+    aput-object v6, v5, v7
 
-    const-class v7, Ljava/lang/String;
+    const-class v6, Ljava/lang/String;
 
-    const/4 v9, 0x1
+    const/4 v7, 0x1
 
-    aput-object v7, v6, v9
+    aput-object v6, v5, v7
 
-    const-class v7, Lcom/transsion/log/cloudengine/ICloudEngineCallback;
+    const-class v6, Lcom/transsion/log/cloudengine/ICloudEngineCallback;
 
-    const/4 v10, 0x2
+    const/4 v7, 0x2
 
-    aput-object v7, v6, v10
+    aput-object v6, v5, v7
 
-    invoke-virtual {v3, v4, v6}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-virtual {v3, v4, v5}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v4
 
     .line 36
     .local v4, "method":Ljava/lang/reflect/Method;
-    new-array v5, v5, [Ljava/lang/Object;
+    filled-new-array {p0, p1, v2}, [Ljava/lang/Object;
 
-    aput-object p0, v5, v8
-
-    aput-object p1, v5, v9
-
-    aput-object v2, v5, v10
+    move-result-object v5
 
     invoke-virtual {v4, v1, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
@@ -228,17 +224,17 @@
 
     .line 48
     .local v2, "method":Ljava/lang/reflect/Method;
-    const/4 v4, 0x0
-
     new-array v3, v3, [Ljava/lang/Object;
 
     aput-object p0, v3, v6
 
     invoke-virtual {v1}, Lcom/transsion/hubsdk/aosp/trancare/TranAospCloudEngineCallbackWrapper$CallbackInfo;->getCloudEngineCallback()Lcom/transsion/log/cloudengine/ICloudEngineCallback;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v7
+    aput-object v4, v3, v7
+
+    const/4 v4, 0x0
 
     invoke-virtual {v2, v4, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0

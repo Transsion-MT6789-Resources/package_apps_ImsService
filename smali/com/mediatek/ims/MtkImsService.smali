@@ -21,12 +21,12 @@
 .method static constructor <clinit>()V
     .locals 2
 
-    .line 75
-    sget-object v0, Landroid/os/Build;->TYPE:Ljava/lang/String;
+    .line 73
+    const-string v0, "eng"
 
-    const-string v1, "eng"
+    sget-object v1, Landroid/os/Build;->TYPE:Ljava/lang/String;
 
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
@@ -40,29 +40,26 @@
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "imsService"    # Lcom/mediatek/ims/ImsService;
 
-    .line 80
+    .line 78
     invoke-direct {p0}, Lcom/mediatek/ims/internal/IMtkImsService$Stub;-><init>()V
 
-    .line 77
+    .line 75
     const/4 v0, 0x0
 
     iput-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
-    .line 81
+    .line 79
     iput-object p2, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
-    .line 82
+    .line 80
     iput-object p1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    .line 83
+    .line 81
     const-string v0, "init"
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/MtkImsService;->log(Ljava/lang/String;)V
 
-    .line 85
-    invoke-static {}, Lcom/mediatek/ims/ril/ImsATController;->init()Lcom/mediatek/ims/ril/ImsATController;
-
-    .line 87
+    .line 82
     return-void
 .end method
 
@@ -70,15 +67,15 @@
     .locals 1
     .param p1, "s"    # Ljava/lang/String;
 
-    .line 255
+    .line 285
     sget-boolean v0, Lcom/mediatek/ims/MtkImsService;->ENGLOAD:Z
 
     if-eqz v0, :cond_0
 
-    .line 256
+    .line 286
     invoke-direct {p0, p1}, Lcom/mediatek/ims/MtkImsService;->log(Ljava/lang/String;)V
 
-    .line 258
+    .line 288
     :cond_0
     return-void
 .end method
@@ -87,12 +84,12 @@
     .locals 1
     .param p1, "s"    # Ljava/lang/String;
 
-    .line 250
+    .line 280
     const-string v0, "MtkImsService"
 
     invoke-static {v0, p1}, Landroid/telephony/Rlog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 252
+    .line 282
     return-void
 .end method
 
@@ -100,12 +97,12 @@
     .locals 1
     .param p1, "s"    # Ljava/lang/String;
 
-    .line 265
+    .line 295
     const-string v0, "MtkImsService"
 
     invoke-static {v0, p1}, Landroid/telephony/Rlog;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 266
+    .line 296
     return-void
 .end method
 
@@ -113,12 +110,12 @@
     .locals 1
     .param p1, "s"    # Ljava/lang/String;
 
-    .line 261
+    .line 291
     const-string v0, "MtkImsService"
 
     invoke-static {v0, p1}, Landroid/telephony/Rlog;->w(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 262
+    .line 292
     return-void
 .end method
 
@@ -128,7 +125,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 111
+    .line 106
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -137,12 +134,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 114
+    .line 109
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->onUpdateImsSate(I)V
 
-    .line 115
+    .line 110
     return-void
 .end method
 
@@ -151,7 +148,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Landroid/telephony/ims/aidl/IImsSmsListener;
 
-    .line 271
+    .line 301
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.SEND_SMS"
@@ -160,12 +157,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 274
+    .line 304
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->onAddImsSmsListener(ILandroid/telephony/ims/aidl/IImsSmsListener;)V
 
-    .line 275
+    .line 305
     return-void
 .end method
 
@@ -174,7 +171,7 @@
     .param p1, "phoneId"    # I
     .param p2, "request"    # Landroid/telephony/ims/feature/CapabilityChangeRequest;
 
-    .line 329
+    .line 359
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -183,12 +180,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 332
+    .line 362
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->changeEnabledCapabilities(ILandroid/telephony/ims/feature/CapabilityChangeRequest;)V
 
-    .line 333
+    .line 363
     return-void
 .end method
 
@@ -199,7 +196,7 @@
     .param p3, "listener"    # Landroid/telephony/ims/aidl/IImsCallSessionListener;
     .param p4, "aospCallSessionImpl"    # Lcom/android/ims/internal/IImsCallSession;
 
-    .line 192
+    .line 207
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -208,7 +205,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 195
+    .line 210
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2, p3, p4}, Lcom/mediatek/ims/ImsService;->onCreateMtkCallSession(ILandroid/telephony/ims/ImsCallProfile;Landroid/telephony/ims/aidl/IImsCallSessionListener;Lcom/android/ims/internal/IImsCallSession;)Lcom/mediatek/ims/internal/IMtkImsCallSession;
@@ -222,7 +219,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 159
+    .line 164
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -231,12 +228,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 162
+    .line 167
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->deregisterIms(I)V
 
-    .line 163
+    .line 168
     return-void
 .end method
 
@@ -244,7 +241,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 314
+    .line 344
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -253,52 +250,81 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 317
+    .line 347
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->fallBackAospMTFlow(I)V
 
-    .line 318
+    .line 348
     return-void
 .end method
 
 .method public getConfigInterfaceEx(I)Lcom/mediatek/ims/internal/IMtkImsConfig;
-    .locals 3
+    .locals 4
     .param p1, "phoneId"    # I
 
-    .line 179
+    .line 184
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
-
-    const-string v2, "getConfigInterfaceEx"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 183
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/ImsService;->bindAndRegisterWifiOffloadService()V
-
     .line 185
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/ImsService;->getImsConfigManager()Lcom/mediatek/ims/ImsConfigManager;
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
-    move-result-object v0
+    move-result v0
 
-    invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsConfigManager;->getEx(I)Lcom/mediatek/ims/internal/IMtkImsConfig;
+    .line 187
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
 
-    move-result-object v0
+    .line 188
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    return-object v0
+    .line 189
+    const-string v2, "android.permission.MODIFY_PHONE_STATE"
+
+    invoke-virtual {v1, v2}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
+
+    move-result v0
+
+    .line 192
+    :cond_0
+    if-eqz v0, :cond_1
+
+    .line 193
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getConfigInterfaceEx"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 198
+    :cond_1
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1}, Lcom/mediatek/ims/ImsService;->bindAndRegisterWifiOffloadService()V
+
+    .line 200
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1}, Lcom/mediatek/ims/ImsService;->getImsConfigManager()Lcom/mediatek/ims/ImsConfigManager;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsConfigManager;->getEx(I)Lcom/mediatek/ims/internal/IMtkImsConfig;
+
+    move-result-object v1
+
+    return-object v1
 .end method
 
 .method public getCurrentCallCount(I)I
     .locals 1
     .param p1, "phoneId"    # I
 
-    .line 231
+    .line 256
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getCurrentCallCount(I)I
@@ -309,47 +335,72 @@
 .end method
 
 .method public getImsNetworkState(I)[I
-    .locals 3
+    .locals 4
     .param p1, "capability"    # I
 
-    .line 236
+    .line 261
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
-
-    const-string v2, "getImsNetworkState"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 239
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getImsNetworkState(I)[I
-
-    move-result-object v0
-
-    return-object v0
-.end method
-
-.method public getImsPdnStatus(I)I
-    .locals 2
-    .param p1, "phoneId"    # I
-
-    .line 359
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
-
-    .line 360
+    .line 262
     const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
     move-result v0
 
-    .line 362
+    .line 264
     .local v0, "permissionCheck":I
-    if-nez v0, :cond_0
+    if-eqz v0, :cond_0
 
-    .line 363
+    .line 265
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getImsNetworkState"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 269
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsService;->getImsNetworkState(I)[I
+
+    move-result-object v1
+
+    return-object v1
+.end method
+
+.method public getImsPdnStatus(I)I
+    .locals 4
+    .param p1, "phoneId"    # I
+
+    .line 394
+    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    .line 395
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
+
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
+
+    move-result v0
+
+    .line 397
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 398
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getImsPdnStatus"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 403
+    :cond_0
     iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsService;->getImsPdnStatus(I)I
@@ -357,92 +408,126 @@
     move-result v1
 
     return v1
-
-    .line 365
-    :cond_0
-    const-string v1, "getImsPdnStatus(), error, no READ_PRIVILEGED_PHONE_STATE permission"
-
-    invoke-direct {p0, v1}, Lcom/mediatek/ims/MtkImsService;->loge(Ljava/lang/String;)V
-
-    .line 366
-    const/4 v1, -0x1
-
-    return v1
 .end method
 
 .method public getImsRegUriType(I)I
-    .locals 3
+    .locals 4
     .param p1, "phoneId"    # I
 
     .line 135
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
+    .line 136
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
-    const-string v2, "getImsRegUriType"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 138
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getImsRegUriType(I)I
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
     move-result v0
 
-    return v0
+    .line 138
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 139
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getImsRegUriType"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 143
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsService;->getImsRegUriType(I)I
+
+    move-result v1
+
+    return v1
 .end method
 
 .method public getImsState(I)I
-    .locals 3
+    .locals 4
     .param p1, "phoneId"    # I
 
-    .line 123
+    .line 118
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
+    .line 119
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
-    const-string v2, "getImsState"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 126
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getImsState(I)I
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
     move-result v0
 
-    return v0
+    .line 121
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 122
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getImsState"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 126
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsService;->getImsState(I)I
+
+    move-result v1
+
+    return v1
 .end method
 
 .method public getModemMultiImsCount()I
-    .locals 3
+    .locals 4
 
-    .line 223
+    .line 243
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
+    .line 244
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
-    const-string v2, "getModemMultiImsCount"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 226
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/ImsService;->getModemMultiImsCount()I
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
     move-result v0
 
-    return v0
+    .line 246
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 247
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getModemMultiImsCount"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 251
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1}, Lcom/mediatek/ims/ImsService;->getModemMultiImsCount()I
+
+    move-result v1
+
+    return v1
 .end method
 
 .method public getMtkUtInterface(I)Lcom/mediatek/ims/internal/IMtkImsUt;
     .locals 1
     .param p1, "phoneId"    # I
 
-    .line 208
+    .line 228
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->onGetMtkUtInterface(I)Lcom/mediatek/ims/internal/IMtkImsUt;
@@ -453,57 +538,87 @@
 .end method
 
 .method public getPendingMtkCallSession(ILjava/lang/String;)Lcom/mediatek/ims/internal/IMtkImsCallSession;
-    .locals 3
+    .locals 4
     .param p1, "phoneId"    # I
     .param p2, "callId"    # Ljava/lang/String;
 
-    .line 200
+    .line 215
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
-    const-string v1, "android.permission.READ_PHONE_STATE"
+    .line 216
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
-    const-string v2, "getPendingMtkCallSession"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 203
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->onGetPendingMtkCallSession(ILjava/lang/String;)Lcom/mediatek/ims/internal/IMtkImsCallSession;
-
-    move-result-object v0
-
-    return-object v0
-.end method
-
-.method public getWfcRegErrorCode(I)I
-    .locals 3
-    .param p1, "phoneId"    # I
-
-    .line 343
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
-
-    const-string v1, "android.permission.READ_PHONE_STATE"
-
-    const-string v2, "getWfcRegErrorCode"
-
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 346
-    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
-
-    invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getWfcRegErrorCode(I)I
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
 
     move-result v0
 
-    return v0
+    .line 218
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 219
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getPendingMtkCallSession"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 223
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1, p1, p2}, Lcom/mediatek/ims/ImsService;->onGetPendingMtkCallSession(ILjava/lang/String;)Lcom/mediatek/ims/internal/IMtkImsCallSession;
+
+    move-result-object v1
+
+    return-object v1
+.end method
+
+.method public getWfcRegErrorCode(I)I
+    .locals 4
+    .param p1, "phoneId"    # I
+
+    .line 373
+    iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    .line 374
+    const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
+
+    invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
+
+    move-result v0
+
+    .line 376
+    .local v0, "permissionCheck":I
+    if-eqz v0, :cond_0
+
+    .line 377
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
+
+    const-string v2, "android.permission.READ_PHONE_STATE"
+
+    const-string v3, "getWfcRegErrorCode"
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 381
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
+
+    invoke-virtual {v1, p1}, Lcom/mediatek/ims/ImsService;->getWfcRegErrorCode(I)I
+
+    move-result v1
+
+    return v1
 .end method
 
 .method public hangupAllCall(I)V
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 147
+    .line 152
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -512,19 +627,19 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 150
+    .line 155
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->onHangupAllCall(I)V
 
-    .line 151
+    .line 156
     return-void
 .end method
 
 .method public isCameraAvailable()Z
     .locals 3
 
-    .line 243
+    .line 273
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.CAMERA"
@@ -533,7 +648,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 245
+    .line 275
     invoke-static {}, Lcom/mediatek/ims/internal/ImsVTProviderUtil;->isCameraAvailable()Z
 
     move-result v0
@@ -548,7 +663,7 @@
     .param p3, "mtklistener"    # Lcom/mediatek/ims/internal/IMtkImsRegistrationListener;
     .param p4, "notifyOnly"    # Z
 
-    .line 298
+    .line 328
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -557,7 +672,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 301
+    .line 331
     iget-object v3, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     const/4 v5, 0x1
@@ -572,7 +687,7 @@
 
     invoke-virtual/range {v3 .. v8}, Lcom/mediatek/ims/ImsService;->onAddRegistrationListener(IILcom/android/ims/internal/IImsRegistrationListener;Lcom/mediatek/ims/internal/IMtkImsRegistrationListener;Z)V
 
-    .line 303
+    .line 333
     return-void
 .end method
 
@@ -584,7 +699,7 @@
     .param p4, "netId"    # I
     .param p5, "phoneId"    # I
 
-    .line 214
+    .line 234
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.ACCESS_NETWORK_STATE"
@@ -593,7 +708,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 217
+    .line 237
     iget-object v3, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     move-object v4, p1
@@ -623,7 +738,7 @@
     .param p6, "isRetry"    # Z
     .param p7, "pdu"    # [B
 
-    .line 280
+    .line 310
     move-object v0, p0
 
     iget-object v1, v0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
@@ -634,7 +749,7 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 283
+    .line 313
     iget-object v4, v0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     move v5, p1
@@ -653,7 +768,7 @@
 
     invoke-virtual/range {v4 .. v11}, Lcom/mediatek/ims/ImsService;->sendSms(IIILjava/lang/String;Ljava/lang/String;Z[B)V
 
-    .line 284
+    .line 314
     return-void
 .end method
 
@@ -667,7 +782,7 @@
     .param p6, "isAllow"    # Z
     .param p7, "cause"    # I
 
-    .line 97
+    .line 92
     move-object v0, p0
 
     iget-object v1, v0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
@@ -678,7 +793,7 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 100
+    .line 95
     iget-object v4, v0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     move v5, p1
@@ -697,7 +812,7 @@
 
     invoke-virtual/range {v4 .. v11}, Lcom/mediatek/ims/ImsService;->onSetCallIndication(ILjava/lang/String;Ljava/lang/String;ILjava/lang/String;ZI)V
 
-    .line 102
+    .line 97
     return-void
 .end method
 
@@ -710,7 +825,7 @@
     .param p5, "extraHeaders"    # Ljava/util/Map;
     .param p6, "location"    # [Ljava/lang/String;
 
-    .line 351
+    .line 386
     move-object v0, p0
 
     iget-object v1, v0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
@@ -721,7 +836,7 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 354
+    .line 389
     iget-object v4, v0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     move-object/from16 v9, p5
@@ -740,7 +855,7 @@
 
     invoke-virtual/range {v4 .. v10}, Lcom/mediatek/ims/ImsService;->setImsPreCallInfo(IILjava/lang/String;Ljava/lang/String;Ljava/util/HashMap;[Ljava/lang/String;)V
 
-    .line 356
+    .line 391
     return-void
 .end method
 
@@ -749,7 +864,7 @@
     .param p1, "phoneId"    # I
     .param p2, "enable"    # Z
 
-    .line 307
+    .line 337
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -758,12 +873,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 310
+    .line 340
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->setMTRedirect(IZ)V
 
-    .line 311
+    .line 341
     return-void
 .end method
 
@@ -773,7 +888,7 @@
     .param p2, "extraHeaders"    # Ljava/util/Map;
     .param p3, "fromUri"    # Ljava/lang/String;
 
-    .line 321
+    .line 351
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -782,7 +897,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 324
+    .line 354
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     move-object v1, p2
@@ -791,7 +906,7 @@
 
     invoke-virtual {v0, p1, v1, p3}, Lcom/mediatek/ims/ImsService;->setSipHeader(ILjava/util/HashMap;Ljava/lang/String;)V
 
-    .line 325
+    .line 355
     return-void
 .end method
 
@@ -800,7 +915,7 @@
     .param p1, "phoneId"    # I
     .param p2, "errorCode"    # I
 
-    .line 336
+    .line 366
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -809,12 +924,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 339
+    .line 369
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->setWfcRegErrorCode(II)V
 
-    .line 340
+    .line 370
     return-void
 .end method
 
@@ -823,7 +938,7 @@
     .param p1, "radioState"    # I
     .param p2, "phoneId"    # I
 
-    .line 171
+    .line 176
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -832,11 +947,11 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 174
+    .line 179
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsService;->mImsService:Lcom/mediatek/ims/ImsService;
 
     invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsService;->updateRadioState(II)V
 
-    .line 175
+    .line 180
     return-void
 .end method

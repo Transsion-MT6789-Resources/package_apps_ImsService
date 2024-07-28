@@ -26,7 +26,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    .line 389
+    .line 422
     iput-object p1, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
     invoke-direct {p0}, Landroid/telephony/TelephonyCallback;-><init>()V
@@ -37,250 +37,140 @@
 
 # virtual methods
 .method public onSignalStrengthsChanged(Landroid/telephony/SignalStrength;)V
-    .locals 10
+    .locals 7
     .param p1, "signalStrength"    # Landroid/telephony/SignalStrength;
 
-    .line 395
+    .line 428
     invoke-virtual {p1}, Landroid/telephony/SignalStrength;->getCellSignalStrengths()Ljava/util/List;
 
     move-result-object v0
 
-    .line 396
+    .line 429
     .local v0, "cellSignalStrengthList":Ljava/util/List;, "Ljava/util/List<Landroid/telephony/CellSignalStrength;>;"
     if-nez v0, :cond_0
 
-    .line 397
+    .line 430
     return-void
 
-    .line 400
+    .line 433
     :cond_0
-    const v1, 0x7fffffff
+    const/4 v1, 0x0
 
-    .line 401
-    .local v1, "rsrp":I
-    const v2, 0x7fffffff
+    .line 437
+    .local v1, "levelChanged":Z
+    invoke-virtual {p1}, Landroid/telephony/SignalStrength;->getLevel()I
 
-    .line 403
-    .local v2, "snr":I
-    const-class v3, Landroid/telephony/CellSignalStrengthLte;
+    move-result v2
 
-    .line 404
-    invoke-virtual {p1, v3}, Landroid/telephony/SignalStrength;->getCellSignalStrengths(Ljava/lang/Class;)Ljava/util/List;
+    .line 439
+    .local v2, "newSigLevel":I
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "mSignalLevel:"
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v3
 
-    .line 405
-    .local v3, "signalStrengthLte":Ljava/util/List;, "Ljava/util/List<Landroid/telephony/CellSignalStrengthLte;>;"
-    invoke-interface {v3}, Ljava/util/List;->isEmpty()Z
+    iget-object v4, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
+
+    invoke-static {v4}, Lcom/mediatek/ims/internal/ImsVTProvider;->access$000(Lcom/mediatek/ims/internal/ImsVTProvider;)I
 
     move-result v4
 
-    const-string v5, ", snr:"
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string v6, "ImsVT"
+    move-result-object v3
 
-    const/4 v7, 0x0
+    const-string v4, ", primary signal newlevel:"
 
-    if-nez v4, :cond_1
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 406
-    invoke-interface {v3, v7}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    move-result-object v3
 
-    move-result-object v4
+    invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    check-cast v4, Landroid/telephony/CellSignalStrengthLte;
+    move-result-object v3
 
-    invoke-virtual {v4}, Landroid/telephony/CellSignalStrengthLte;->getRsrp()I
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result v1
+    move-result-object v3
 
-    .line 407
-    invoke-interface {v3, v7}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    const-string v4, "ImsVT"
 
-    move-result-object v4
+    invoke-static {v4, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    check-cast v4, Landroid/telephony/CellSignalStrengthLte;
+    .line 441
+    iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    invoke-virtual {v4}, Landroid/telephony/CellSignalStrengthLte;->getRssnr()I
+    invoke-static {v3}, Lcom/mediatek/ims/internal/ImsVTProvider;->access$000(Lcom/mediatek/ims/internal/ImsVTProvider;)I
 
-    move-result v2
+    move-result v3
 
-    .line 408
-    new-instance v4, Ljava/lang/StringBuilder;
+    if-eq v3, v2, :cond_1
 
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+    .line 442
+    const/4 v1, 0x1
 
-    const-string v8, "signalStrengthLte, rsrp:"
+    .line 443
+    iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    invoke-virtual {v4, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-static {v3, v2}, Lcom/mediatek/ims/internal/ImsVTProvider;->access$002(Lcom/mediatek/ims/internal/ImsVTProvider;I)I
 
-    move-result-object v4
-
-    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v6, v4}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 411
+    .line 446
     :cond_1
-    const v4, 0x7fffffff
+    const/4 v3, 0x1
 
-    if-ne v1, v4, :cond_2
+    if-ne v1, v3, :cond_3
 
-    .line 412
-    const-class v8, Landroid/telephony/CellSignalStrengthNr;
+    .line 448
+    :goto_0
+    iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    .line 413
-    invoke-virtual {p1, v8}, Landroid/telephony/SignalStrength;->getCellSignalStrengths(Ljava/lang/Class;)Ljava/util/List;
+    iget-boolean v3, v3, Lcom/mediatek/ims/internal/ImsVTProvider;->mInitComplete:Z
 
-    move-result-object v8
+    if-nez v3, :cond_2
 
-    .line 414
-    .local v8, "signalStrengthNr":Ljava/util/List;, "Ljava/util/List<Landroid/telephony/CellSignalStrengthNr;>;"
-    invoke-interface {v8}, Ljava/util/List;->isEmpty()Z
+    .line 450
+    :try_start_0
+    const-string v3, "not init done, wait"
 
-    move-result v9
+    invoke-static {v4, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    if-nez v9, :cond_2
+    .line 451
+    const-wide/16 v5, 0x64
 
-    .line 415
-    invoke-interface {v8, v7}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    invoke-static {v5, v6}, Ljava/lang/Thread;->sleep(J)V
+    :try_end_0
+    .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    move-result-object v9
+    goto :goto_1
 
-    check-cast v9, Landroid/telephony/CellSignalStrengthNr;
+    .line 452
+    :catch_0
+    move-exception v3
 
-    invoke-virtual {v9}, Landroid/telephony/CellSignalStrengthNr;->getSsRsrp()I
+    .line 453
+    :goto_1
+    goto :goto_0
 
-    move-result v1
-
-    .line 416
-    invoke-interface {v8, v7}, Ljava/util/List;->get(I)Ljava/lang/Object;
-
-    move-result-object v7
-
-    check-cast v7, Landroid/telephony/CellSignalStrengthNr;
-
-    invoke-virtual {v7}, Landroid/telephony/CellSignalStrengthNr;->getSsSinr()I
-
-    move-result v2
-
-    .line 417
-    new-instance v7, Ljava/lang/StringBuilder;
-
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "signalStrengthNr, rsrp:"
-
-    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-static {v6, v5}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 421
-    .end local v8    # "signalStrengthNr":Ljava/util/List;, "Ljava/util/List<Landroid/telephony/CellSignalStrengthNr;>;"
+    .line 455
     :cond_2
-    if-ne v1, v4, :cond_3
+    iget-object v3, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
 
-    .line 422
-    return-void
+    iget v3, v3, Lcom/mediatek/ims/internal/ImsVTProvider;->mId:I
 
-    .line 425
+    iget-object v4, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
+
+    invoke-static {v4}, Lcom/mediatek/ims/internal/ImsVTProvider;->access$000(Lcom/mediatek/ims/internal/ImsVTProvider;)I
+
+    move-result v4
+
+    invoke-static {v3, v4}, Lcom/mediatek/ims/internal/ImsVTProvider;->nSetSignalLevel(II)I
+
+    .line 457
     :cond_3
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    .line 426
-    .local v4, "prop":Ljava/lang/StringBuilder;
-    const-string v5, "vendor.ims.vt.signalstrength."
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    .line 427
-    iget-object v5, p0, Lcom/mediatek/ims/internal/ImsVTProvider$ImsVTProviderTelephonyCallback;->this$0:Lcom/mediatek/ims/internal/ImsVTProvider;
-
-    iget v5, v5, Lcom/mediatek/ims/internal/ImsVTProvider;->mSimId:I
-
-    add-int/lit8 v5, v5, 0x1
-
-    invoke-static {v5}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    .line 429
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    .line 431
-    .local v5, "value":Ljava/lang/StringBuilder;
-    invoke-static {v1}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    .line 432
-    const-string v7, ","
-
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    .line 433
-    invoke-static {v2}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    .line 434
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Landroid/os/SystemProperties;->set(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 436
-    const-string v7, "set signalstrength property done"
-
-    invoke-static {v6, v7}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 438
     return-void
 .end method

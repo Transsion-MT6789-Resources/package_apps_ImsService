@@ -15,13 +15,13 @@
 
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$NetworkLostCallback;,
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$NetworkAvailableCallback;,
         Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$DisconnectingState;,
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$InactiveState;,
         Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$ActiveState;,
         Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$ActivatingState;,
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$InactiveState;,
-        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$DefaultState;
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$DefaultState;,
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$NetworkAvailableCallback;,
+        Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection$NetworkLostCallback;
     }
 .end annotation
 
@@ -1340,9 +1340,11 @@
     if-eqz v0, :cond_0
 
     .line 567
-    const/4 v1, 0x4
+    nop
 
     .line 568
+    const/4 v1, 0x4
+
     invoke-virtual {p0, v1}, Lcom/mediatek/ims/internal/ImsDataSynchronizer$DataConnection;->obtainMessage(I)Landroid/os/Message;
 
     move-result-object v1

@@ -20,7 +20,7 @@
 .method public static callDiscount()V
     .locals 1
 
-    .line 105
+    .line 106
     :try_start_0
     invoke-static {}, Lcom/transsion/hubsdk/trancare/trancareassist/TranTrancareAssistManager;->getService()Lcom/transsion/hubsdk/trancare/trancareassist/ITranTrancareAssistManager;
 
@@ -30,18 +30,18 @@
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 108
+    .line 109
     goto :goto_0
 
-    .line 106
+    .line 107
     :catch_0
     move-exception v0
 
-    .line 107
+    .line 108
     .local v0, "e":Ljava/lang/Exception;
     invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
 
-    .line 109
+    .line 110
     .end local v0    # "e":Ljava/lang/Exception;
     :goto_0
     return-void
@@ -50,7 +50,7 @@
 .method public static isSupportFansFeature()Z
     .locals 2
 
-    .line 142
+    .line 143
     const-string v0, "persist.sys.fans.support"
 
     invoke-static {v0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
@@ -72,10 +72,10 @@
     .param p1, "subId"    # I
     .param p2, "context"    # Landroid/content/Context;
 
-    .line 113
+    .line 114
     const/4 v0, 0x0
 
-    .line 114
+    .line 115
     .local v0, "voiceNetworkTypeName":Ljava/lang/String;
     invoke-static {p2}, Landroid/telephony/TelephonyManager;->from(Landroid/content/Context;)Landroid/telephony/TelephonyManager;
 
@@ -85,51 +85,51 @@
 
     move-result-object v1
 
-    .line 115
+    .line 116
     .local v1, "telephonyManager":Landroid/telephony/TelephonyManager;
     invoke-virtual {v1, p1}, Landroid/telephony/TelephonyManager;->getVoiceNetworkType(I)I
 
     move-result v2
 
-    .line 116
+    .line 117
     .local v2, "actualVoiceNetworkType":I
     if-eqz v2, :cond_0
 
-    .line 117
+    .line 118
     invoke-static {v2}, Landroid/telephony/TelephonyManager;->getNetworkTypeName(I)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 120
+    .line 121
     :cond_0
     invoke-virtual {v1, p1}, Landroid/telephony/TelephonyManager;->getServiceStateForSubscriber(I)Landroid/telephony/ServiceState;
 
     move-result-object v3
 
-    .line 121
+    .line 122
     .local v3, "serviceState":Landroid/telephony/ServiceState;
     invoke-virtual {v1}, Landroid/telephony/TelephonyManager;->getSignalStrength()Landroid/telephony/SignalStrength;
 
     move-result-object v4
 
-    .line 122
+    .line 123
     .local v4, "signalStrength":Landroid/telephony/SignalStrength;
     if-eqz v3, :cond_3
 
     if-eqz v4, :cond_3
 
-    .line 123
+    .line 124
     invoke-virtual {v3}, Landroid/telephony/ServiceState;->getState()I
 
     move-result v5
 
-    .line 124
+    .line 125
     .local v5, "state":I
     invoke-virtual {v4}, Landroid/telephony/SignalStrength;->getDbm()I
 
     move-result v6
 
-    .line 125
+    .line 126
     .local v6, "signalDbm":I
     new-instance v7, Ljava/lang/StringBuilder;
 
@@ -153,7 +153,7 @@
 
     invoke-static {v8, v7}, Landroid/telephony/Rlog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 126
+    .line 127
     const/4 v7, 0x1
 
     if-eq v7, v5, :cond_1
@@ -162,17 +162,17 @@
 
     if-ne v7, v5, :cond_2
 
-    .line 128
+    .line 129
     :cond_1
     const/4 v6, 0x0
 
-    .line 130
+    .line 131
     :cond_2
     new-instance v7, Ljava/lang/StringBuilder;
 
     invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 131
+    .line 132
     .local v7, "localLog":Ljava/lang/StringBuilder;
     new-instance v8, Ljava/lang/StringBuilder;
 
@@ -194,7 +194,7 @@
 
     invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 132
+    .line 133
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -215,7 +215,7 @@
 
     invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 133
+    .line 134
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -244,7 +244,7 @@
 
     invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 134
+    .line 135
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -265,16 +265,16 @@
 
     invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 135
+    .line 136
+    const-string v8, "TSD_CONNECTIVITY"
+
     invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v8
+    move-result-object v9
 
-    const-string v9, "TSD_CONNECTIVITY"
+    invoke-static {v8, v9}, Lcom/transsion/hubsdk/api/trancare/TranTrancareNative;->localLog(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-static {v9, v8}, Lcom/transsion/hubsdk/api/trancare/TranTrancareNative;->localLog(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 138
+    .line 139
     .end local v5    # "state":I
     .end local v6    # "signalDbm":I
     .end local v7    # "localLog":Ljava/lang/StringBuilder;

@@ -387,11 +387,11 @@
     .line 238
     :cond_1
     :goto_0
-    const/4 v0, 0x5
+    const-string v0, "approveEccRedial() : mCallSessionImpl is null"
 
-    const-string v1, "approveEccRedial() : mCallSessionImpl is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 240
     return-void
@@ -406,11 +406,11 @@
     if-nez v0, :cond_0
 
     .line 283
-    const/4 v0, 0x5
+    const-string v0, "callTerminated() : mAospImsCallSessionProxy is null"
 
-    const-string v1, "callTerminated() : mAospImsCallSessionProxy is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 285
     return-void
@@ -599,11 +599,11 @@
     if-nez v0, :cond_0
 
     .line 413
-    const/4 v0, 0x5
+    const-string v0, "ConferenceEventListener() : mAospImsCallSessionProxy is null"
 
-    const-string v1, "ConferenceEventListener() : mAospImsCallSessionProxy is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 415
     const/4 v0, 0x0
@@ -641,11 +641,11 @@
     if-nez v0, :cond_0
 
     .line 214
-    const/4 v0, 0x5
+    const-string v0, "getIImsCallSession() : mAospImsCallSessionProxy is null"
 
-    const-string v1, "getIImsCallSession() : mAospImsCallSessionProxy is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 216
     const/4 v0, 0x0
@@ -699,11 +699,11 @@
     .line 229
     :cond_1
     :goto_0
-    const/4 v0, 0x5
+    const-string v0, "isIncomingCallMultiparty() : mCallSessionImpl is null"
 
-    const-string v1, "isIncomingCallMultiparty() : mCallSessionImpl is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 231
     const/4 v0, 0x0
@@ -720,11 +720,11 @@
     if-nez v0, :cond_0
 
     .line 377
-    const/4 v0, 0x2
+    const-string v0, "notifyCallSessionBusy() : mMtkListener is null"
 
-    const-string v1, "notifyCallSessionBusy() : mMtkListener is null"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 378
     return-void
@@ -747,11 +747,11 @@
 
     .line 383
     .local v0, "e":Landroid/os/RemoteException;
-    const/4 v1, 0x5
+    const-string v1, "notifyCallSessionBusy() : RemoteException notifyCallSessionBusy()"
 
-    const-string v2, "notifyCallSessionBusy() : RemoteException notifyCallSessionBusy()"
+    const/4 v2, 0x5
 
-    invoke-direct {p0, v2, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v1, v2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 385
     .end local v0    # "e":Landroid/os/RemoteException;
@@ -768,11 +768,11 @@
     if-nez v0, :cond_0
 
     .line 365
-    const/4 v0, 0x2
+    const-string v0, "notifyCallSessionCalling() : mMtkListener is null"
 
-    const-string v1, "notifyCallSessionCalling() : mMtkListener is null"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 366
     return-void
@@ -795,11 +795,11 @@
 
     .line 371
     .local v0, "e":Landroid/os/RemoteException;
-    const/4 v1, 0x5
+    const-string v1, "notifyCallSessionCalling() : RemoteException notifyCallSessionCalling()"
 
-    const-string v2, "notifyCallSessionCalling() : RemoteException notifyCallSessionCalling()"
+    const/4 v2, 0x5
 
-    invoke-direct {p0, v2, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v1, v2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 373
     .end local v0    # "e":Landroid/os/RemoteException;
@@ -910,11 +910,11 @@
     if-nez v0, :cond_0
 
     .line 351
-    const/4 v0, 0x2
+    const-string v0, "notifyCallSessionRinging() : mMtkListener is nullcached ringing call notify"
 
-    const-string v1, "notifyCallSessionRinging() : mMtkListener is nullcached ringing call notify"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 353
     iput-object p1, p0, Lcom/mediatek/ims/MtkImsCallSessionProxy;->mCacheCallProfile:Landroid/telephony/ims/ImsCallProfile;
@@ -940,11 +940,11 @@
 
     .line 359
     .local v0, "e":Landroid/os/RemoteException;
-    const/4 v1, 0x5
+    const-string v1, "notifyCallSessionRinging() : RemoteException notifyCallSessionRinging()"
 
-    const-string v2, "notifyCallSessionRinging() : RemoteException notifyCallSessionRinging()"
+    const/4 v2, 0x5
 
-    invoke-direct {p0, v2, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v1, v2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 361
     .end local v0    # "e":Landroid/os/RemoteException;
@@ -963,11 +963,11 @@
     if-nez v0, :cond_0
 
     .line 401
-    const/4 v0, 0x2
+    const-string v0, "notifyNotificationRingtone() : mMtkListener is null"
 
-    const-string v1, "notifyNotificationRingtone() : mMtkListener is null"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 402
     return-void
@@ -990,11 +990,11 @@
 
     .line 407
     .local v0, "e":Landroid/os/RemoteException;
-    const/4 v1, 0x5
+    const-string v1, "notifyNotificationRingtone() : RemoteException callSessionVideoRingtoneEvent()"
 
-    const-string v2, "notifyNotificationRingtone() : RemoteException callSessionVideoRingtoneEvent()"
+    const/4 v2, 0x5
 
-    invoke-direct {p0, v2, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v1, v2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 409
     .end local v0    # "e":Landroid/os/RemoteException;
@@ -1166,11 +1166,11 @@
     if-nez v0, :cond_0
 
     .line 389
-    const/4 v0, 0x2
+    const-string v0, "notifyVideoRingtoneEvent() : mMtkListener is null"
 
-    const-string v1, "notifyVideoRingtoneEvent() : mMtkListener is null"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 390
     return-void
@@ -1193,11 +1193,11 @@
 
     .line 395
     .local v0, "e":Landroid/os/RemoteException;
-    const/4 v1, 0x5
+    const-string v1, "notifyVideoRingtoneEvent() : RemoteException callSessionVideoRingtoneEvent()"
 
-    const-string v2, "notifyVideoRingtoneEvent() : RemoteException callSessionVideoRingtoneEvent()"
+    const/4 v2, 0x5
 
-    invoke-direct {p0, v2, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v1, v2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 397
     .end local v0    # "e":Landroid/os/RemoteException;
@@ -1226,11 +1226,11 @@
     if-nez v0, :cond_0
 
     .line 274
-    const/4 v0, 0x5
+    const-string v0, "resume() : mAospImsCallSessionProxy is null"
 
-    const-string v1, "resume() : mAospImsCallSessionProxy is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 275
     return-void
@@ -1299,11 +1299,11 @@
     if-eqz v0, :cond_0
 
     .line 206
-    const/4 v0, 0x2
+    const-string v0, "setListener() :notify cached ringing call"
 
-    const-string v1, "setListener() :notify cached ringing call"
+    const/4 v1, 0x2
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 207
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsCallSessionProxy;->mCacheCallProfile:Landroid/telephony/ims/ImsCallProfile;
@@ -1341,11 +1341,11 @@
     if-nez v0, :cond_0
 
     .line 422
-    const/4 v0, 0x5
+    const-string v0, "terminate() : mAospImsCallSessionProxy is null"
 
-    const-string v1, "terminate() : mAospImsCallSessionProxy is null"
+    const/4 v1, 0x5
 
-    invoke-direct {p0, v1, v0}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
+    invoke-direct {p0, v0, v1}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->logWithCallId(Ljava/lang/String;I)V
 
     .line 423
     return-void
@@ -1358,15 +1358,16 @@
     return-void
 .end method
 
-.method public videoRingtoneOperation(ILjava/lang/String;)V
+.method public videoScreenOperation(ILjava/lang/String;Ljava/lang/String;)V
     .locals 1
     .param p1, "type"    # I
     .param p2, "operation"    # Ljava/lang/String;
+    .param p3, "duration"    # Ljava/lang/String;
 
     .line 304
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsCallSessionProxy;->mAospImsCallSessionProxy:Lcom/mediatek/ims/ImsCallSessionProxy;
 
-    invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/ImsCallSessionProxy;->videoRingtoneOperation(ILjava/lang/String;)V
+    invoke-virtual {v0, p1, p2, p3}, Lcom/mediatek/ims/ImsCallSessionProxy;->videoScreenOperation(ILjava/lang/String;Ljava/lang/String;)V
 
     .line 305
     return-void

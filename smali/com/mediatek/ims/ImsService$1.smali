@@ -23,7 +23,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/mediatek/ims/ImsService;
 
-    .line 469
+    .line 468
     iput-object p1, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
@@ -34,11 +34,11 @@
 
 # virtual methods
 .method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 10
+    .locals 9
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "intent"    # Landroid/content/Intent;
 
-    .line 471
+    .line 470
     iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -65,100 +65,102 @@
 
     invoke-static {v0, v1}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
 
-    .line 473
+    .line 472
+    const-string v0, "com.mediatek.ims.ACTION_IMS_SIMULATE"
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    const-string v1, "com.mediatek.ims.ACTION_IMS_SIMULATE"
-
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
-    const/4 v1, 0x3
+    const/4 v1, 0x2
 
-    const/4 v2, 0x2
+    const/4 v2, 0x0
 
     const/4 v3, 0x0
 
-    const/4 v4, 0x0
-
-    const/4 v5, 0x1
+    const/4 v4, 0x1
 
     if-eqz v0, :cond_0
+
+    .line 474
+    iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+
+    const-string v5, "registry"
+
+    invoke-virtual {p2, v5, v2}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+
+    move-result v5
+
+    invoke-static {v0, v5}, Lcom/mediatek/ims/ImsService;->access$202(Lcom/mediatek/ims/ImsService;Z)Z
 
     .line 475
     iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    const-string v6, "registry"
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, v6, v4}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result v6
+    const-string v6, "Simulate IMS Registration: "
 
-    invoke-static {v0, v6}, Lcom/mediatek/ims/ImsService;->access$202(Lcom/mediatek/ims/ImsService;Z)Z
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 476
-    iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+    move-result-object v5
 
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "Simulate IMS Registration: "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
-
-    invoke-static {v7}, Lcom/mediatek/ims/ImsService;->access$200(Lcom/mediatek/ims/ImsService;)Z
-
-    move-result v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v0, v6}, Lcom/mediatek/ims/ImsService;->access$300(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
-
-    .line 477
-    invoke-static {}, Lcom/mediatek/ims/ImsCommonUtil;->getMainCapabilityPhoneId()I
-
-    move-result v0
-
-    .line 478
-    .local v0, "phoneId":I
-    new-array v1, v1, [I
-
-    .line 479
     iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v6}, Lcom/mediatek/ims/ImsService;->access$200(Lcom/mediatek/ims/ImsService;)Z
 
     move-result v6
 
-    aput v6, v1, v4
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
-    const/16 v4, 0xf
+    move-result-object v5
 
-    aput v4, v1, v5
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    aput v0, v1, v2
+    move-result-object v5
 
-    .line 482
+    invoke-static {v0, v5}, Lcom/mediatek/ims/ImsService;->access$300(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
+
+    .line 476
+    invoke-static {}, Lcom/mediatek/ims/ImsCommonUtil;->getMainCapabilityPhoneId()I
+
+    move-result v0
+
+    .line 477
+    .local v0, "phoneId":I
+    const/4 v5, 0x3
+
+    new-array v5, v5, [I
+
+    .line 478
+    iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+
+    invoke-static {v6}, Lcom/mediatek/ims/ImsService;->access$200(Lcom/mediatek/ims/ImsService;)Z
+
+    move-result v6
+
+    aput v6, v5, v2
+
+    const/16 v2, 0xf
+
+    aput v2, v5, v4
+
+    aput v0, v5, v1
+
+    move-object v1, v5
+
+    .line 481
     .local v1, "result":[I
     new-instance v2, Landroid/os/AsyncResult;
 
     invoke-direct {v2, v3, v1, v3}, Landroid/os/AsyncResult;-><init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
 
-    .line 483
+    .line 482
     .local v2, "ar":Landroid/os/AsyncResult;
     iget-object v3, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
@@ -168,47 +170,47 @@
 
     aget-object v3, v3, v0
 
-    iget-object v4, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
-
-    .line 484
-    invoke-static {v4}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
-
-    move-result-object v4
-
-    aget-object v4, v4, v0
-
-    invoke-virtual {v4, v5, v2}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
-
-    move-result-object v4
+    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     .line 483
+    invoke-static {v5}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
+
+    move-result-object v5
+
+    aget-object v5, v5, v0
+
+    invoke-virtual {v5, v4, v2}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
+
+    move-result-object v4
+
+    .line 482
     invoke-virtual {v3, v4}, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
 
-    .line 485
+    .line 484
     .end local v0    # "phoneId":I
     .end local v1    # "result":[I
     .end local v2    # "ar":Landroid/os/AsyncResult;
     goto/16 :goto_3
 
     :cond_0
+    const-string v0, "android.intent.action.BOOT_COMPLETED"
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v5
 
-    const-string v6, "android.intent.action.BOOT_COMPLETED"
-
-    invoke-virtual {v6, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_3
 
-    .line 486
+    .line 485
     iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v0}, Lcom/mediatek/ims/ImsService;->access$500(Lcom/mediatek/ims/ImsService;)V
 
-    .line 489
+    .line 488
     const/4 v0, 0x0
 
     .local v0, "i":I
@@ -221,7 +223,7 @@
 
     if-ge v0, v1, :cond_2
 
-    .line 490
+    .line 489
     iget-object v1, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v1}, Lcom/mediatek/ims/ImsService;->access$700(Lcom/mediatek/ims/ImsService;)[I
@@ -230,22 +232,22 @@
 
     aget v1, v1, v0
 
-    if-ne v1, v5, :cond_1
+    if-ne v1, v4, :cond_1
 
-    .line 491
+    .line 490
     new-instance v1, Landroid/content/Intent;
 
     const-string v2, "com.android.ims.IMS_SERVICE_UP"
 
     invoke-direct {v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
 
-    .line 492
+    .line 491
     .local v1, "newIntent":Landroid/content/Intent;
     const-string v2, "android:phone_id"
 
     invoke-virtual {v1, v2, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
 
-    .line 493
+    .line 492
     iget-object v2, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v2}, Lcom/mediatek/ims/ImsService;->access$800(Lcom/mediatek/ims/ImsService;)Landroid/content/Context;
@@ -254,16 +256,16 @@
 
     invoke-virtual {v2, v1}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;)V
 
-    .line 494
+    .line 493
     iget-object v2, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v4, "broadcast IMS_SERVICE_UP for phone="
+    const-string v5, "broadcast IMS_SERVICE_UP for phone="
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v3
 
@@ -277,7 +279,7 @@
 
     invoke-static {v2, v3}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
 
-    .line 489
+    .line 488
     .end local v1    # "newIntent":Landroid/content/Intent;
     :cond_1
     add-int/lit8 v0, v0, 0x1
@@ -288,30 +290,30 @@
     :cond_2
     goto/16 :goto_3
 
-    .line 497
+    .line 496
     :cond_3
+    const-string v0, "android.intent.action.SIM_STATE_CHANGED"
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v5
 
-    const-string v6, "android.intent.action.SIM_STATE_CHANGED"
-
-    invoke-virtual {v6, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
-    const/4 v6, -0x1
+    const/4 v5, -0x1
 
     if-eqz v0, :cond_5
 
-    .line 498
+    .line 497
     const-string v0, "ss"
 
     invoke-virtual {p2, v0}, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 499
+    .line 498
     .local v0, "simStatus":Ljava/lang/String;
     const-string v1, "ABSENT"
 
@@ -321,14 +323,14 @@
 
     if-eqz v1, :cond_4
 
-    .line 500
+    .line 499
     const-string v1, "phone"
 
-    invoke-virtual {p2, v1, v6}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    invoke-virtual {p2, v1, v5}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
     move-result v1
 
-    .line 502
+    .line 501
     .local v1, "phoneId":I
     invoke-static {v1}, Lcom/mediatek/ims/ImsService;->access$900(I)Z
 
@@ -336,66 +338,66 @@
 
     if-eqz v2, :cond_4
 
-    .line 503
+    .line 502
     iget-object v2, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v2, v1}, Lcom/mediatek/ims/ImsService;->access$1000(Lcom/mediatek/ims/ImsService;I)V
 
-    .line 506
+    .line 505
     .end local v0    # "simStatus":Ljava/lang/String;
     .end local v1    # "phoneId":I
     :cond_4
     goto/16 :goto_3
 
     :cond_5
+    const-string v0, "android.intent.action.SERVICE_STATE"
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v6
 
-    const-string v7, "android.intent.action.SERVICE_STATE"
-
-    invoke-virtual {v7, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_9
 
-    .line 508
+    .line 507
     invoke-virtual {p2}, Landroid/content/Intent;->getExtras()Landroid/os/Bundle;
 
     move-result-object v0
 
-    .line 509
+    .line 508
     .local v0, "extras":Landroid/os/Bundle;
     const-string v1, "slot"
 
-    invoke-virtual {p2, v1, v4}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    invoke-virtual {p2, v1, v2}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
     move-result v1
 
-    .line 510
+    .line 509
     .local v1, "slotId":I
     if-eqz v0, :cond_a
 
-    .line 511
+    .line 510
     invoke-static {v0}, Landroid/telephony/ServiceState;->newFromBundle(Landroid/os/Bundle;)Landroid/telephony/ServiceState;
 
     move-result-object v2
 
-    .line 512
+    .line 511
     .local v2, "ss":Landroid/telephony/ServiceState;
     invoke-virtual {v2}, Landroid/telephony/ServiceState;->getDataRegState()I
 
     move-result v3
 
-    .line 513
+    .line 512
     .local v3, "dataState":I
     invoke-virtual {v2}, Landroid/telephony/ServiceState;->getDataNetworkType()I
 
-    move-result v4
+    move-result v5
 
-    .line 514
-    .local v4, "dataNetType":I
+    .line 513
+    .local v5, "dataNetType":I
     iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     new-instance v7, Ljava/lang/StringBuilder;
@@ -420,7 +422,7 @@
 
     iget-object v8, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    .line 515
+    .line 514
     invoke-static {v8}, Lcom/mediatek/ims/ImsService;->access$1100(Lcom/mediatek/ims/ImsService;)[I
 
     move-result-object v8
@@ -445,10 +447,10 @@
 
     move-result-object v7
 
-    .line 514
+    .line 513
     invoke-static {v6, v7}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
 
-    .line 516
+    .line 515
     iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     invoke-static {v6}, Lcom/mediatek/ims/ImsService;->access$1100(Lcom/mediatek/ims/ImsService;)[I
@@ -459,205 +461,203 @@
 
     if-nez v6, :cond_a
 
-    .line 517
+    .line 516
     if-nez v3, :cond_8
 
-    .line 518
+    .line 517
     const/16 v6, 0xd
 
-    if-eq v4, v6, :cond_7
+    if-eq v5, v6, :cond_7
 
     const/16 v6, 0x13
 
-    if-eq v4, v6, :cond_7
+    if-eq v5, v6, :cond_7
 
     const/16 v6, 0x14
 
-    if-eq v4, v6, :cond_7
+    if-eq v5, v6, :cond_7
 
     const/16 v6, 0x12
 
-    if-ne v4, v6, :cond_6
+    if-ne v5, v6, :cond_6
 
     goto :goto_1
 
-    .line 524
+    .line 523
     :cond_6
     iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    invoke-static {v6, v1, v5}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
+    invoke-static {v6, v1, v4}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
 
     goto/16 :goto_2
 
-    .line 522
+    .line 521
     :cond_7
     :goto_1
-    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+    iget-object v4, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    invoke-static {v5}, Lcom/mediatek/ims/ImsService;->access$1100(Lcom/mediatek/ims/ImsService;)[I
+    invoke-static {v4}, Lcom/mediatek/ims/ImsService;->access$1100(Lcom/mediatek/ims/ImsService;)[I
 
     move-result-object v6
 
     aget v6, v6, v1
 
-    invoke-static {v5, v1, v6}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
+    invoke-static {v4, v1, v6}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
 
     goto/16 :goto_2
 
-    .line 527
+    .line 526
     :cond_8
     iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    invoke-static {v6, v1, v5}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
+    invoke-static {v6, v1, v4}, Lcom/mediatek/ims/ImsService;->access$1200(Lcom/mediatek/ims/ImsService;II)V
 
     goto :goto_2
 
-    .line 532
+    .line 531
     .end local v0    # "extras":Landroid/os/Bundle;
     .end local v1    # "slotId":I
     .end local v2    # "ss":Landroid/telephony/ServiceState;
     .end local v3    # "dataState":I
-    .end local v4    # "dataNetType":I
+    .end local v5    # "dataNetType":I
     :cond_9
+    const-string v0, "com.mediatek.ims.MTK_RCS_REG_STATE"
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v2
 
-    const-string v7, "com.mediatek.ims.MTK_RCS_REG_STATE"
-
-    invoke-virtual {v7, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_a
 
-    .line 533
+    .line 532
     const-string v0, "android:phoneId"
 
-    invoke-virtual {p2, v0, v6}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    invoke-virtual {p2, v0, v5}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
     move-result v0
 
-    .line 534
+    .line 533
     .local v0, "phoneId":I
-    const-string v7, "android:state"
+    const-string v2, "android:state"
 
-    invoke-virtual {p2, v7, v6}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    invoke-virtual {p2, v2, v5}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
-    move-result v6
+    move-result v2
+
+    .line 534
+    .local v2, "state":I
+    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v7, "[onReceive] ACTION_RCS_REGISTER_CHANGED phoneId="
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    const-string v7, ", state:"
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v5, v6}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
 
     .line 535
-    .local v6, "state":I
-    iget-object v7, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "[onReceive] ACTION_RCS_REGISTER_CHANGED phoneId="
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v9, ", state:"
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
-
-    .line 536
     invoke-static {v0}, Landroid/telephony/SubscriptionManager;->isValidPhoneId(I)Z
 
-    move-result v7
+    move-result v5
 
-    if-eqz v7, :cond_b
+    if-eqz v5, :cond_b
+
+    .line 536
+    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+
+    invoke-static {v5}, Lcom/mediatek/ims/ImsService;->access$1300(Lcom/mediatek/ims/ImsService;)[I
+
+    move-result-object v5
+
+    aput v2, v5, v0
 
     .line 537
-    iget-object v7, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    invoke-static {v7}, Lcom/mediatek/ims/ImsService;->access$1300(Lcom/mediatek/ims/ImsService;)[I
+    .line 539
+    invoke-static {v5}, Lcom/mediatek/ims/ImsService;->access$1400(Lcom/mediatek/ims/ImsService;)[I
 
-    move-result-object v7
+    move-result-object v5
 
-    aput v6, v7, v0
+    aget v5, v5, v0
 
-    .line 538
-    new-array v1, v1, [I
+    filled-new-array {v1, v5, v0}, [I
 
-    aput v2, v1, v4
+    move-result-object v1
 
-    iget-object v4, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+    .line 541
+    .local v1, "result":[I
+    new-instance v5, Landroid/os/AsyncResult;
 
-    .line 540
-    invoke-static {v4}, Lcom/mediatek/ims/ImsService;->access$1400(Lcom/mediatek/ims/ImsService;)[I
+    invoke-direct {v5, v3, v1, v3}, Landroid/os/AsyncResult;-><init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
 
-    move-result-object v4
-
-    aget v4, v4, v0
-
-    aput v4, v1, v5
-
-    aput v0, v1, v2
+    move-object v3, v5
 
     .line 542
-    .local v1, "result":[I
-    new-instance v2, Landroid/os/AsyncResult;
+    .local v3, "ar":Landroid/os/AsyncResult;
+    iget-object v5, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
-    invoke-direct {v2, v3, v1, v3}, Landroid/os/AsyncResult;-><init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+    invoke-static {v5}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
+
+    move-result-object v5
+
+    aget-object v5, v5, v0
+
+    iget-object v6, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
 
     .line 543
-    .local v2, "ar":Landroid/os/AsyncResult;
-    iget-object v3, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
+    invoke-static {v6}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
 
-    invoke-static {v3}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
+    move-result-object v6
 
-    move-result-object v3
+    aget-object v6, v6, v0
 
-    aget-object v3, v3, v0
-
-    iget-object v4, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
-
-    .line 544
-    invoke-static {v4}, Lcom/mediatek/ims/ImsService;->access$400(Lcom/mediatek/ims/ImsService;)[Landroid/os/Handler;
+    invoke-virtual {v6, v4, v3}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
 
     move-result-object v4
 
-    aget-object v4, v4, v0
-
-    invoke-virtual {v4, v5, v2}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
-
-    move-result-object v4
-
-    .line 543
-    invoke-virtual {v3, v4}, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
+    .line 542
+    invoke-virtual {v5, v4}, Landroid/os/Handler;->sendMessage(Landroid/os/Message;)Z
 
     goto :goto_3
 
-    .line 532
+    .line 531
     .end local v0    # "phoneId":I
     .end local v1    # "result":[I
-    .end local v2    # "ar":Landroid/os/AsyncResult;
-    .end local v6    # "state":I
+    .end local v2    # "state":I
+    .end local v3    # "ar":Landroid/os/AsyncResult;
     :cond_a
     :goto_2
     nop
 
-    .line 548
+    .line 547
     :cond_b
     :goto_3
     iget-object v0, p0, Lcom/mediatek/ims/ImsService$1;->this$0:Lcom/mediatek/ims/ImsService;
@@ -686,6 +686,6 @@
 
     invoke-static {v0, v1}, Lcom/mediatek/ims/ImsService;->access$100(Lcom/mediatek/ims/ImsService;Ljava/lang/String;)V
 
-    .line 549
+    .line 548
     return-void
 .end method

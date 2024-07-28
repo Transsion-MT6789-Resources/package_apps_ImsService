@@ -27,8 +27,13 @@
 .method constructor <init>(Lcom/mediatek/wfo/impl/ImsLocationHandler;Ljava/util/List;)V
     .locals 0
     .param p1, "this$0"    # Lcom/mediatek/wfo/impl/ImsLocationHandler;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
 
-    .line 948
+    .line 1002
     iput-object p1, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     iput-object p2, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->val$LocationInfoQueueCopy:Ljava/util/List;
@@ -43,12 +48,12 @@
 .method public run()V
     .locals 6
 
-    .line 950
+    .line 1004
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->val$LocationInfoQueueCopy:Ljava/util/List;
 
     if-eqz v0, :cond_1
 
-    .line 951
+    .line 1005
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -77,7 +82,7 @@
 
     invoke-static {v1, v0}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 952
+    .line 1006
     iget-object v0, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->val$LocationInfoQueueCopy:Ljava/util/List;
 
     invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
@@ -97,7 +102,7 @@
 
     check-cast v1, Lcom/mediatek/wfo/impl/ImsLocationHandler$LocationInfo;
 
-    .line 953
+    .line 1007
     .local v1, "gpsLocationInfo":Lcom/mediatek/wfo/impl/ImsLocationHandler$LocationInfo;
     iget-object v2, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
@@ -105,11 +110,11 @@
 
     move-result-object v2
 
-    .line 954
+    .line 1008
     .local v2, "res":Lcom/mediatek/wfo/impl/ImsLocationHandler$LocationInfo;
     if-eqz v2, :cond_0
 
-    .line 955
+    .line 1009
     iget-object v3, p0, Lcom/mediatek/wfo/impl/ImsLocationHandler$3;->this$0:Lcom/mediatek/wfo/impl/ImsLocationHandler;
 
     const/16 v4, 0xbbc
@@ -122,13 +127,13 @@
 
     invoke-virtual {v3}, Landroid/os/Message;->sendToTarget()V
 
-    .line 957
+    .line 1011
     .end local v1    # "gpsLocationInfo":Lcom/mediatek/wfo/impl/ImsLocationHandler$LocationInfo;
     .end local v2    # "res":Lcom/mediatek/wfo/impl/ImsLocationHandler$LocationInfo;
     :cond_0
     goto :goto_0
 
-    .line 959
+    .line 1013
     :cond_1
     return-void
 .end method

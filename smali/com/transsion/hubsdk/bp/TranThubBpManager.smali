@@ -922,13 +922,13 @@
     .local v1, "date":Ljava/util/Date;
     new-instance v2, Ljava/text/SimpleDateFormat;
 
+    const-string v3, "MM-dd HH:mm:ss"
+
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    move-result-object v3
+    move-result-object v4
 
-    const-string v4, "MM-dd HH:mm:ss"
-
-    invoke-direct {v2, v4, v3}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
+    invoke-direct {v2, v3, v4}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
     .line 257
     .local v2, "simpleDateFormat":Ljava/text/SimpleDateFormat;
@@ -1301,13 +1301,13 @@
 
     .line 250
     .local v0, "tranActivityManager":Lcom/transsion/hubsdk/api/app/TranActivityManager;
-    invoke-static {}, Landroid/os/Binder;->getCallingPid()I
-
-    move-result v4
-
     const-string v1, "0x01010001"
 
     const-wide/16 v2, 0x200
+
+    invoke-static {}, Landroid/os/Binder;->getCallingPid()I
+
+    move-result v4
 
     const-string v5, ""
 

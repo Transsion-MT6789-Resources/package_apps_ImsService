@@ -40,7 +40,7 @@
 
     iget v2, p0, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda0;->f$2:I
 
-    invoke-static {v0, v1, v2}, Lcom/mediatek/ims/rcs/UaServiceManager;->lambda$registerSipCallback$2(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;I)V
+    invoke-static {v0, v1, v2}, Lcom/mediatek/ims/rcs/UaServiceManager;->lambda$registerSipCallback$1(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;I)V
 
     return-void
 .end method

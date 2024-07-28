@@ -91,13 +91,13 @@
 
     .line 82
     .local v0, "e":Landroid/os/RemoteException;
+    const-string v2, "TranAospAppmCallbackWrapper"
+
     invoke-virtual {v0}, Landroid/os/RemoteException;->toString()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v3
 
-    const-string v3, "TranAospAppmCallbackWrapper"
-
-    invoke-static {v3, v2}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->e(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v2, v3}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 84
     .end local v0    # "e":Landroid/os/RemoteException;

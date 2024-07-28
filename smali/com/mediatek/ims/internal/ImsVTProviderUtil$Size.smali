@@ -26,16 +26,16 @@
     .param p1, "w"    # I
     .param p2, "h"    # I
 
-    .line 195
+    .line 222
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 196
+    .line 223
     iput p1, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;->width:I
 
-    .line 197
+    .line 224
     iput p2, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;->height:I
 
-    .line 198
+    .line 225
     return-void
 .end method
 
@@ -45,23 +45,23 @@
     .locals 4
     .param p1, "obj"    # Ljava/lang/Object;
 
-    .line 209
+    .line 236
     instance-of v0, p1, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;
 
     const/4 v1, 0x0
 
     if-nez v0, :cond_0
 
-    .line 210
+    .line 237
     return v1
 
-    .line 212
+    .line 239
     :cond_0
     move-object v0, p1
 
     check-cast v0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;
 
-    .line 213
+    .line 240
     .local v0, "s":Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;
     iget v2, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;->width:I
 
@@ -84,7 +84,7 @@
 .method public hashCode()I
     .locals 2
 
-    .line 218
+    .line 245
     iget v0, p0, Lcom/mediatek/ims/internal/ImsVTProviderUtil$Size;->width:I
 
     mul-int/lit16 v0, v0, 0x7fc9

@@ -99,84 +99,84 @@
     .line 57
     sget-object v0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sActivityManagerClass:Ljava/lang/Class;
 
-    const/4 v1, 0x1
+    const-class v1, Ljava/lang/String;
 
-    new-array v2, v1, [Ljava/lang/Class;
+    filled-new-array {v1}, [Ljava/lang/Class;
 
-    const-class v3, Ljava/lang/String;
+    move-result-object v1
 
-    const/4 v4, 0x0
+    const-string v2, "forceStopPackage"
 
-    aput-object v3, v2, v4
-
-    const-string v3, "forceStopPackage"
-
-    invoke-static {v0, v3, v2}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
     .line 60
     .local v0, "forceStopPackageMethod":Ljava/lang/reflect/Method;
     :try_start_0
-    sget-object v2, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sActivityManagerClass:Ljava/lang/Class;
+    sget-object v1, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sActivityManagerClass:Ljava/lang/Class;
 
-    const/4 v3, 0x2
+    const/4 v2, 0x2
 
-    new-array v5, v3, [Ljava/lang/Class;
+    new-array v3, v2, [Ljava/lang/Class;
 
-    const-class v6, Landroid/content/Context;
-
-    aput-object v6, v5, v4
-
-    const-class v6, Landroid/os/Handler;
-
-    aput-object v6, v5, v1
-
-    invoke-static {v2, v5}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getConstructor(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
-
-    move-result-object v2
-
-    .line 61
-    .local v2, "constructor":Ljava/lang/reflect/Constructor;
-    invoke-virtual {v2, v1}, Ljava/lang/reflect/Constructor;->setAccessible(Z)V
-
-    .line 62
-    new-array v3, v3, [Ljava/lang/Object;
-
-    invoke-virtual {p0}, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->getContext()Landroid/content/Context;
-
-    move-result-object v5
-
-    aput-object v5, v3, v4
+    const-class v4, Landroid/content/Context;
 
     const/4 v5, 0x0
 
-    aput-object v5, v3, v1
+    aput-object v4, v3, v5
 
-    invoke-virtual {v2, v3}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+    const-class v4, Landroid/os/Handler;
+
+    const/4 v6, 0x1
+
+    aput-object v4, v3, v6
+
+    invoke-static {v1, v3}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getConstructor(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+
+    move-result-object v1
+
+    .line 61
+    .local v1, "constructor":Ljava/lang/reflect/Constructor;
+    invoke-virtual {v1, v6}, Ljava/lang/reflect/Constructor;->setAccessible(Z)V
+
+    .line 62
+    new-array v2, v2, [Ljava/lang/Object;
+
+    invoke-virtual {p0}, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->getContext()Landroid/content/Context;
 
     move-result-object v3
 
-    check-cast v3, Landroid/app/ActivityManager;
+    aput-object v3, v2, v5
+
+    const/4 v3, 0x0
+
+    aput-object v3, v2, v6
+
+    invoke-virtual {v1, v2}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/app/ActivityManager;
 
     .line 63
-    .local v3, "object":Landroid/app/ActivityManager;
-    invoke-virtual {v0, v1}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    .local v2, "object":Landroid/app/ActivityManager;
+    invoke-virtual {v0, v6}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 64
-    new-array v1, v1, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v1, v4
+    move-result-object v3
 
-    invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 67
     nop
 
-    .end local v2    # "constructor":Ljava/lang/reflect/Constructor;
-    .end local v3    # "object":Landroid/app/ActivityManager;
+    .end local v1    # "constructor":Ljava/lang/reflect/Constructor;
+    .end local v2    # "object":Landroid/app/ActivityManager;
     goto :goto_0
 
     .line 65
@@ -644,7 +644,7 @@
 .end method
 
 .method public startTNE(Ljava/lang/String;JILjava/lang/String;)V
-    .locals 9
+    .locals 6
     .param p1, "tag"    # Ljava/lang/String;
     .param p2, "type"    # J
     .param p4, "pid"    # I
@@ -653,105 +653,99 @@
     .line 42
     sget-object v0, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sClassName:Ljava/lang/Class;
 
-    const/4 v1, 0x4
+    const-class v1, Ljava/lang/String;
 
-    new-array v2, v1, [Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/String;
-
-    const/4 v4, 0x0
-
-    aput-object v3, v2, v4
-
-    sget-object v3, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
-
-    const/4 v5, 0x1
-
-    aput-object v3, v2, v5
+    sget-object v2, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
 
     sget-object v3, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
 
-    const/4 v6, 0x2
+    const-class v4, Ljava/lang/String;
 
-    aput-object v3, v2, v6
+    filled-new-array {v1, v2, v3, v4}, [Ljava/lang/Class;
 
-    const-class v3, Ljava/lang/String;
+    move-result-object v1
 
-    const/4 v7, 0x3
+    const-string v2, "startTNE"
 
-    aput-object v3, v2, v7
-
-    const-string v3, "startTNE"
-
-    invoke-static {v0, v3, v2}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v0, v2, v1}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v0
 
     .line 44
     .local v0, "startTNEMethod":Ljava/lang/reflect/Method;
-    sget-object v2, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sActivityManagerClass:Ljava/lang/Class;
+    sget-object v1, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->sActivityManagerClass:Ljava/lang/Class;
 
-    new-array v3, v4, [Ljava/lang/Class;
+    const/4 v2, 0x0
 
-    const-string v8, "getService"
+    new-array v3, v2, [Ljava/lang/Class;
 
-    invoke-static {v2, v8, v3}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    const-string v4, "getService"
 
-    move-result-object v2
+    invoke-static {v1, v4, v3}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+
+    move-result-object v1
 
     .line 46
-    .local v2, "getServiceMethod":Ljava/lang/reflect/Method;
+    .local v1, "getServiceMethod":Ljava/lang/reflect/Method;
+    const/4 v3, 0x1
+
     :try_start_0
-    invoke-virtual {v2, v5}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    invoke-virtual {v1, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 47
-    const/4 v3, 0x0
+    new-array v4, v2, [Ljava/lang/Object;
 
-    new-array v8, v4, [Ljava/lang/Object;
+    const/4 v5, 0x0
 
-    invoke-virtual {v2, v3, v8}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v5, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v3
+    move-result-object v4
 
     .line 48
-    .local v3, "object":Ljava/lang/Object;
-    invoke-virtual {v0, v5}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    .local v4, "object":Ljava/lang/Object;
+    invoke-virtual {v0, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 49
-    new-array v1, v1, [Ljava/lang/Object;
+    const/4 v5, 0x4
 
-    aput-object p1, v1, v4
+    new-array v5, v5, [Ljava/lang/Object;
+
+    aput-object p1, v5, v2
 
     invoke-static {p2, p3}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
 
-    move-result-object v4
+    move-result-object v2
 
-    aput-object v4, v1, v5
+    aput-object v2, v5, v3
 
     invoke-static {p4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v2
 
-    aput-object v4, v1, v6
+    const/4 v3, 0x2
 
-    aput-object p5, v1, v7
+    aput-object v2, v5, v3
 
-    invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    const/4 v2, 0x3
+
+    aput-object p5, v5, v2
+
+    invoke-virtual {v0, v4, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 52
     nop
 
-    .end local v3    # "object":Ljava/lang/Object;
+    .end local v4    # "object":Ljava/lang/Object;
     goto :goto_0
 
     .line 50
     :catchall_0
-    move-exception v1
+    move-exception v2
 
     .line 51
-    .local v1, "t":Ljava/lang/Throwable;
+    .local v2, "t":Ljava/lang/Throwable;
     sget-object v3, Lcom/transsion/hubsdk/aosp/app/TranAospActivityManager;->TAG:Ljava/lang/String;
 
     new-instance v4, Ljava/lang/StringBuilder;
@@ -764,7 +758,7 @@
 
     move-result-object v4
 
-    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
     move-result-object v4
 
@@ -775,7 +769,7 @@
     invoke-static {v3, v4}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 53
-    .end local v1    # "t":Ljava/lang/Throwable;
+    .end local v2    # "t":Ljava/lang/Throwable;
     :goto_0
     return-void
 .end method

@@ -23,7 +23,7 @@
     .locals 0
     .param p1, "this$1"    # Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    .line 1501
+    .line 1678
     iput-object p1, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     invoke-direct {p0}, Landroid/hardware/camera2/CameraDevice$StateCallback;-><init>()V
@@ -37,7 +37,7 @@
     .locals 2
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
 
-    .line 1555
+    .line 1732
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -50,19 +50,19 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1556
+    .line 1733
     invoke-super {p0, p1}, Landroid/hardware/camera2/CameraDevice$StateCallback;->onClosed(Landroid/hardware/camera2/CameraDevice;)V
 
-    .line 1557
+    .line 1734
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1300(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2000(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/os/ConditionVariable;->open()V
 
-    .line 1558
+    .line 1735
     return-void
 .end method
 
@@ -70,7 +70,7 @@
     .locals 3
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
 
-    .line 1531
+    .line 1708
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -99,42 +99,42 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1532
+    .line 1709
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1500(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/hardware/camera2/CameraDevice;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2200(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/hardware/camera2/CameraDevice;
 
     move-result-object v0
 
     if-eqz v0, :cond_0
 
-    .line 1533
+    .line 1710
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1500(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/hardware/camera2/CameraDevice;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2200(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/hardware/camera2/CameraDevice;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/hardware/camera2/CameraDevice;->close()V
 
-    .line 1534
+    .line 1711
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     const/4 v1, 0x0
 
-    invoke-static {v0, v1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1502(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Landroid/hardware/camera2/CameraDevice;)Landroid/hardware/camera2/CameraDevice;
+    invoke-static {v0, v1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2202(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Landroid/hardware/camera2/CameraDevice;)Landroid/hardware/camera2/CameraDevice;
 
-    .line 1536
+    .line 1713
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1300(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2000(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/os/ConditionVariable;->open()V
 
-    .line 1537
+    .line 1714
     return-void
 .end method
 
@@ -143,7 +143,7 @@
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
     .param p2, "error"    # I
 
-    .line 1505
+    .line 1682
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -172,10 +172,10 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1506
+    .line 1683
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1000(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)I
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1700(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)I
 
     move-result v0
 
@@ -187,7 +187,7 @@
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
 
-    .line 1507
+    .line 1684
     invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource;->access$600(Lcom/mediatek/ims/internal/VTSource;)Z
 
     move-result v0
@@ -202,13 +202,13 @@
 
     if-ne p2, v0, :cond_1
 
-    .line 1511
+    .line 1688
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1008(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)I
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1708(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)I
 
-    .line 1513
+    .line 1690
     const-wide/16 v0, 0x190
 
     :try_start_0
@@ -216,42 +216,42 @@
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 1516
+    .line 1693
     goto :goto_0
 
-    .line 1514
+    .line 1691
     :catch_0
     move-exception v0
 
-    .line 1515
+    .line 1692
     .local v0, "e":Ljava/lang/InterruptedException;
     invoke-virtual {v0}, Ljava/lang/InterruptedException;->printStackTrace()V
 
-    .line 1517
+    .line 1694
     .end local v0    # "e":Ljava/lang/InterruptedException;
     :goto_0
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1100(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Ljava/lang/String;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1800(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Ljava/lang/String;
 
     move-result-object v1
 
-    invoke-static {v0, v1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1200(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Ljava/lang/String;)V
+    invoke-static {v0, v1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1900(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Ljava/lang/String;)V
 
-    .line 1518
+    .line 1695
     return-void
 
-    .line 1520
+    .line 1697
     :cond_1
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1300(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2000(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/os/ConditionVariable;->open()V
 
-    .line 1521
+    .line 1698
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -262,10 +262,10 @@
 
     if-nez v0, :cond_2
 
-    .line 1522
+    .line 1699
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1400(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2100(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
 
     move-result-object v0
 
@@ -273,7 +273,7 @@
 
     goto :goto_1
 
-    .line 1524
+    .line 1701
     :cond_2
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
@@ -287,17 +287,17 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1526
+    .line 1703
     :goto_1
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1400(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2100(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
 
     move-result-object v0
 
     invoke-interface {v0}, Lcom/mediatek/ims/internal/VTSource$EventCallback;->onOpenFail()V
 
-    .line 1527
+    .line 1704
     return-void
 .end method
 
@@ -305,7 +305,7 @@
     .locals 5
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
 
-    .line 1541
+    .line 1718
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -318,12 +318,12 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1542
+    .line 1719
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0, p1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1502(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Landroid/hardware/camera2/CameraDevice;)Landroid/hardware/camera2/CameraDevice;
+    invoke-static {v0, p1}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2202(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;Landroid/hardware/camera2/CameraDevice;)Landroid/hardware/camera2/CameraDevice;
 
-    .line 1543
+    .line 1720
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -334,41 +334,41 @@
 
     if-eqz v0, :cond_0
 
-    .line 1544
+    .line 1721
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    const/4 v1, 0x1
+    iget-object v1, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
 
-    iget-object v2, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
+    invoke-static {v1}, Lcom/mediatek/ims/internal/VTSource;->access$2300(Lcom/mediatek/ims/internal/VTSource;)Ljava/util/concurrent/atomic/AtomicInteger;
 
-    invoke-static {v2}, Lcom/mediatek/ims/internal/VTSource;->access$1600(Lcom/mediatek/ims/internal/VTSource;)Ljava/util/concurrent/atomic/AtomicInteger;
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/util/concurrent/atomic/AtomicInteger;->incrementAndGet()I
+
+    move-result v1
+
+    iget-object v2, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
+
+    iget-object v2, v2, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
+
+    .line 1722
+    invoke-static {v2}, Lcom/mediatek/ims/internal/VTSource;->access$100(Lcom/mediatek/ims/internal/VTSource;)Landroid/view/Surface;
 
     move-result-object v2
 
-    invoke-virtual {v2}, Ljava/util/concurrent/atomic/AtomicInteger;->incrementAndGet()I
+    .line 1721
+    const/4 v3, 0x1
 
-    move-result v2
+    const/4 v4, 0x0
 
-    const/4 v3, 0x0
-
-    iget-object v4, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
-
-    iget-object v4, v4, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
-
-    .line 1545
-    invoke-static {v4}, Lcom/mediatek/ims/internal/VTSource;->access$100(Lcom/mediatek/ims/internal/VTSource;)Landroid/view/Surface;
-
-    move-result-object v4
-
-    .line 1544
-    invoke-virtual {v0, v1, v2, v3, v4}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->obtainMessage(IIILjava/lang/Object;)Landroid/os/Message;
+    invoke-virtual {v0, v3, v1, v4, v2}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->obtainMessage(IIILjava/lang/Object;)Landroid/os/Message;
 
     move-result-object v0
 
-    .line 1545
+    .line 1722
     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
 
-    .line 1546
+    .line 1723
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
     iget-object v0, v0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
@@ -391,8 +391,8 @@
 
     iget-object v2, v2, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->this$0:Lcom/mediatek/ims/internal/VTSource;
 
-    .line 1547
-    invoke-static {v2}, Lcom/mediatek/ims/internal/VTSource;->access$1600(Lcom/mediatek/ims/internal/VTSource;)Ljava/util/concurrent/atomic/AtomicInteger;
+    .line 1724
+    invoke-static {v2}, Lcom/mediatek/ims/internal/VTSource;->access$2300(Lcom/mediatek/ims/internal/VTSource;)Ljava/util/concurrent/atomic/AtomicInteger;
 
     move-result-object v2
 
@@ -414,28 +414,28 @@
 
     move-result-object v1
 
-    .line 1546
+    .line 1723
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1549
+    .line 1726
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1300(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2000(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Landroid/os/ConditionVariable;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/os/ConditionVariable;->open()V
 
-    .line 1550
+    .line 1727
     iget-object v0, p0, Lcom/mediatek/ims/internal/VTSource$DeviceHandler$1;->this$1:Lcom/mediatek/ims/internal/VTSource$DeviceHandler;
 
-    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$1400(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
+    invoke-static {v0}, Lcom/mediatek/ims/internal/VTSource$DeviceHandler;->access$2100(Lcom/mediatek/ims/internal/VTSource$DeviceHandler;)Lcom/mediatek/ims/internal/VTSource$EventCallback;
 
     move-result-object v0
 
     invoke-interface {v0}, Lcom/mediatek/ims/internal/VTSource$EventCallback;->onOpenSuccess()V
 
-    .line 1551
+    .line 1728
     return-void
 .end method

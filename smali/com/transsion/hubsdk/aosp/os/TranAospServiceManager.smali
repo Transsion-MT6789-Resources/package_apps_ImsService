@@ -79,11 +79,11 @@
     .line 24
     sget-object v1, Lcom/transsion/hubsdk/aosp/os/TranAospServiceManager;->sClassName:Ljava/lang/Class;
 
-    new-array v3, v2, [Ljava/lang/Class;
+    const-string v3, "listServices"
 
-    const-string v4, "listServices"
+    new-array v4, v2, [Ljava/lang/Class;
 
-    invoke-static {v1, v4, v3}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+    invoke-static {v1, v3, v4}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
     move-result-object v1
 

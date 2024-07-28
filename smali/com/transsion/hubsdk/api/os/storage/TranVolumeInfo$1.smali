@@ -44,13 +44,13 @@
     .param p2, "rhs"    # Lcom/transsion/hubsdk/api/os/storage/TranVolumeInfo;
 
     .line 34
+    const-string v0, "private"
+
     invoke-virtual {p1}, Lcom/transsion/hubsdk/api/os/storage/TranVolumeInfo;->getId()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    const-string v1, "private"
-
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 

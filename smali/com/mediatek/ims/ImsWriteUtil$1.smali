@@ -30,6 +30,11 @@
 # direct methods
 .method constructor <init>(ZILandroid/content/Context;I)V
     .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
 
     .line 55
     iput-boolean p1, p0, Lcom/mediatek/ims/ImsWriteUtil$1;->val$isOnIms:Z

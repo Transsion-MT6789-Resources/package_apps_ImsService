@@ -160,9 +160,9 @@
     .param p3, "flags"    # I
     .param p4, "userId"    # I
 
+    .line 38
     move-object/from16 v1, p0
 
-    .line 38
     :try_start_0
     iget-object v0, v1, Lcom/transsion/hubsdk/aosp/app/role/TranAospRoleManager;->mMethodGetService:Ljava/lang/reflect/Method;
 
@@ -378,29 +378,29 @@
 
     .line 57
     .local v10, "mRoleHolderAsUser":Ljava/lang/reflect/Method;
-    const/4 v11, 0x0
+    new-array v11, v12, [Ljava/lang/Object;
 
-    new-array v12, v12, [Ljava/lang/Object;
+    aput-object p1, v11, v2
 
-    aput-object p1, v12, v2
-
-    aput-object p2, v12, v3
+    aput-object p2, v11, v3
 
     invoke-static/range {p3 .. p3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v2
 
-    aput-object v2, v12, v15
+    aput-object v2, v11, v15
 
     invoke-static/range {p4 .. p4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v2
 
-    aput-object v2, v12, v16
+    aput-object v2, v11, v16
 
-    aput-object v9, v12, v17
+    aput-object v9, v11, v17
 
-    invoke-virtual {v10, v11, v12}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    const/4 v2, 0x0
+
+    invoke-virtual {v10, v2, v11}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 58
     const-string v2, "addRoleHolderAsUser success!"

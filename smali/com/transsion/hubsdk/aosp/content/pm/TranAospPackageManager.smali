@@ -291,50 +291,50 @@
 
     invoke-static {v5, v6, v7}, Lcom/transsion/hubsdk/common/reflect/TranDoorMan;->getMethod(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
 
-    move-result-object v5
+    move-result-object v3
 
     .line 73
-    .local v5, "method":Ljava/lang/reflect/Method;
-    sget-object v6, Lcom/transsion/hubsdk/aosp/content/pm/TranAospPackageManager;->TAG:Ljava/lang/String;
+    .local v3, "method":Ljava/lang/reflect/Method;
+    sget-object v5, Lcom/transsion/hubsdk/aosp/content/pm/TranAospPackageManager;->TAG:Ljava/lang/String;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    new-instance v6, Ljava/lang/StringBuilder;
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v8, "getHomeActivities "
+    const-string v7, "getHomeActivities "
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    move-result-object v6
 
-    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    move-result-object v6
 
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v6
 
-    invoke-static {v6, v7}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v5, v6}, Lcom/transsion/hubsdk/common/util/TranSdkLog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 74
-    invoke-virtual {v5, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
+    invoke-virtual {v3, v2}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 75
-    new-array v2, v2, [Ljava/lang/Object;
+    filled-new-array {p1}, [Ljava/lang/Object;
 
-    aput-object p1, v2, v3
+    move-result-object v2
 
-    invoke-virtual {v5, v4, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v3, v4, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v2
 
     .line 76
     .local v2, "obj":Ljava/lang/Object;
-    const/4 v3, 0x0
+    const/4 v5, 0x0
 
     .line 77
-    .local v3, "name":Landroid/content/ComponentName;
+    .local v5, "name":Landroid/content/ComponentName;
     if-eqz v2, :cond_0
 
     instance-of v6, v2, Landroid/content/ComponentName;
@@ -348,18 +348,18 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    move-object v3, v6
+    move-object v5, v6
 
     .line 80
     :cond_0
-    return-object v3
+    return-object v5
 
     .line 81
     .end local v1    # "globalMethod":Ljava/lang/reflect/Method;
     .end local v2    # "obj":Ljava/lang/Object;
-    .end local v3    # "name":Landroid/content/ComponentName;
+    .end local v3    # "method":Ljava/lang/reflect/Method;
     .end local v4    # "object":Ljava/lang/Object;
-    .end local v5    # "method":Ljava/lang/reflect/Method;
+    .end local v5    # "name":Landroid/content/ComponentName;
     :catchall_0
     move-exception v1
 
@@ -592,11 +592,11 @@
     invoke-virtual {v0, v1}, Ljava/lang/reflect/Method;->setAccessible(Z)V
 
     .line 34
-    const/4 v3, 0x0
+    new-array v3, v2, [Ljava/lang/Object;
 
-    new-array v4, v2, [Ljava/lang/Object;
+    const/4 v4, 0x0
 
-    invoke-virtual {v0, v3, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v4, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v3
 

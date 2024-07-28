@@ -86,13 +86,13 @@
     .line 138
     iget-object v0, p0, Lcom/mediatek/ims/internal/ImsDataTracker$1;->this$0:Lcom/mediatek/ims/internal/ImsDataTracker;
 
-    const/4 v1, 0x1
-
     invoke-static {v0}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$300(Lcom/mediatek/ims/internal/ImsDataTracker;)I
 
-    move-result v2
+    move-result v1
 
-    invoke-static {v0, v1, v2}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$500(Lcom/mediatek/ims/internal/ImsDataTracker;II)V
+    const/4 v2, 0x1
+
+    invoke-static {v0, v2, v1}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$500(Lcom/mediatek/ims/internal/ImsDataTracker;II)V
 
     .line 139
     goto :goto_1
@@ -131,13 +131,13 @@
     .line 134
     iget-object v0, p0, Lcom/mediatek/ims/internal/ImsDataTracker$1;->this$0:Lcom/mediatek/ims/internal/ImsDataTracker;
 
-    const/4 v1, 0x0
-
     invoke-static {v0}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$300(Lcom/mediatek/ims/internal/ImsDataTracker;)I
 
-    move-result v2
+    move-result v1
 
-    invoke-static {v0, v1, v2}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$500(Lcom/mediatek/ims/internal/ImsDataTracker;II)V
+    const/4 v2, 0x0
+
+    invoke-static {v0, v2, v1}, Lcom/mediatek/ims/internal/ImsDataTracker;->access$500(Lcom/mediatek/ims/internal/ImsDataTracker;II)V
 
     .line 135
     goto :goto_1

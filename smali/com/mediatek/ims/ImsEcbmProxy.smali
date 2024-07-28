@@ -302,11 +302,11 @@
 
     .line 134
     .local v2, "volteEnabledByUser":Z
-    iget v3, p0, Lcom/mediatek/ims/ImsEcbmProxy;->mPhoneId:I
+    const-string v3, "persist.vendor.mtk.volte.enable"
 
-    const-string v4, "persist.vendor.mtk.volte.enable"
+    iget v4, p0, Lcom/mediatek/ims/ImsEcbmProxy;->mPhoneId:I
 
-    invoke-static {v4, v3}, Lcom/mediatek/ims/config/internal/ImsConfigUtils;->getFeaturePropValue(Ljava/lang/String;I)I
+    invoke-static {v3, v4}, Lcom/mediatek/ims/config/internal/ImsConfigUtils;->getFeaturePropValue(Ljava/lang/String;I)I
 
     move-result v3
 

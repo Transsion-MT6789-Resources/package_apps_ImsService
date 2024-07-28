@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:sharedUserId="android.uid.phone" coreApp="true" package="com.mediatek.ims" platformBuildVersionCode="33" platformBuildVersionName="13">
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" android:sharedUserId="android.uid.phone" coreApp="true" package="com.mediatek.ims" platformBuildVersionCode="34" platformBuildVersionName="14">
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_PRECISE_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
@@ -21,11 +21,13 @@
     <uses-permission android:name="com.mediatek.ims.rcsua.permission.USE_SERVICE"/>
     <uses-permission android:name="android.permission.READ_DEVICE_CONFIG"/>
     <uses-permission android:name="android.permission.LOCATION_BYPASS"/>
+    <uses-permission android:name="android.permission.MANAGE_MEDIA_PROJECTION"/>
     <uses-permission android:name="com.mediatek.ims.permission.INTERNAL_ACESS"/>
     <permission android:label="IMS config provider read permission" android:name="com.mediatek.ims.config.provider.PERMISSION.READ" android:protectionLevel="signatureOrSystem"/>
     <permission android:label="IMS config provider write permission" android:name="com.mediatek.ims.config.provider.PERMISSION.WRITE" android:protectionLevel="signatureOrSystem"/>
     <permission android:label="Read LTE message waiting indication permission" android:name="com.mediatek.permission.READ_LTE_MESSAGE_WAITING_INDICATION" android:protectionLevel="signatureOrSystem"/>
     <permission android:label="Ims reg error notification" android:name="com.mediatek.permission.IMS_ERR_NOTIFICATION" android:protectionLevel="signatureOrSystem"/>
+    <permission android:label="bind AR Call Service" android:name="com.newcall.permission.BIND_ARCALL_SERVICE" android:protectionLevel="normal"/>
     <protected-broadcast android:name="com.android.ims.IMS_SERVICE_DEREGISTERED"/>
     <protected-broadcast android:name="com.android.ims.IMS_INCOMING_CALL_INDICATION"/>
     <protected-broadcast android:name="mediatek.intent.action.lte.mwi"/>
@@ -48,16 +50,25 @@
     <protected-broadcast android:name="com.mediatek.internal.telephony.imsphone.rtt_emc_guard_timer_180"/>
     <permission android:name="androidx.legacy.coreutils.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
     <uses-permission android:name="androidx.legacy.coreutils.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
-    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:directBootAware="true" android:extractNativeLibs="false" android:label="ImsApp" android:name="com.mediatek.ims.ImsApp" android:usesNonSdkApi="true">
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:directBootAware="true" android:extractNativeLibs="false" android:label="ImsApp" android:name="com.mediatek.ims.ImsApp" android:persistent="true" android:usesNonSdkApi="true">
         <uses-library android:name="com.mediatek.ims.oemplugin" android:required="false"/>
         <uses-library android:name="com.mediatek.ims.plugin" android:required="false"/>
-        <uses-library android:name="com.mediatek.ims.rcsua" android:required="false"/>
         <service android:exported="true" android:name="com.mediatek.ims.MtkDynamicImsService" android:permission="android.permission.BIND_IMS_SERVICE">
             <meta-data android:name="android.telephony.ims.RCS_FEATURE" android:value="true"/>
             <meta-data android:name="android.telephony.ims.MMTEL_FEATURE" android:value="true"/>
             <meta-data android:name="android.telephony.ims.EMERGENCY_MMTEL_FEATURE" android:value="true"/>
             <intent-filter>
                 <action android:name="android.telephony.ims.ImsService"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="false" android:name="com.mediatek.ims.ImsKeeperReceiver" androidprv:textAppearanceAutoCorrectionSuggestion="true">
+            <intent-filter>
+                <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="true" android:name="com.mediatek.ims.ImsARCallService" android:permission="com.newcall.permission.BIND_ARCALL_SERVICE">
+            <intent-filter>
+                <action android:name="com.mediatek.ims.ARCallService"/>
             </intent-filter>
         </service>
     </application>

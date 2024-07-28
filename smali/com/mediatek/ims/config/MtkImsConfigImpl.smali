@@ -105,6 +105,9 @@
 
     iput-object v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
+    .line 66
+    nop
+
     .line 69
     :cond_0
     return-void
@@ -121,29 +124,20 @@
     return-void
 .end method
 
-.method static synthetic access$100(Lcom/mediatek/ims/config/MtkImsConfigImpl;ZI)V
+.method static synthetic access$100(Lcom/mediatek/ims/config/MtkImsConfigImpl;IZI)V
     .locals 0
     .param p0, "x0"    # Lcom/mediatek/ims/config/MtkImsConfigImpl;
-    .param p1, "x1"    # Z
-    .param p2, "x2"    # I
+    .param p1, "x1"    # I
+    .param p2, "x2"    # Z
+    .param p3, "x3"    # I
 
     .line 35
-    invoke-direct {p0, p1, p2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->updateConfiguration(ZI)V
+    invoke-direct {p0, p1, p2, p3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->updateConfiguration(IZI)V
 
     return-void
 .end method
 
-.method static synthetic access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)I
-    .locals 1
-    .param p0, "x0"    # Lcom/mediatek/ims/config/MtkImsConfigImpl;
-
-    .line 35
-    iget v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
-
-    return v0
-.end method
-
-.method static synthetic access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
+.method static synthetic access$200(Lcom/mediatek/ims/config/MtkImsConfigImpl;)Lcom/mediatek/ims/rcs/UaServiceManager;
     .locals 1
     .param p0, "x0"    # Lcom/mediatek/ims/config/MtkImsConfigImpl;
 
@@ -153,7 +147,7 @@
     return-object v0
 .end method
 
-.method static synthetic access$400(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
+.method static synthetic access$300(Lcom/mediatek/ims/config/MtkImsConfigImpl;Ljava/lang/String;)V
     .locals 0
     .param p0, "x0"    # Lcom/mediatek/ims/config/MtkImsConfigImpl;
     .param p1, "x1"    # Ljava/lang/String;
@@ -165,19 +159,19 @@
 .end method
 
 .method private getMccMncList(I)[Ljava/lang/String;
-    .locals 5
+    .locals 3
     .param p1, "slotId"    # I
 
-    .line 303
+    .line 295
     invoke-static {p1}, Landroid/telephony/SubscriptionManager;->getSubId(I)[I
 
     move-result-object v0
 
-    .line 304
+    .line 296
     .local v0, "subIds":[I
     if-nez v0, :cond_0
 
-    .line 305
+    .line 297
     const-string v1, "empty"
 
     filled-new-array {v1}, [Ljava/lang/String;
@@ -186,28 +180,26 @@
 
     return-object v1
 
-    .line 307
+    .line 299
     :cond_0
-    const/4 v1, 0x1
-
-    new-array v1, v1, [Ljava/lang/String;
-
     invoke-static {}, Landroid/telephony/TelephonyManager;->getDefault()Landroid/telephony/TelephonyManager;
 
-    move-result-object v2
+    move-result-object v1
 
-    const/4 v3, 0x0
+    const/4 v2, 0x0
 
-    aget v4, v0, v3
+    aget v2, v0, v2
 
-    .line 308
-    invoke-virtual {v2, v4}, Landroid/telephony/TelephonyManager;->getSimOperatorNumeric(I)Ljava/lang/String;
+    .line 300
+    invoke-virtual {v1, v2}, Landroid/telephony/TelephonyManager;->getSimOperatorNumeric(I)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v1
 
-    aput-object v2, v1, v3
+    filled-new-array {v1}, [Ljava/lang/String;
 
-    .line 307
+    move-result-object v1
+
+    .line 299
     return-object v1
 .end method
 
@@ -215,12 +207,12 @@
     .locals 10
     .param p1, "slotId"    # I
 
-    .line 291
+    .line 283
     invoke-direct {p0, p1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->getMccMncList(I)[Ljava/lang/String;
 
     move-result-object v0
 
-    .line 292
+    .line 284
     .local v0, "mccMncList":[Ljava/lang/String;
     sget-object v1, Lcom/mediatek/ims/config/MtkImsConfigImpl;->MCC_MNC_ATT:[Ljava/lang/String;
 
@@ -235,7 +227,7 @@
 
     aget-object v5, v1, v4
 
-    .line 293
+    .line 285
     .local v5, "attMccMnc":Ljava/lang/String;
     array-length v6, v0
 
@@ -246,7 +238,7 @@
 
     aget-object v8, v0, v7
 
-    .line 294
+    .line 286
     .local v8, "simMccMnc":Ljava/lang/String;
     invoke-virtual {v5, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -254,26 +246,26 @@
 
     if-eqz v9, :cond_0
 
-    .line 295
+    .line 287
     const/4 v1, 0x1
 
     return v1
 
-    .line 293
+    .line 285
     .end local v8    # "simMccMnc":Ljava/lang/String;
     :cond_0
     add-int/lit8 v7, v7, 0x1
 
     goto :goto_1
 
-    .line 292
+    .line 284
     .end local v5    # "attMccMnc":Ljava/lang/String;
     :cond_1
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_0
 
-    .line 299
+    .line 291
     :cond_2
     return v3
 .end method
@@ -282,7 +274,7 @@
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 312
+    .line 304
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -311,48 +303,11 @@
 
     invoke-static {v0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 313
+    .line 305
     return-void
 .end method
 
 .method private loge(Ljava/lang/String;)V
-    .locals 2
-    .param p1, "msg"    # Ljava/lang/String;
-
-    .line 324
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "[SR-IMS][MtkImsConfigImpl]["
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    iget v1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, "]"
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {v0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 325
-    return-void
-.end method
-
-.method private logi(Ljava/lang/String;)V
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
@@ -383,9 +338,46 @@
 
     move-result-object v0
 
-    invoke-static {v0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 317
+    return-void
+.end method
+
+.method private logi(Ljava/lang/String;)V
+    .locals 2
+    .param p1, "msg"    # Ljava/lang/String;
+
+    .line 308
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "[SR-IMS][MtkImsConfigImpl]["
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget v1, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, "]"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 309
     return-void
 .end method
 
@@ -393,7 +385,7 @@
     .locals 2
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 320
+    .line 312
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -422,23 +414,22 @@
 
     invoke-static {v0, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 321
+    .line 313
     return-void
 .end method
 
-.method private updateConfiguration(ZI)V
-    .locals 8
-    .param p1, "valid"    # Z
-    .param p2, "version"    # I
+.method private updateConfiguration(IZI)V
+    .locals 7
+    .param p1, "phoneId"    # I
+    .param p2, "valid"    # Z
+    .param p3, "version"    # I
 
-    .line 225
-    iget v0, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
-
-    invoke-static {v0}, Landroid/telephony/SubscriptionManager;->getSubId(I)[I
+    .line 217
+    invoke-static {p1}, Landroid/telephony/SubscriptionManager;->getSubId(I)[I
 
     move-result-object v0
 
-    .line 226
+    .line 218
     .local v0, "subIds":[I
     if-eqz v0, :cond_9
 
@@ -452,17 +443,15 @@
 
     if-eqz v2, :cond_9
 
-    .line 227
-    if-eqz p1, :cond_0
+    .line 219
+    if-eqz p2, :cond_0
 
-    if-lez p2, :cond_0
+    if-lez p3, :cond_0
 
-    .line 228
-    iget v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
+    .line 220
+    invoke-direct {p0, p1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->updateSipTransport(I)V
 
-    invoke-direct {p0, v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->updateSipTransport(I)V
-
-    .line 230
+    .line 222
     :cond_0
     :try_start_0
     aget v2, v0, v1
@@ -471,32 +460,28 @@
 
     move-result-object v2
 
-    .line 231
+    .line 223
     .local v2, "pm":Landroid/telephony/ims/ProvisioningManager;
     if-eqz v2, :cond_8
 
-    .line 232
-    iget v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
-
-    invoke-direct {p0, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->isAttSimCard(I)Z
+    .line 224
+    invoke-direct {p0, p1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->isAttSimCard(I)Z
 
     move-result v3
 
     if-eqz v3, :cond_5
 
-    .line 233
-    if-eqz p1, :cond_1
+    .line 225
+    if-eqz p2, :cond_1
 
-    if-lez p2, :cond_1
+    if-lez p3, :cond_1
 
-    .line 234
+    .line 226
     iget-object v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    iget v4, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
+    const-string v4, "capInfoExpiry"
 
-    const-string v5, "capInfoExpiry"
-
-    invoke-virtual {v3, v4, v5}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigInt(ILjava/lang/String;)I
+    invoke-virtual {v3, p1, v4}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigInt(ILjava/lang/String;)I
 
     move-result v3
 
@@ -505,12 +490,12 @@
     :cond_1
     const/16 v3, 0x5460
 
-    .line 235
+    .line 227
     .local v3, "rcsExpiry":I
     :goto_0
     const/16 v4, 0x12
 
-    .line 236
+    .line 228
     .local v4, "key":I
     invoke-virtual {v2, v4}, Landroid/telephony/ims/ProvisioningManager;->getProvisioningIntValue(I)I
 
@@ -518,23 +503,21 @@
 
     if-eq v5, v3, :cond_2
 
-    .line 237
+    .line 229
     invoke-virtual {v2, v4, v3}, Landroid/telephony/ims/ProvisioningManager;->setProvisioningIntValue(II)I
 
-    .line 240
+    .line 232
     :cond_2
-    if-eqz p1, :cond_3
+    if-eqz p2, :cond_3
 
-    if-lez p2, :cond_3
+    if-lez p3, :cond_3
 
-    .line 241
+    .line 233
     iget-object v5, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    iget v6, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
+    const-string v6, "source-throttlepublish"
 
-    const-string v7, "source-throttlepublish"
-
-    invoke-virtual {v5, v6, v7}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigInt(ILjava/lang/String;)I
+    invoke-virtual {v5, p1, v6}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfigInt(ILjava/lang/String;)I
 
     move-result v5
 
@@ -545,45 +528,43 @@
     :cond_3
     const/16 v5, 0x7530
 
-    .line 242
+    .line 234
     .local v5, "publishThrottle":I
     :goto_1
     const/16 v4, 0x15
 
-    .line 243
+    .line 235
     invoke-virtual {v2, v4}, Landroid/telephony/ims/ProvisioningManager;->getProvisioningIntValue(I)I
 
     move-result v6
 
     if-eq v6, v5, :cond_4
 
-    .line 244
+    .line 236
     invoke-virtual {v2, v4, v5}, Landroid/telephony/ims/ProvisioningManager;->setProvisioningIntValue(II)I
 
-    .line 246
+    .line 238
     .end local v3    # "rcsExpiry":I
     .end local v4    # "key":I
     .end local v5    # "publishThrottle":I
     :cond_4
     goto :goto_2
 
-    .line 247
+    .line 239
     :cond_5
     const-string v3, "not support sim, not change pm value"
 
     invoke-direct {p0, v3}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->logi(Ljava/lang/String;)V
 
-    .line 250
+    .line 242
     :goto_2
     iget-object v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    iget v4, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
-
-    invoke-virtual {v3, v4}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfiguration(I)Lcom/mediatek/ims/rcsua/AcsConfiguration;
+    invoke-virtual {v3, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->getAcsConfiguration(I)Lcom/mediatek/ims/rcsua/AcsConfiguration;
 
     move-result-object v3
 
-    .line 251
+    .line 243
     .local v3, "config":Lcom/mediatek/ims/rcsua/AcsConfiguration;
     const/4 v4, 0x0
 
@@ -598,7 +579,7 @@
     :cond_6
     move-object v5, v4
 
-    .line 252
+    .line 244
     .local v5, "info":Ljava/lang/String;
     :goto_3
     if-eqz v5, :cond_7
@@ -607,19 +588,19 @@
 
     move-result-object v4
 
-    .line 253
+    .line 245
     .local v4, "infoByte":[B
     :cond_7
     if-eqz v4, :cond_8
 
-    .line 254
+    .line 246
     invoke-virtual {v2, v4, v1}, Landroid/telephony/ims/ProvisioningManager;->notifyRcsAutoConfigurationReceived([BZ)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
     goto :goto_4
 
-    .line 257
+    .line 249
     .end local v2    # "pm":Landroid/telephony/ims/ProvisioningManager;
     .end local v3    # "config":Lcom/mediatek/ims/rcsua/AcsConfiguration;
     .end local v4    # "infoByte":[B
@@ -627,7 +608,7 @@
     :catch_0
     move-exception v1
 
-    .line 258
+    .line 250
     .local v1, "e":Ljava/lang/Exception;
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -649,19 +630,19 @@
 
     invoke-direct {p0, v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->loge(Ljava/lang/String;)V
 
-    .line 259
+    .line 251
     .end local v1    # "e":Ljava/lang/Exception;
     :cond_8
     :goto_4
     goto :goto_5
 
-    .line 261
+    .line 253
     :cond_9
     const-string v1, "updateConfiguration, invalid subId"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->log(Ljava/lang/String;)V
 
-    .line 263
+    .line 255
     :goto_5
     return-void
 .end method
@@ -670,44 +651,44 @@
     .locals 8
     .param p1, "slotId"    # I
 
-    .line 266
+    .line 258
     const/4 v0, 0x0
 
     invoke-static {v0}, Lcom/mediatek/ims/ImsService;->getInstance(Landroid/content/Context;)Lcom/mediatek/ims/ImsService;
 
     move-result-object v0
 
-    .line 267
+    .line 259
     .local v0, "imsService":Lcom/mediatek/ims/ImsService;
     if-nez v0, :cond_0
 
-    .line 268
+    .line 260
     const-string v1, "ImsService retrieval fail in updateSipTransport"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->logw(Ljava/lang/String;)V
 
-    .line 269
+    .line 261
     return-void
 
-    .line 271
+    .line 263
     :cond_0
     invoke-virtual {v0, p1}, Lcom/mediatek/ims/ImsService;->getSipTransport(I)Lcom/mediatek/ims/rcs/MtkSipTransportImpl;
 
     move-result-object v1
 
-    .line 272
+    .line 264
     .local v1, "transport":Lcom/mediatek/ims/rcs/MtkSipTransportImpl;
     if-nez v1, :cond_1
 
-    .line 273
+    .line 265
     const-string v2, "SipTransport retrieval fail in updateSipTransport"
 
     invoke-direct {p0, v2}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->logw(Ljava/lang/String;)V
 
-    .line 274
+    .line 266
     return-void
 
-    .line 276
+    .line 268
     :cond_1
     iget-object v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
@@ -717,7 +698,7 @@
 
     move-result-object v2
 
-    .line 277
+    .line 269
     .local v2, "ftUri":Ljava/lang/String;
     iget-object v3, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
 
@@ -740,7 +721,7 @@
     :cond_2
     move v3, v4
 
-    .line 278
+    .line 270
     .local v3, "chatAuth":Z
     :goto_0
     iget-object v6, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->uaSrvMgr:Lcom/mediatek/ims/rcs/UaServiceManager;
@@ -760,7 +741,7 @@
     :cond_3
     move v6, v4
 
-    .line 279
+    .line 271
     .local v6, "groupChatAuth":Z
     :goto_1
     if-eqz v2, :cond_4
@@ -781,7 +762,7 @@
 
     move v4, v5
 
-    .line 282
+    .line 274
     .local v4, "ftProvisioned":Z
     :cond_4
     if-nez v4, :cond_5
@@ -790,21 +771,21 @@
 
     if-nez v6, :cond_5
 
-    .line 283
+    .line 275
     const-string v5, "updateSipTransport-> bypass the case all RCS feature off"
 
     invoke-direct {p0, v5}, Lcom/mediatek/ims/config/MtkImsConfigImpl;->logi(Ljava/lang/String;)V
 
-    .line 284
+    .line 276
     return-void
 
-    .line 287
+    .line 279
     :cond_5
     const-string v5, "+g.3gpp.iari-ref=\"urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.fthttp\""
 
     invoke-virtual {v1, v5, v4}, Lcom/mediatek/ims/rcs/MtkSipTransportImpl;->notifyProvisioningChanged(Ljava/lang/String;Z)V
 
-    .line 288
+    .line 280
     return-void
 .end method
 
@@ -1194,7 +1175,7 @@
 
     iget v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
 
-    invoke-virtual {v1, v2, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerAcsCallback(ILcom/mediatek/ims/rcsua/AcsEventCallback;)V
+    invoke-virtual {v1, v2, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerAcsCallback(ILcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 
@@ -1322,7 +1303,7 @@
 
     iget v2, p0, Lcom/mediatek/ims/config/MtkImsConfigImpl;->mSlotId:I
 
-    invoke-virtual {v1, v2, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerAcsCallback(ILcom/mediatek/ims/rcsua/AcsEventCallback;)V
+    invoke-virtual {v1, v2, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->registerAcsCallback(ILcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 

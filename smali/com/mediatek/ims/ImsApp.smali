@@ -88,7 +88,7 @@
 
     move-result-object v0
 
-    const-string v1, "0"
+    const-string v1, "1"
 
     invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -96,7 +96,7 @@
 
     const-string v1, "ImsApp"
 
-    if-eqz v0, :cond_0
+    if-nez v0, :cond_0
 
     .line 75
     const-string v0, "IMS not support, do not init ImsService"

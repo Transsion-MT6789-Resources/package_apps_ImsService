@@ -7,19 +7,42 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;,
-        Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;,
-        Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;
+        Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;,
+        Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;,
+        Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
     }
 .end annotation
 
 
 # static fields
+.field private static final EXTRA_OPTIONS:Ljava/lang/String; = "service_options"
+
+.field private static final EXTRA_PHONE_ID:Ljava/lang/String; = "phone_id"
+
 .field private static volatile INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager; = null
 
 .field private static final LOG_TAG:Ljava/lang/String; = "[SR-IMS][UaServiceManager]"
 
+.field private static final OPTION_DEREG_SUSPEND:Ljava/lang/String; = "OPTION_DEREG_SUSPEND"
+
+.field private static final OPTION_ROI_SUPPORT:Ljava/lang/String; = "OPTION_ROI_SUPPORT"
+
+.field public static final REG_MODE_IMS:I = 0x1
+
+.field public static final REG_MODE_INTERNET:I = 0x2
+
+.field private static final REG_STATE_DEREGISTERING:I = 0x3
+
+.field private static final REG_STATE_NOT_REGISTERED:I = 0x0
+
+.field private static final REG_STATE_REGISTERED:I = 0x2
+
+.field private static final REG_STATE_REGISTERING:I = 0x1
+
 
 # instance fields
+.field acsSupported:Z
+
 .field private callbackHandler:Landroid/os/Handler;
 
 .field private hdlrThread:Landroid/os/HandlerThread;
@@ -37,88 +60,86 @@
     .end annotation
 .end field
 
-.field private serviceCallback:Lcom/mediatek/ims/rcsua/RcsUaService$Callback;
+.field rcsActivated:Z
 
 .field private serviceStarted:Z
 
 
 # direct methods
 .method private constructor <init>(Landroid/content/Context;)V
-    .locals 1
+    .locals 2
     .param p1, "context"    # Landroid/content/Context;
 
-    .line 810
+    .line 1033
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 761
-    new-instance v0, Lcom/mediatek/ims/rcs/UaServiceManager$1;
-
-    invoke-direct {v0, p0}, Lcom/mediatek/ims/rcs/UaServiceManager$1;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager;)V
-
-    iput-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceCallback:Lcom/mediatek/ims/rcsua/RcsUaService$Callback;
-
-    .line 833
+    .line 1086
     new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
 
     iput-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
-    .line 811
+    .line 1034
     iput-object p1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
 
-    .line 812
+    .line 1035
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
+
+    move-result v0
+
+    iput-boolean v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->acsSupported:Z
+
+    .line 1036
+    const-string v0, "persist.vendor.service.rcs"
+
+    const/4 v1, 0x1
+
+    invoke-static {v0, v1}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    if-ne v0, v1, :cond_0
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v1, 0x0
+
+    :goto_0
+    iput-boolean v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->rcsActivated:Z
+
+    .line 1037
     return-void
 .end method
 
-.method static synthetic access$100(Lcom/mediatek/ims/rcs/UaServiceManager;Ljava/lang/String;)V
+.method static synthetic access$000(Lcom/mediatek/ims/rcs/UaServiceManager;)Landroid/content/Context;
+    .locals 1
+    .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
+
+    .line 74
+    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
+
+    return-object v0
+.end method
+
+.method static synthetic access$200(Lcom/mediatek/ims/rcs/UaServiceManager;Ljava/lang/String;)V
     .locals 0
     .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
     .param p1, "x1"    # Ljava/lang/String;
 
-    .line 63
+    .line 74
     invoke-direct {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
     return-void
 .end method
 
-.method static synthetic access$1000(Lcom/mediatek/ims/rcs/UaServiceManager;)Lcom/mediatek/ims/rcsua/RcsUaService$Callback;
+.method static synthetic access$400(Lcom/mediatek/ims/rcs/UaServiceManager;)Landroid/os/Handler;
     .locals 1
     .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    .line 63
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceCallback:Lcom/mediatek/ims/rcsua/RcsUaService$Callback;
-
-    return-object v0
-.end method
-
-.method static synthetic access$300(Lcom/mediatek/ims/rcs/UaServiceManager;)Landroid/os/Handler;
-    .locals 1
-    .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
-
-    .line 63
+    .line 74
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
-
-    return-object v0
-.end method
-
-.method static synthetic access$800(Lcom/mediatek/ims/rcs/UaServiceManager;Ljava/lang/String;)V
-    .locals 0
-    .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
-    .param p1, "x1"    # Ljava/lang/String;
-
-    .line 63
-    invoke-direct {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
-
-    return-void
-.end method
-
-.method static synthetic access$900(Lcom/mediatek/ims/rcs/UaServiceManager;)Landroid/content/Context;
-    .locals 1
-    .param p0, "x0"    # Lcom/mediatek/ims/rcs/UaServiceManager;
-
-    .line 63
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
 
     return-object v0
 .end method
@@ -127,30 +148,30 @@
     .locals 2
     .param p0, "context"    # Landroid/content/Context;
 
-    .line 68
+    .line 96
     sget-object v0, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     if-nez v0, :cond_1
 
-    .line 69
+    .line 97
     const-class v0, Lcom/mediatek/ims/rcs/UaServiceManager;
 
     monitor-enter v0
 
-    .line 70
+    .line 98
     :try_start_0
     sget-object v1, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     if-nez v1, :cond_0
 
-    .line 71
+    .line 99
     new-instance v1, Lcom/mediatek/ims/rcs/UaServiceManager;
 
     invoke-direct {v1, p0}, Lcom/mediatek/ims/rcs/UaServiceManager;-><init>(Landroid/content/Context;)V
 
     sput-object v1, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
-    .line 73
+    .line 101
     :cond_0
     monitor-exit v0
 
@@ -165,7 +186,7 @@
 
     throw v1
 
-    .line 75
+    .line 103
     :cond_1
     :goto_0
     sget-object v0, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
@@ -176,12 +197,12 @@
 .method public static deleteInstance()V
     .locals 4
 
-    .line 79
+    .line 107
     sget-object v0, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     if-eqz v0, :cond_0
 
-    .line 80
+    .line 108
     sget-object v0, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     iget-object v0, v0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
@@ -207,7 +228,7 @@
 
     check-cast v1, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 81
+    .line 109
     .local v1, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     sget-object v2, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
@@ -217,11 +238,11 @@
 
     invoke-virtual {v2, v3}, Lcom/mediatek/ims/rcs/UaServiceManager;->stopService(I)V
 
-    .line 82
+    .line 110
     .end local v1    # "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     goto :goto_0
 
-    .line 84
+    .line 112
     :cond_0
     return-void
 .end method
@@ -229,63 +250,166 @@
 .method public static getInstance()Lcom/mediatek/ims/rcs/UaServiceManager;
     .locals 1
 
-    .line 87
+    .line 115
     sget-object v0, Lcom/mediatek/ims/rcs/UaServiceManager;->INSTANCE:Lcom/mediatek/ims/rcs/UaServiceManager;
 
     return-object v0
 .end method
 
-.method static synthetic lambda$registerSipCallback$2(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;I)V
-    .locals 1
+.method private isAcsAvailable()Z
+    .locals 4
+
+    .line 1054
+    const/4 v0, 0x0
+
+    .line 1055
+    .local v0, "info":Landroid/content/pm/PackageInfo;
+    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v1
+
+    .line 1057
+    .local v1, "pm":Landroid/content/pm/PackageManager;
+    const/4 v2, 0x0
+
+    :try_start_0
+    const-string v3, "com.mediatek.rcs.provisioning"
+
+    invoke-virtual {v1, v3, v2}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
+
+    move-result-object v3
+    :try_end_0
+    .catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-object v0, v3
+
+    .line 1059
+    goto :goto_0
+
+    .line 1058
+    :catch_0
+    move-exception v3
+
+    .line 1061
+    :goto_0
+    if-eqz v0, :cond_0
+
+    const/4 v2, 0x1
+
+    :cond_0
+    return v2
+.end method
+
+.method private isRcsUaAvailable()Z
+    .locals 6
+
+    .line 1040
+    const-string v0, "persist.vendor.mtk_rcs_ua_support"
+
+    .line 1041
+    .local v0, "name":Ljava/lang/String;
+    const-string v1, "persist.vendor.mtk_rcs_ua_support"
+
+    const/4 v2, 0x0
+
+    invoke-static {v1, v2}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
+
+    move-result v1
+
+    .line 1043
+    .local v1, "uaSupported":I
+    const/4 v3, 0x0
+
+    .line 1044
+    .local v3, "info":Landroid/content/pm/PackageInfo;
+    iget-object v4, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v4}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v4
+
+    .line 1046
+    .local v4, "pm":Landroid/content/pm/PackageManager;
+    :try_start_0
+    const-string v5, "com.mediatek.ims.rcsua.service"
+
+    invoke-virtual {v4, v5, v2}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
+
+    move-result-object v5
+    :try_end_0
+    .catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-object v3, v5
+
+    .line 1048
+    goto :goto_0
+
+    .line 1047
+    :catch_0
+    move-exception v5
+
+    .line 1050
+    :goto_0
+    if-eqz v3, :cond_0
+
+    const/4 v5, 0x1
+
+    if-ne v1, v5, :cond_0
+
+    move v2, v5
+
+    :cond_0
+    return v2
+.end method
+
+.method static synthetic lambda$registerSipCallback$1(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;I)V
+    .locals 2
     .param p0, "serviceContext"    # Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     .param p1, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
     .param p2, "phoneId"    # I
 
-    .line 262
-    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addSipCallback(Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
+    .line 268
+    const/4 v0, 0x0
 
-    .line 263
-    invoke-virtual {p0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
+    .line 270
+    .local v0, "available":Z
+    :try_start_0
+    invoke-virtual {p0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/service/ISipChannel;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-eqz v0, :cond_1
+    invoke-interface {v1}, Lcom/mediatek/ims/rcsua/service/ISipChannel;->isAvailable()Z
 
-    .line 264
-    invoke-virtual {p0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
+    move-result v1
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    move-result-object v0
+    move v0, v1
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/SipChannel;->isConnected()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 265
-    invoke-virtual {p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;->onAvailable(I)V
-
+    .line 272
     goto :goto_0
 
-    .line 267
+    .line 271
+    :catch_0
+    move-exception v1
+
+    .line 273
+    :goto_0
+    if-eqz v0, :cond_0
+
+    .line 274
+    invoke-virtual {p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;->onAvailable(I)V
+
+    goto :goto_1
+
+    .line 276
     :cond_0
     invoke-virtual {p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;->onUnavailable(I)V
 
-    .line 269
-    :cond_1
-    :goto_0
-    return-void
-.end method
-
-.method static synthetic lambda$unregisterSipCallback$3(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
-    .locals 0
-    .param p0, "serviceContext"    # Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-    .param p1, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
-
-    .line 279
-    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeSipCallback(Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
-
-    .line 280
+    .line 277
+    :goto_1
     return-void
 .end method
 
@@ -293,12 +417,12 @@
     .locals 1
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 815
+    .line 1065
     const-string v0, "[SR-IMS][UaServiceManager]"
 
     invoke-static {v0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 816
+    .line 1066
     return-void
 .end method
 
@@ -306,12 +430,12 @@
     .locals 1
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 827
+    .line 1077
     const-string v0, "[SR-IMS][UaServiceManager]"
 
     invoke-static {v0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 828
+    .line 1078
     return-void
 .end method
 
@@ -319,12 +443,12 @@
     .locals 1
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 819
+    .line 1069
     const-string v0, "[SR-IMS][UaServiceManager]"
 
     invoke-static {v0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 820
+    .line 1070
     return-void
 .end method
 
@@ -332,12 +456,12 @@
     .locals 1
     .param p1, "msg"    # Ljava/lang/String;
 
-    .line 823
+    .line 1073
     const-string v0, "[SR-IMS][UaServiceManager]"
 
     invoke-static {v0, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 824
+    .line 1074
     return-void
 .end method
 
@@ -347,7 +471,7 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 206
+    .line 211
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -374,7 +498,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 207
+    .line 212
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -387,6 +511,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 213
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -399,32 +524,9 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->activate()V
 
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    .line 208
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->activate()V
-
-    .line 209
+    .line 214
     :cond_0
     return-void
 .end method
@@ -434,7 +536,7 @@
     .param p1, "phoneId"    # I
     .param p2, "capability"    # Lcom/mediatek/ims/rcsua/Capability;
 
-    .line 218
+    .line 223
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -471,14 +573,14 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 220
+    .line 225
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 221
+    .line 226
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -491,13 +593,9 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addCapability(Lcom/mediatek/ims/rcsua/Capability;)V
 
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->addCapability(Lcom/mediatek/ims/rcsua/Capability;)V
-
-    .line 222
+    .line 227
     :cond_0
     return-void
 .end method
@@ -506,7 +604,7 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 212
+    .line 217
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -533,7 +631,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 213
+    .line 218
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -546,6 +644,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 219
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -558,32 +657,9 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->deactivate()V
 
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    .line 214
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->deactivate()V
-
-    .line 215
+    .line 220
     :cond_0
     return-void
 .end method
@@ -593,10 +669,10 @@
     .param p1, "phoneId"    # I
     .param p2, "config"    # Ljava/lang/String;
 
-    .line 312
+    .line 319
     const/4 v0, 0x0
 
-    .line 314
+    .line 321
     .local v0, "result":I
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
@@ -604,15 +680,13 @@
 
     if-eqz v1, :cond_0
 
-    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v1}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
-    .line 315
+    .line 322
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -625,23 +699,19 @@
 
     check-cast v1, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v1
-
-    invoke-virtual {v1, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->getAcsConfigInt(Ljava/lang/String;)I
+    invoke-virtual {v1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getAcsConfigInt(Ljava/lang/String;)I
 
     move-result v0
 
     goto :goto_0
 
-    .line 317
+    .line 324
     :cond_0
     const-string v1, "Not ready to getAcsConfigInt"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
 
-    .line 319
+    .line 326
     :goto_0
     return v0
 .end method
@@ -651,10 +721,10 @@
     .param p1, "phoneId"    # I
     .param p2, "config"    # Ljava/lang/String;
 
-    .line 323
+    .line 330
     const/4 v0, 0x0
 
-    .line 325
+    .line 332
     .local v0, "result":Ljava/lang/String;
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
@@ -662,15 +732,13 @@
 
     if-eqz v1, :cond_0
 
-    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v1}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
-    .line 326
+    .line 333
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -683,23 +751,19 @@
 
     check-cast v1, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v1
-
-    invoke-virtual {v1, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->getAcsConfigString(Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {v1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getAcsConfigString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
     goto :goto_0
 
-    .line 328
+    .line 335
     :cond_0
     const-string v1, "Not ready to getAcsConfigString"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
 
-    .line 330
+    .line 337
     :goto_0
     return-object v0
 .end method
@@ -708,10 +772,10 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 301
+    .line 308
     const/4 v0, 0x0
 
-    .line 303
+    .line 310
     .local v0, "configuration":Lcom/mediatek/ims/rcsua/AcsConfiguration;
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
@@ -719,15 +783,13 @@
 
     if-eqz v1, :cond_0
 
-    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v1}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
-    .line 304
+    .line 311
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -740,23 +802,19 @@
 
     check-cast v1, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcsua/RcsUaService;->getAcsConfiguration()Lcom/mediatek/ims/rcsua/AcsConfiguration;
+    invoke-virtual {v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getAcsConfiguration()Lcom/mediatek/ims/rcsua/AcsConfiguration;
 
     move-result-object v0
 
     goto :goto_0
 
-    .line 306
+    .line 313
     :cond_0
     const-string v1, "Not ready to getAcsConfiguration"
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
 
-    .line 308
+    .line 315
     :goto_0
     return-object v0
 .end method
@@ -764,7 +822,7 @@
 .method public getCallbackHandler()Landroid/os/Handler;
     .locals 1
 
-    .line 390
+    .line 403
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
 
     return-object v0
@@ -774,14 +832,14 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 353
+    .line 356
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 354
+    .line 357
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -794,11 +852,7 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->getCapabilities()Lcom/mediatek/ims/rcsua/Capability;
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getCapabilities()Lcom/mediatek/ims/rcsua/Capability;
 
     move-result-object v0
 
@@ -807,7 +861,7 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 353
+    .line 356
     :goto_0
     return-object v0
 .end method
@@ -816,7 +870,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 358
+    .line 361
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -827,52 +881,81 @@
 
     move-result-object v0
 
-    const/4 v1, 0x0
-
     if-nez v0, :cond_0
 
-    move-object v0, v1
+    const/4 v0, 0x0
 
     goto :goto_0
 
-    .line 359
+    .line 362
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-virtual {v0, v2}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/Client;
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/service/IRcsUaClient;
 
     move-result-object v0
 
     :goto_0
     nop
 
-    .line 360
-    .local v0, "imsClient":Lcom/mediatek/ims/rcsua/Client;
+    .line 364
+    .local v0, "imsClient":Lcom/mediatek/ims/rcsua/service/IRcsUaClient;
+    const/4 v1, 0x0
+
+    .line 365
+    .local v1, "regInfo":Lcom/mediatek/ims/rcsua/RegistrationInfo;
     if-eqz v0, :cond_1
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/Client;->getRegistrationInfo()Lcom/mediatek/ims/rcsua/RegistrationInfo;
+    .line 367
+    :try_start_0
+    invoke-interface {v0}, Lcom/mediatek/ims/rcsua/service/IRcsUaClient;->getRegistrationInfo()Lcom/mediatek/ims/rcsua/RegistrationInfo;
 
-    move-result-object v1
+    move-result-object v2
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
+    move-object v1, v2
+
+    .line 370
+    goto :goto_1
+
+    .line 368
+    :catch_0
+    move-exception v2
+
+    .line 373
     :cond_1
-    return-object v1
+    :goto_1
+    if-eqz v1, :cond_2
+
+    move-object v2, v1
+
+    goto :goto_2
+
+    :cond_2
+    new-instance v2, Lcom/mediatek/ims/rcsua/RegistrationInfo;
+
+    invoke-direct {v2}, Lcom/mediatek/ims/rcsua/RegistrationInfo;-><init>()V
+
+    :goto_2
+    return-object v2
 .end method
 
 .method public getUpdateRcsFeatureTagState(I)Z
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 374
+    .line 387
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -885,7 +968,7 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 375
+    .line 388
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
@@ -907,6 +990,22 @@
 .end method
 
 .method public imsRegistered(I)Z
+    .locals 1
+    .param p1, "phoneId"    # I
+
+    .line 352
+    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->getRegistrationInfo(I)Lcom/mediatek/ims/rcsua/RegistrationInfo;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RegistrationInfo;->isRegistered()Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public isActivated(I)Z
     .locals 2
     .param p1, "phoneId"    # I
 
@@ -921,16 +1020,11 @@
 
     move-result-object v0
 
-    if-nez v0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 v0, 0x0
-
-    goto :goto_0
+    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     .line 348
-    :cond_0
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -941,92 +1035,7 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/Client;
-
-    move-result-object v0
-
-    :goto_0
-    nop
-
-    .line 349
-    .local v0, "imsClient":Lcom/mediatek/ims/rcsua/Client;
-    if-eqz v0, :cond_1
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/Client;->getRegistrationInfo()Lcom/mediatek/ims/rcsua/RegistrationInfo;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcsua/RegistrationInfo;->isRegistered()Z
-
-    move-result v1
-
-    if-eqz v1, :cond_1
-
-    const/4 v1, 0x1
-
-    goto :goto_1
-
-    :cond_1
-    const/4 v1, 0x0
-
-    :goto_1
-    return v1
-.end method
-
-.method public isActivated(I)Z
-    .locals 2
-    .param p1, "phoneId"    # I
-
-    .line 341
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    .line 342
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    .line 343
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isActivated()Z
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->isActivated()Z
 
     move-result v0
 
@@ -1039,7 +1048,7 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 341
+    .line 347
     :goto_0
     return v0
 .end method
@@ -1048,7 +1057,7 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 385
+    .line 398
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1063,7 +1072,7 @@
 
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
-    .line 386
+    .line 399
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -1087,29 +1096,18 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 385
+    .line 398
     :goto_0
     return v0
 .end method
 
-.method synthetic lambda$registerStateCallback$0$com-mediatek-ims-rcs-UaServiceManager(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;I)V
+.method synthetic lambda$registerStateCallback$0$com-mediatek-ims-rcs-UaServiceManager(ILcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
     .locals 2
-    .param p1, "serviceContext"    # Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
+    .param p1, "phoneId"    # I
     .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;
-    .param p3, "phoneId"    # I
 
-    .line 141
-    invoke-virtual {p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addStateCallback(Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
-
-    .line 142
-    invoke-virtual {p1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/Client;
-
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    .line 143
-    invoke-virtual {p0, p3}, Lcom/mediatek/ims/rcs/UaServiceManager;->getRegistrationInfo(I)Lcom/mediatek/ims/rcsua/RegistrationInfo;
+    .line 159
+    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->getRegistrationInfo(I)Lcom/mediatek/ims/rcsua/RegistrationInfo;
 
     move-result-object v0
 
@@ -1117,9 +1115,9 @@
 
     move-result v0
 
-    .line 144
+    .line 160
     .local v0, "regState":I
-    invoke-virtual {p0, p3}, Lcom/mediatek/ims/rcs/UaServiceManager;->getRegistrationInfo(I)Lcom/mediatek/ims/rcsua/RegistrationInfo;
+    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->getRegistrationInfo(I)Lcom/mediatek/ims/rcsua/RegistrationInfo;
 
     move-result-object v1
 
@@ -1127,40 +1125,40 @@
 
     move-result v1
 
-    .line 145
+    .line 161
     .local v1, "regMode":I
     packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
-    .line 153
+    .line 169
     :pswitch_0
-    invoke-virtual {p2, p3, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onDeregistering(II)V
+    invoke-virtual {p2, p1, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onDeregistering(II)V
 
-    .line 154
+    .line 170
     goto :goto_0
 
-    .line 156
+    .line 172
     :pswitch_1
-    invoke-virtual {p2, p3, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onRegistered(II)V
+    invoke-virtual {p2, p1, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onRegistered(II)V
 
     goto :goto_0
 
-    .line 150
+    .line 166
     :pswitch_2
-    invoke-virtual {p2, p3, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onRegistering(II)V
+    invoke-virtual {p2, p1, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onRegistering(II)V
 
-    .line 151
+    .line 167
     goto :goto_0
 
-    .line 147
+    .line 163
     :pswitch_3
-    invoke-virtual {p2, p3, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onDeregistered(II)V
+    invoke-virtual {p2, p1, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;->onDeregistered(II)V
 
-    .line 160
-    .end local v0    # "regState":I
-    .end local v1    # "regMode":I
-    :cond_0
+    .line 164
+    nop
+
+    .line 175
     :goto_0
     return-void
 
@@ -1175,35 +1173,11 @@
     .end packed-switch
 .end method
 
-.method synthetic lambda$unregisterStateCallback$1$com-mediatek-ims-rcs-UaServiceManager(ILcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
-    .locals 2
-    .param p1, "phoneId"    # I
-    .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;
-
-    .line 168
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeStateCallback(Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
-
-    .line 169
-    return-void
-.end method
-
 .method public readConfiguraion(I)Lcom/mediatek/ims/rcsua/Configuration;
     .locals 1
     .param p1, "phoneId"    # I
 
-    .line 364
+    .line 377
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->imsRegistered(I)Z
 
     move-result v0
@@ -1227,12 +1201,12 @@
     return-object v0
 .end method
 
-.method public registerAcsCallback(ILcom/mediatek/ims/rcsua/AcsEventCallback;)V
+.method public registerAcsCallback(ILcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
     .locals 2
     .param p1, "phoneId"    # I
-    .param p2, "callback"    # Lcom/mediatek/ims/rcsua/AcsEventCallback;
+    .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;
 
-    .line 174
+    .line 188
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1269,23 +1243,15 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 176
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
+    .line 190
+    iget-boolean v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->acsSupported:Z
 
     if-nez v0, :cond_0
 
-    .line 177
+    .line 191
     return-void
 
-    .line 179
+    .line 192
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
@@ -1297,34 +1263,13 @@
 
     move-result-object v0
 
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
+    if-nez v0, :cond_1
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getAcsCallback()Lcom/mediatek/ims/rcsua/AcsEventCallback;
-
-    move-result-object v0
-
-    if-eqz v0, :cond_1
-
-    .line 180
+    .line 193
     return-void
 
-    .line 182
+    .line 195
     :cond_1
-    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_2
-
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_2
-
-    .line 183
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1337,32 +1282,9 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addAcsCallback(Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
 
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->registerAcsEventCallback(Lcom/mediatek/ims/rcsua/AcsEventCallback;)V
-
-    goto :goto_0
-
-    .line 185
-    :cond_2
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setAcsCallback(Lcom/mediatek/ims/rcsua/AcsEventCallback;)V
-
-    .line 187
-    :goto_0
+    .line 196
     return-void
 .end method
 
@@ -1371,7 +1293,7 @@
     .param p1, "phoneId"    # I
     .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
 
-    .line 257
+    .line 260
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1408,7 +1330,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 259
+    .line 262
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1421,11 +1343,21 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 260
+    .line 263
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
-    .line 261
+    .line 264
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addSipCallback(Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
+
+    .line 266
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/service/ISipChannel;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_0
+
+    .line 267
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
 
     new-instance v2, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda0;
@@ -1434,7 +1366,7 @@
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 271
+    .line 280
     :cond_0
     return-void
 .end method
@@ -1444,7 +1376,7 @@
     .param p1, "phoneId"    # I
     .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;
 
-    .line 136
+    .line 151
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1457,7 +1389,7 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 137
+    .line 152
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1505,19 +1437,29 @@
 
     invoke-direct {p0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 139
+    .line 154
     if-eqz v0, :cond_0
 
-    .line 140
+    .line 155
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->addStateCallback(Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
+
+    .line 157
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/service/IRcsUaClient;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_0
+
+    .line 158
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
 
-    new-instance v2, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda2;
+    new-instance v2, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda1;
 
-    invoke-direct {v2, p0, v0, p2, p1}, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda2;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager;Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;I)V
+    invoke-direct {v2, p0, p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda1;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager;ILcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 162
+    .line 178
     :cond_0
     return-void
 .end method
@@ -1527,7 +1469,7 @@
     .param p1, "phoneId"    # I
     .param p2, "capability"    # Lcom/mediatek/ims/rcsua/Capability;
 
-    .line 225
+    .line 230
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1564,14 +1506,14 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 227
+    .line 232
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 228
+    .line 233
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1584,23 +1526,19 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeCapability(Lcom/mediatek/ims/rcsua/Capability;)V
 
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->removeCapability(Lcom/mediatek/ims/rcsua/Capability;)V
-
-    .line 229
+    .line 234
     :cond_0
     return-void
 .end method
 
 .method public sendSipMessage(ILandroid/telephony/ims/SipMessage;)Z
-    .locals 4
+    .locals 2
     .param p1, "phoneId"    # I
     .param p2, "message"    # Landroid/telephony/ims/SipMessage;
 
-    .line 246
+    .line 251
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1613,49 +1551,18 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 247
+    .line 252
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
-    .line 248
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
-
-    move-result-object v1
-
-    if-eqz v1, :cond_0
-
-    .line 249
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Lcom/mediatek/ims/rcsua/SipChannel;->isConnected()Z
+    .line 253
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->sendSipMessage(Landroid/telephony/ims/SipMessage;)Z
 
     move-result v1
 
-    if-eqz v1, :cond_0
-
-    .line 250
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
-
-    move-result-object v1
-
-    invoke-virtual {p2}, Landroid/telephony/ims/SipMessage;->toEncodedMessage()[B
-
-    move-result-object v2
-
-    invoke-virtual {p2}, Landroid/telephony/ims/SipMessage;->getViaBranchParameter()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-virtual {v1, v2, v3}, Lcom/mediatek/ims/rcsua/SipChannel;->sendMessageAsync([BLjava/lang/String;)V
-
-    .line 251
-    const/4 v1, 0x1
-
     return v1
 
-    .line 253
+    .line 256
     :cond_0
     const/4 v1, 0x0
 
@@ -1666,25 +1573,7 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 334
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    if-nez v0, :cond_0
-
-    const/4 v0, 0x0
-
-    goto :goto_0
-
-    .line 335
-    :cond_0
+    .line 341
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1697,31 +1586,24 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    .line 343
+    .local v0, "context":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
+    if-eqz v0, :cond_0
 
-    move-result-object v0
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/service/IRcsUaService;
 
-    :goto_0
-    nop
+    move-result-object v1
 
-    .line 337
-    .local v0, "uaService":Lcom/mediatek/ims/rcsua/RcsUaService;
-    if-eqz v0, :cond_1
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isConnected()Z
-
-    move-result v1
-
-    if-eqz v1, :cond_1
+    if-eqz v1, :cond_0
 
     const/4 v1, 0x1
 
-    goto :goto_1
+    goto :goto_0
 
-    :cond_1
+    :cond_0
     const/4 v1, 0x0
 
-    :goto_1
+    :goto_0
     return v1
 .end method
 
@@ -1730,7 +1612,7 @@
     .param p1, "phoneId"    # I
     .param p2, "isNotified"    # Z
 
-    .line 379
+    .line 392
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1743,14 +1625,14 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 380
+    .line 393
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
-    .line 381
+    .line 394
     invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setCcNotified(Z)V
 
-    .line 382
+    .line 395
     :cond_0
     return-void
 .end method
@@ -1760,22 +1642,20 @@
     .param p1, "phoneId"    # I
     .param p2, "rcc"    # Landroid/telephony/ims/RcsClientConfiguration;
 
-    .line 285
+    .line 292
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 286
+    .line 293
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1788,21 +1668,17 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->setRcsClientConfiguration(Landroid/telephony/ims/RcsClientConfiguration;)V
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setRcsClientConfiguration(Landroid/telephony/ims/RcsClientConfiguration;)V
 
     goto :goto_0
 
-    .line 288
+    .line 295
     :cond_0
     const-string v0, "Not ready to setRcsClientconfiguration"
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
 
-    .line 290
+    .line 297
     :goto_0
     return-void
 .end method
@@ -1812,7 +1688,7 @@
     .param p1, "phoneId"    # I
     .param p2, "state"    # Z
 
-    .line 368
+    .line 381
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1825,23 +1701,23 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 369
+    .line 382
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
-    .line 370
+    .line 383
     invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setUpdateRcsFeatureTagState(Z)V
 
-    .line 371
+    .line 384
     :cond_0
     return-void
 .end method
 
 .method public startService(I)V
-    .locals 4
+    .locals 3
     .param p1, "phoneId"    # I
 
-    .line 91
+    .line 119
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1868,10 +1744,8 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 93
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAvailable(Landroid/content/Context;)Z
+    .line 121
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isRcsUaAvailable()Z
 
     move-result v0
 
@@ -1885,7 +1759,7 @@
 
     if-nez v0, :cond_0
 
-    .line 94
+    .line 122
     new-instance v0, Landroid/os/HandlerThread;
 
     const-string v1, "IMS-RCSUA-WORKER"
@@ -1894,10 +1768,10 @@
 
     iput-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->hdlrThread:Landroid/os/HandlerThread;
 
-    .line 95
+    .line 123
     invoke-virtual {v0}, Landroid/os/HandlerThread;->start()V
 
-    .line 96
+    .line 124
     new-instance v0, Landroid/os/Handler;
 
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->hdlrThread:Landroid/os/HandlerThread;
@@ -1910,7 +1784,7 @@
 
     iput-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
 
-    .line 99
+    .line 127
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
@@ -1924,12 +1798,12 @@
 
     if-nez v0, :cond_1
 
-    .line 100
+    .line 128
     new-instance v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
     invoke-direct {v0, p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager;I)V
 
-    .line 101
+    .line 129
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
@@ -1939,42 +1813,20 @@
 
     invoke-virtual {v1, v2, v0}, Ljava/util/concurrent/ConcurrentHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 102
-    new-instance v1, Landroid/os/Bundle;
+    .line 130
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->startService()V
 
-    invoke-direct {v1}, Landroid/os/Bundle;-><init>()V
-
-    .line 103
-    .local v1, "options":Landroid/os/Bundle;
-    const/4 v2, 0x1
-
-    const-string v3, "OPTION_ROI_SUPPORT"
-
-    invoke-virtual {v1, v3, v2}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
-
-    .line 104
-    iget-object v2, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    iget-object v3, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceCallback:Lcom/mediatek/ims/rcsua/RcsUaService$Callback;
-
-    invoke-static {v2, p1, v3, v1}, Lcom/mediatek/ims/rcsua/RcsUaService;->startService(Landroid/content/Context;ILcom/mediatek/ims/rcsua/RcsUaService$Callback;Landroid/os/Bundle;)Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v2
-
-    invoke-virtual {v0, v2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setUaService(Lcom/mediatek/ims/rcsua/RcsUaService;)V
-
-    .line 106
+    .line 132
     .end local v0    # "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-    .end local v1    # "options":Landroid/os/Bundle;
     :cond_1
     return-void
 .end method
 
 .method public stopService(I)V
-    .locals 4
+    .locals 2
     .param p1, "phoneId"    # I
 
-    .line 109
+    .line 135
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2001,7 +1853,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 111
+    .line 137
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2014,97 +1866,38 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 112
+    .line 138
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
+    if-eqz v0, :cond_0
+
+    .line 139
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->stopService()V
+
+    .line 142
+    :cond_0
+    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
+
+    invoke-virtual {v1}, Ljava/util/concurrent/ConcurrentHashMap;->size()I
+
+    move-result v1
+
+    if-nez v1, :cond_1
+
+    .line 143
+    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->hdlrThread:Landroid/os/HandlerThread;
+
+    if-eqz v1, :cond_1
+
+    .line 144
+    invoke-virtual {v1}, Landroid/os/HandlerThread;->quit()Z
+
+    .line 145
     const/4 v1, 0x0
 
-    if-eqz v0, :cond_2
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v2
-
-    if-eqz v2, :cond_2
-
-    .line 113
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
-
-    move-result-object v2
-
-    if-eqz v2, :cond_0
-
-    .line 114
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getSipChannel()Lcom/mediatek/ims/rcsua/SipChannel;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Lcom/mediatek/ims/rcsua/SipChannel;->close()V
-
-    .line 115
-    invoke-virtual {v0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setSipChannel(Lcom/mediatek/ims/rcsua/SipChannel;)V
-
-    .line 117
-    :cond_0
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->clearSipCallbacks()V
-
-    .line 118
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/Client;
-
-    move-result-object v2
-
-    if-eqz v2, :cond_1
-
-    .line 119
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v2
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getImsClient()Lcom/mediatek/ims/rcsua/Client;
-
-    move-result-object v3
-
-    invoke-virtual {v2, v3}, Lcom/mediatek/ims/rcsua/RcsUaService;->unregisterClient(Lcom/mediatek/ims/rcsua/Client;)V
-
-    .line 120
-    invoke-virtual {v0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setImsClient(Lcom/mediatek/ims/rcsua/Client;)V
-
-    .line 122
-    :cond_1
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->clearStateCallbacks()V
-
-    .line 124
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Lcom/mediatek/ims/rcsua/RcsUaService;->stopService()V
-
-    .line 125
-    invoke-virtual {v0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setUaService(Lcom/mediatek/ims/rcsua/RcsUaService;)V
-
-    .line 127
-    :cond_2
-    iget-object v2, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-virtual {v2}, Ljava/util/concurrent/ConcurrentHashMap;->size()I
-
-    move-result v2
-
-    if-nez v2, :cond_3
-
-    .line 128
-    iget-object v2, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->hdlrThread:Landroid/os/HandlerThread;
-
-    if-eqz v2, :cond_3
-
-    .line 129
-    invoke-virtual {v2}, Landroid/os/HandlerThread;->quit()Z
-
-    .line 130
     iput-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->hdlrThread:Landroid/os/HandlerThread;
 
-    .line 133
-    :cond_3
+    .line 148
+    :cond_1
     return-void
 .end method
 
@@ -2113,22 +1906,20 @@
     .param p1, "phoneId"    # I
     .param p2, "reason"    # I
 
-    .line 293
+    .line 300
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
+    invoke-direct {p0}, Lcom/mediatek/ims/rcs/UaServiceManager;->isAcsAvailable()Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 294
+    .line 301
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2141,21 +1932,17 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->triggerAcsRequest(I)V
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->triggerAcsRequest(I)V
 
     goto :goto_0
 
-    .line 296
+    .line 303
     :cond_0
     const-string v0, "Not ready to triggerAcRequest"
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logE(Ljava/lang/String;)V
 
-    .line 298
+    .line 305
     :goto_0
     return-void
 .end method
@@ -2164,7 +1951,7 @@
     .locals 2
     .param p1, "phoneId"    # I
 
-    .line 239
+    .line 244
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2191,14 +1978,14 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 241
+    .line 246
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 242
+    .line 247
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2211,23 +1998,19 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->triggerRestoration()V
 
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->triggerRestoration()V
-
-    .line 243
+    .line 248
     :cond_0
     return-void
 .end method
 
-.method public unregisterAcsCallback(ILcom/mediatek/ims/rcsua/AcsEventCallback;)V
+.method public unregisterAcsCallback(ILcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
     .locals 2
     .param p1, "phoneId"    # I
-    .param p2, "callback"    # Lcom/mediatek/ims/rcsua/AcsEventCallback;
+    .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;
 
-    .line 190
+    .line 199
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2264,13 +2047,13 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 192
+    .line 201
     if-nez p2, :cond_0
 
-    .line 193
+    .line 202
     return-void
 
-    .line 195
+    .line 204
     :cond_0
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
@@ -2284,26 +2067,11 @@
 
     if-nez v0, :cond_1
 
-    .line 196
+    .line 205
     return-void
 
-    .line 198
+    .line 207
     :cond_1
-    invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_2
-
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v0}, Lcom/mediatek/ims/rcsua/RcsUaService;->isAcsAvailable(Landroid/content/Context;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_2
-
-    .line 199
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2316,63 +2084,18 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeAcsCallback(Lcom/mediatek/ims/rcs/UaServiceManager$AcsEventCallback;)V
 
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->unregisterAcsEventCallback(Lcom/mediatek/ims/rcsua/AcsEventCallback;)V
-
-    goto :goto_0
-
-    .line 200
-    :cond_2
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getAcsCallback()Lcom/mediatek/ims/rcsua/AcsEventCallback;
-
-    move-result-object v0
-
-    if-ne v0, p2, :cond_3
-
-    .line 201
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
-
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
-
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->setAcsCallback(Lcom/mediatek/ims/rcsua/AcsEventCallback;)V
-
-    .line 203
-    :cond_3
-    :goto_0
+    .line 208
     return-void
 .end method
 
 .method public unregisterSipCallback(ILcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
-    .locals 3
+    .locals 2
     .param p1, "phoneId"    # I
     .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;
 
-    .line 274
+    .line 283
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2409,7 +2132,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 276
+    .line 285
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2422,20 +2145,14 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    .line 277
+    .line 286
     .local v0, "serviceContext":Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
     if-eqz v0, :cond_0
 
-    .line 278
-    iget-object v1, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
+    .line 287
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeSipCallback(Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
 
-    new-instance v2, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda1;
-
-    invoke-direct {v2, v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda1;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;Lcom/mediatek/ims/rcs/UaServiceManager$SipCallback;)V
-
-    invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
-
-    .line 282
+    .line 289
     :cond_0
     return-void
 .end method
@@ -2445,7 +2162,7 @@
     .param p1, "phoneId"    # I
     .param p2, "callback"    # Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;
 
-    .line 165
+    .line 181
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2482,7 +2199,7 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 166
+    .line 182
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2495,16 +2212,22 @@
 
     if-eqz v0, :cond_0
 
-    .line 167
-    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->callbackHandler:Landroid/os/Handler;
+    .line 183
+    iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
-    new-instance v1, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda3;
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-direct {v1, p0, p1, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$$ExternalSyntheticLambda3;-><init>(Lcom/mediatek/ims/rcs/UaServiceManager;ILcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
+    move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+    invoke-virtual {v0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 171
+    move-result-object v0
+
+    check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
+
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->removeStateCallback(Lcom/mediatek/ims/rcs/UaServiceManager$StateCallback;)V
+
+    .line 185
     :cond_0
     return-void
 .end method
@@ -2514,7 +2237,7 @@
     .param p1, "phoneId"    # I
     .param p2, "capability"    # Lcom/mediatek/ims/rcsua/Capability;
 
-    .line 232
+    .line 237
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2551,14 +2274,14 @@
 
     invoke-direct {p0, v0}, Lcom/mediatek/ims/rcs/UaServiceManager;->logD(Ljava/lang/String;)V
 
-    .line 234
+    .line 239
     invoke-virtual {p0, p1}, Lcom/mediatek/ims/rcs/UaServiceManager;->serviceConnected(I)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 235
+    .line 240
     iget-object v0, p0, Lcom/mediatek/ims/rcs/UaServiceManager;->mServiceContexts:Ljava/util/concurrent/ConcurrentHashMap;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2571,13 +2294,9 @@
 
     check-cast v0, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;
 
-    invoke-virtual {v0}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->getUaService()Lcom/mediatek/ims/rcsua/RcsUaService;
+    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcs/UaServiceManager$UaServiceContext;->updateCapabilities(Lcom/mediatek/ims/rcsua/Capability;)V
 
-    move-result-object v0
-
-    invoke-virtual {v0, p2}, Lcom/mediatek/ims/rcsua/RcsUaService;->updateCapabilities(Lcom/mediatek/ims/rcsua/Capability;)V
-
-    .line 236
+    .line 241
     :cond_0
     return-void
 .end method

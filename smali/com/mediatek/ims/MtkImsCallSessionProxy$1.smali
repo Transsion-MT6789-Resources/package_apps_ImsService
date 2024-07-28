@@ -198,15 +198,16 @@
     return-void
 .end method
 
-.method public videoRingtoneOperation(ILjava/lang/String;)V
+.method public videoScreenOperation(ILjava/lang/String;Ljava/lang/String;)V
     .locals 1
     .param p1, "type"    # I
     .param p2, "operation"    # Ljava/lang/String;
+    .param p3, "duration"    # Ljava/lang/String;
 
     .line 140
     iget-object v0, p0, Lcom/mediatek/ims/MtkImsCallSessionProxy$1;->this$0:Lcom/mediatek/ims/MtkImsCallSessionProxy;
 
-    invoke-virtual {v0, p1, p2}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->videoRingtoneOperation(ILjava/lang/String;)V
+    invoke-virtual {v0, p1, p2, p3}, Lcom/mediatek/ims/MtkImsCallSessionProxy;->videoScreenOperation(ILjava/lang/String;Ljava/lang/String;)V
 
     .line 141
     return-void
